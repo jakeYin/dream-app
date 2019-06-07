@@ -33,7 +33,8 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     private lateinit var magnetSearchPresenter: SourcePresenterImp
     private lateinit var urlDownLoadPresenter: UrlDownLoadPresenterImp
     private var keyword: String = ""
-
+    private lateinit var searchListAdapter: SourceListAdapter
+    private var searchPage: Int = 0
     companion object {
         fun newInstance(args: Bundle): SourceFrm {
             val fragment = SourceFrm()
@@ -45,8 +46,8 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     }
 
     override fun refreshData(info: List<MagnetInfo>?) {
-        source_twinklingRefreshLayout!!.finishRefreshing()
-        source_twinklingRefreshLayout.finishLoadmore()
+        source_twinklingRefreshLayout?.finishRefreshing()
+        source_twinklingRefreshLayout?.finishLoadmore()
         if (null == info) {
             Util.alert(activity!!, "网络超时，请重试", Const.ERROR_ALERT)
         } else if (info.isEmpty()) {
@@ -80,9 +81,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         loadData()
     }
 
-    private lateinit var searchListAdapter: SourceListAdapter
 
-    private var searchPage: Int = 0
 
     private fun initView(){
         //recyclerView;

@@ -1,32 +1,15 @@
 package cn.sddman.download.activity
 
-import android.content.Intent
-import android.graphics.Bitmap
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
 import cn.sddman.download.R
 import cn.sddman.download.adapter.SourceDetailListAdapter
-import cn.sddman.download.adapter.TorrentInfoAdapter
 import cn.sddman.download.common.BaseActivity
-import cn.sddman.download.common.Const
-import cn.sddman.download.common.MessageEvent
-import cn.sddman.download.common.Msg
-import cn.sddman.download.listener.GetThumbnailsListener
 import cn.sddman.download.mvp.e.MagnetDetail
-import cn.sddman.download.mvp.e.MagnetInfo
 import cn.sddman.download.mvp.e.MagnetRule
-import cn.sddman.download.mvp.e.TorrentInfoEntity
-import cn.sddman.download.mvp.p.*
+import cn.sddman.download.mvp.p.SourceDetailPresenterImp
 import cn.sddman.download.mvp.v.SourceDetailView
-import cn.sddman.download.mvp.v.TorrentInfoView
-import cn.sddman.download.thread.GetTorrentVideoThumbnailsTask
-import cn.sddman.download.util.AlertUtil
-import cn.sddman.download.util.Util
 import kotlinx.android.synthetic.main.activity_torrent_info.*
-import org.greenrobot.eventbus.EventBus
-import java.util.*
 
 class SourceDetailActivity : BaseActivity(), SourceDetailView {
     private var detailUrl: String? = null

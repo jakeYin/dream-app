@@ -11,7 +11,6 @@
         android:layout_width="@dimen/top_bar_back_width"
         android:layout_height="@dimen/top_bar_height"
         android:gravity="center"
-        android:text="@string/back"
         android:textColor="@color/white"
         android:textSize="@dimen/top_bar_back_text_size"
         app:pressTextColor="@color/colorAccent"

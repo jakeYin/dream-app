@@ -9,7 +9,8 @@
         android:id="@+id/magnet_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_pad2"
+        android:paddingStart="@dimen/default_pad"
+        android:paddingEnd="@dimen/default_pad"
         android:gravity="left|center_vertical"
         android:textColor="@color/colorMain"
         android:textSize="14sp"
@@ -19,7 +20,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/default_pad2">
+            android:paddingStart="@dimen/default_pad"
+            android:paddingEnd="@dimen/default_pad"
+            >
             <TextView
                 android:id="@+id/magnet_date"
                 android:layout_width="0dp"
@@ -29,26 +32,6 @@
                 android:textColor="@color/gray_8f"
                 android:textSize="@dimen/file_item_text_size"
                 android:text="@string/magnet_date"/>
-
-            <TextView
-                android:id="@+id/magnet_size"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/default_pad2"
-                android:textColor="@color/gray_8f"
-                android:textSize="@dimen/file_item_text_size"
-                android:text="@string/magnet_size"/>
-
-            <TextView
-                android:id="@+id/magnet_hot"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/default_pad2"
-                android:textColor="@color/gray_8f"
-                android:textSize="@dimen/file_item_text_size"
-                android:text="@string/magnet_hot"/>
         </LinearLayout>
     <TextView
         android:layout_width="match_parent"

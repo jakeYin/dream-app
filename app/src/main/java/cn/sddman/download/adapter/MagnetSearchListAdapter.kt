@@ -40,22 +40,15 @@ class MagnetSearchListAdapter(private val context: Context, private val magnetSe
 
     internal inner class MagnetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val magnetNameText: TextView
-        private val magnetSize: TextView
         private val magnetDate: TextView
-        private val magnetHot: TextView
 
         init {
             magnetNameText = itemView.findViewById<View>(R.id.magnet_name) as TextView
-            magnetSize = itemView.findViewById<View>(R.id.magnet_size) as TextView
             magnetDate = itemView.findViewById<View>(R.id.magnet_date) as TextView
-            magnetHot = itemView.findViewById<View>(R.id.magnet_hot) as TextView
         }
 
         fun bind(magnet: MagnetInfo) {
             magnetNameText.text = magnet.name
-//            magnetDate.setText(String.format(itemView.resources.getString(R.string.magnet_date), magnet.count))
-//            magnetSize.setText(String.format(itemView.resources.getString(R.string.magnet_size), magnet.formatSize))
-//            magnetHot.setText(String.format(itemView.resources.getString(R.string.magnet_hot), magnet.hot))
             itemView.setOnClickListener { magnetSearchView.moreOption(magnet) }
         }
 
