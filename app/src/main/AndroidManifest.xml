@@ -46,9 +46,9 @@
         <activity android:name=".activity.PlayerActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppStartLoadTranslucent"></activity>
-        <activity android:name=".activity.MagnetSearchActivity"
-            android:windowSoftInputMode="adjustPan" ></activity>
         <activity android:name=".activity.SourceActivity"
+        android:windowSoftInputMode="adjustPan" ></activity>
+        <activity android:name=".activity.SourceDetailActivity"
             android:windowSoftInputMode="adjustPan" ></activity>
         <activity android:name=".activity.BrowseActivity"></activity>
 

@@ -22,7 +22,7 @@ class SourcePresenterImp(val sourceView: SourceView) : SourcePresenter {
     }
 
     override fun searchMagnet(rule: MagnetRule, keyword: String, page: Int) {
-        IAsyncTask(sourceView).executeOnExecutor(Const.THREAD_POOL_EXECUTOR,MagnetSearchBean(rule,keyword,page))
+        IAsyncTask(sourceView).executeOnExecutor(Const.THREAD_POOL_EXECUTOR,MagnetSearchBean(rule,keyword,page,""))
     }
 
 

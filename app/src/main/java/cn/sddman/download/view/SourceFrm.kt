@@ -1,6 +1,5 @@
 package cn.sddman.download.view
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cn.sddman.download.R
+import cn.sddman.download.activity.SourceDetailActivity
 import cn.sddman.download.adapter.SourceListAdapter
 import cn.sddman.download.common.Const
 import cn.sddman.download.common.RecyclerViewNoBugLinearLayoutManager
@@ -25,9 +25,6 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout
 import kotlinx.android.synthetic.main.frm_source.*
 import java.util.*
-import cn.sddman.download.activity.BrowseActivity
-import com.cocosw.bottomsheet.BottomSheet
-
 
 
 class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
@@ -121,25 +118,28 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     }
 
     override fun clickItem(magnet: MagnetInfo) {
-        println("todo ====")
-
-        BottomSheet.Builder(activity!!)
-                .title(R.string.slest_option)
-                .sheet(R.menu.magnet_option)
-                .listener(object : DialogInterface.OnClickListener {
-                    override fun onClick(dialog: DialogInterface, which: Int) {
-                        when (which) {
-                            R.id.down -> urlDownLoadPresenter.startTask(magnet.magnet!!)
-                            R.id.copy -> Util.putTextIntoClip(magnet.magnet!!)
-//                            R.id.xl -> openXL(magnet)
-                            R.id.sourcepage -> {
-                                val intent = Intent(activity, BrowseActivity::class.java)
-                                intent.putExtra("url", magnet.detailUrl)
-                                startActivity(intent)
-                            }
-                        }
-                    }
-                }).show()
+        val intent = Intent(activity, SourceDetailActivity::class.java)
+        intent.putExtra(SourceDetailActivity.DETAIL_URL, magnet.detailUrl)
+        intent.putExtra(SourceDetailActivity.TITLE, magnet.name)
+        intent.putExtra(SourceDetailActivity.MAGNET_RULE, rule)
+        startActivity(intent)
+//        BottomSheet.Builder(activity!!)
+//                .title(R.string.slest_option)
+//                .sheet(R.menu.magnet_option)
+//                .listener(object : DialogInterface.OnClickListener {
+//                    override fun onClick(dialog: DialogInterface, which: Int) {
+//                        when (which) {
+//                            R.id.down -> urlDownLoadPresenter.startTask(magnet.magnet!!)
+//                            R.id.copy -> Util.putTextIntoClip(magnet.magnet!!)
+////                            R.id.xl -> openXL(magnet)
+//                            R.id.sourcepage -> {
+//                                val intent = Intent(activity, BrowseActivity::class.java)
+//                                intent.putExtra("url", magnet.detailUrl)
+//                                startActivity(intent)
+//                            }
+//                        }
+//                    }
+//                }).show()
     }
 
     fun search(keyword: String) {
