@@ -3,7 +3,6 @@ package cn.sddman.download.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +28,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     private lateinit var rule: MagnetRule
     private lateinit var magnetSearchPresenter: SourcePresenterImp
     private lateinit var urlDownLoadPresenter: UrlDownLoadPresenterImp
+    private var keyword: String = ""
 
     companion object {
         fun newInstance(args: Bundle): SourceFrm {
@@ -44,11 +44,11 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         source_twinklingRefreshLayout.finishLoadmore()
         if (null == info) {
             Util.alert(activity!!, "网络超时，请重试", Const.ERROR_ALERT)
-        } else if (info.size == 0) {
+        } else if (info.isEmpty()) {
             Util.alert(activity!!, "没有更多了", Const.ERROR_ALERT)
         } else {
             list.addAll(info)
-            searchListAdapter!!.notifyDataSetChanged()
+            searchListAdapter.notifyDataSetChanged()
         }
     }
 
@@ -78,7 +78,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
 
     private var searchPage: Int = 0
 
-    fun initView(){
+    private fun initView(){
         //recyclerView;
         source_rv!!.layoutManager = RecyclerViewNoBugLinearLayoutManager(context!!,
                 LinearLayoutManager.VERTICAL, false)
@@ -92,26 +92,32 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         source_twinklingRefreshLayout.setFloatRefresh(true)
         source_twinklingRefreshLayout.setOverScrollRefreshShow(false)
         source_twinklingRefreshLayout.setOnRefreshListener(object : RefreshListenerAdapter() {
-            override fun onRefresh(refreshLayout: TwinklingRefreshLayout?) {
+            override fun onRefresh(refreshLayout: TwinklingRefreshLayout) {
                 searchPage = 0
                 list.clear()
-                searchListAdapter!!.notifyDataSetChanged()
+                searchListAdapter.notifyDataSetChanged()
                 loadData()
             }
 
-            override fun onLoadMore(refreshLayout: TwinklingRefreshLayout?) {
+            override fun onLoadMore(refreshLayout: TwinklingRefreshLayout) {
                 searchPage += 1
                 loadData()
             }
         })
     }
-
     private fun loadData() {
-        magnetSearchPresenter.searchMagnet(rule,"妻子",searchPage)
+        magnetSearchPresenter.searchMagnet(rule,keyword,searchPage)
     }
 
     override fun clickItem(magnet: MagnetInfo) {
         println("todo ====")
+    }
+
+    fun search(keyword: String) {
+        this.keyword = keyword
+        searchPage = 0
+        list.clear()
+        loadData()
     }
 
 
