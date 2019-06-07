@@ -18,6 +18,7 @@ class UrlDownLoadActivity : BaseActivity(), UrlDownLoadView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_url_download)
         super.setTopBarTitle(R.string.new_download)
         XLTaskHelper.init(applicationContext)
         urlDownLoadPresenter = UrlDownLoadPresenterImp(this)
