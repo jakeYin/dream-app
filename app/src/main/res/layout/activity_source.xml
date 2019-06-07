@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:background="@color/colorMain"-->
+        <!--android:gravity="right"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<com.coorchice.library.SuperTextView-->
+            <!--android:id="@+id/open_add_task_pop"-->
+            <!--android:layout_width="@dimen/top_bar_height"-->
+            <!--android:layout_height="@dimen/top_bar_height"-->
+            <!--android:gravity="center"-->
+            <!--android:onClick="addTaskClick"-->
+            <!--app:isShowState="true"-->
+            <!--app:state_drawable="@drawable/ic_plus2"-->
+            <!--app:state_drawable_height="25dp"-->
+            <!--app:state_drawable_width="25dp" />-->
+
+        <!--<com.coorchice.library.SuperTextView-->
+            <!--android:id="@+id/open_magnet_search"-->
+            <!--android:layout_width="@dimen/top_bar_height"-->
+            <!--android:layout_height="@dimen/top_bar_height"-->
+            <!--android:gravity="center"-->
+            <!--android:onClick="magnetSearchClick"-->
+            <!--app:isShowState="true"-->
+            <!--app:state_drawable="@drawable/ic_search"-->
+            <!--app:state_drawable_height="25dp"-->
+            <!--app:state_drawable_width="25dp" />-->
+
+        <!--<com.coorchice.library.SuperTextView-->
+            <!--android:id="@+id/open_setting"-->
+            <!--android:layout_width="@dimen/top_bar_height"-->
+            <!--android:layout_height="@dimen/top_bar_height"-->
+            <!--android:gravity="center"-->
+            <!--android:onClick="appSettingClick"-->
+            <!--app:isShowState="true"-->
+            <!--app:state_drawable="@drawable/ic_setting"-->
+            <!--app:state_drawable_height="25dp"-->
+            <!--app:state_drawable_width="25dp" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:background="@color/colorMain"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/downloading"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:onClick="downloadingClick"-->
+            <!--android:text="@string/downloading"-->
+            <!--android:textColor="@color/white" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/downloadfinish"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:onClick="downloadfinishClick"-->
+            <!--android:text="@string/down_finish"-->
+            <!--android:textColor="@color/trwhite" />-->
+    <!--</LinearLayout>-->
+    <include
+        android:id="@+id/bolck_titlebar"
+        layout="@layout/view_sear_bar" />
+    <android.support.design.widget.TabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tab_sources"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:tabBackground="@null"
+        app:tabIndicatorHeight="0dp"
+        app:tabMaxWidth="72dp"
+        app:tabMinWidth="16dp"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="#f85959"
+        app:tabTextAppearance="@style/tab_index_common"
+        app:tabTextColor="#222222" />
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/twinklingRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/source_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+</LinearLayout>
