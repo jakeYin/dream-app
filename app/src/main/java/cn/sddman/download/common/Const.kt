@@ -4,6 +4,10 @@ import org.xutils.x
 
 import cn.sddman.download.R
 import cn.sddman.download.util.FileTools
+import java.util.concurrent.Executor
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 
 object Const {
 
@@ -60,4 +64,6 @@ object Const {
 
     val SEARCH_SORT_HOT = "hot"
     val SEARCH_SORT_DATE = "date"
+
+    val THREAD_POOL_EXECUTOR: Executor = ThreadPoolExecutor(15, 200, 10, TimeUnit.SECONDS, LinkedBlockingQueue<Runnable>())
 }

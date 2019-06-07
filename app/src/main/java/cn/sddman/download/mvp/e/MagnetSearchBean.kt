@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class MagnetSearchBean(
+        var rule: MagnetRule,
         var keyword: String,
-        var page: Int,
-        var rule: MagnetRule): Parcelable
+        var page: Int
+        ): Parcelable

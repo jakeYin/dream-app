@@ -22,7 +22,6 @@ object Util {
     fun alert(activity: Activity, msg: String, msgType: Int) {
         if (Const.ERROR_ALERT == msgType) {
             Sneaker.with(activity)
-                    .setTitle(activity.resources.getString(R.string.title_dialog), R.color.white)
                     .setMessage(msg, R.color.white)
                     .setDuration(2000)
                     .autoHide(true)
@@ -30,7 +29,6 @@ object Util {
                     .sneak(R.color.colorAccent)
         } else if (Const.SUCCESS_ALERT == msgType) {
             Sneaker.with(activity)
-                    .setTitle(activity.resources.getString(R.string.title_dialog), R.color.white)
                     .setMessage(msg, R.color.white)
                     .setDuration(2000)
                     .autoHide(true)
@@ -38,7 +36,6 @@ object Util {
                     .sneak(R.color.success)
         } else if (Const.WARNING_ALERT == msgType) {
             Sneaker.with(activity)
-                    .setTitle(activity.resources.getString(R.string.title_dialog), R.color.white)
                     .setMessage(msg, R.color.white)
                     .setDuration(2000)
                     .autoHide(true)
@@ -50,7 +47,6 @@ object Util {
     fun alert(activity: FragmentActivity, msg: String, msgType: Int) {
         if (Const.ERROR_ALERT == msgType) {
             Sneaker.with(activity)
-                    .setTitle(activity.resources.getString(R.string.title_dialog), R.color.white)
                     .setMessage(msg, R.color.white)
                     .setDuration(2000)
                     .autoHide(true)
@@ -58,7 +54,6 @@ object Util {
                     .sneak(R.color.colorAccent)
         } else if (Const.SUCCESS_ALERT == msgType) {
             Sneaker.with(activity)
-                    .setTitle(activity.resources.getString(R.string.title_dialog), R.color.white)
                     .setMessage(msg, R.color.white)
                     .setDuration(2000)
                     .autoHide(true)
@@ -66,7 +61,6 @@ object Util {
                     .sneak(R.color.success)
         } else if (Const.WARNING_ALERT == msgType) {
             Sneaker.with(activity)
-                    .setTitle(activity.resources.getString(R.string.title_dialog), R.color.white)
                     .setMessage(msg, R.color.white)
                     .setDuration(2000)
                     .autoHide(true)

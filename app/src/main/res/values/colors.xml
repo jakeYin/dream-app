@@ -9,18 +9,15 @@
     <color name="color444">#444</color>
 
 
-
      <color name="primary">#00bcd4</color>
     <color name="success">#009688</color>
      <color name="info">#03a9f4</color>
     <color name="warning">#ffc107</color>
      <color name="danger">#e51c23</color>
-    <color name="white">#ffffff</color>
     <color name="trwhite">#4Dffffff</color>
     <color name="white_ff">#b0f1ffff</color>
     <color name="gray_ff">#ded2d2</color>
     <color name="black_ff">#b01a1a1a</color>
-    <color name="transparent">#00000000</color><!--透明色 -->
     <color name="ivory">#FFFFF0</color><!--象牙色 -->
     <color name="lightyellow">#FFFFE0</color><!--亮黄色 -->
     <color name="yellow">#FFFF00</color><!--黄色 -->
@@ -49,7 +46,6 @@
     <color name="orangered">#FF4500</color><!--红橙色 -->
     <color name="deeppink">#FF1493</color><!--深粉红色 -->
     <color name="fuchsia">#FF00FF</color><!--紫红色 -->
-    <color name="red">#FF0000</color><!--红色 -->
     <color name="oldlace">#FDF5E6</color><!--老花色 -->
     <color name="lightgoldenrodyellow">#FAFAD2</color><!--亮金黄色 -->
     <color name="linen">#FAF0E6</color><!--亚麻色 -->
@@ -157,10 +153,37 @@
     <color name="mediumblue">#0000CD</color><!--中兰色 -->
     <color name="darkblue">#00008B</color><!--暗蓝色 -->
     <color name="navy">#000080</color><!--海军色 -->
-    <color name="black">#000000</color><!--黑色 -->
     <color name="grassgreen">#99cc33</color><!--草绿色 -->
     <color name="gray_cc">#cccccc</color><!--灰色cc -->
     <color name="gray_cccc">#a0f3ecec</color><!--灰色cc -->
     <color name="gray_8f">#8f8f8f</color><!--灰色8f -->
     <color name="mycolor">#2b8fff</color>
+
+    <color name="common_bg">#fcfcfc</color>
+    <color name="common_bg_dark">#f4f4f4</color>
+    <color name="status_bar_color">#2240320d</color>
+    <color name="title_bar_color">@color/common_bg</color>
+    <color name="line_color">#e7e7e7</color>
+    <color name="white">#ffffff</color>
+    <color name="dark">#999999</color>
+    <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
+    <color name="transparent">#00000000</color>
+    <color name="title_text_color">#222222</color>
+    <color name="btn_submit_normal">#4d94d9</color>
+    <color name="btn_submit_press">#39bdff</color>
+    <!--pickerview-->
+    <color name="pickerview_timebtn_nor">#019fe8</color>
+    <color name="pickerview_timebtn_pre">#c2daf5</color>
+    <color name="pickerview_bg_topbar">#f5f5f5</color>
+    <color name="pickerview_topbar_title">#000000</color>
+    <color name="pickerview_wheelview_textcolor_out">#999999</color>
+    <color name="pickerview_wheelview_textcolor_center">#3e3e3e</color>
+    <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
+    <!--仿IOS弹出菜单颜色-->
+    <color name="alert_dialog_line">#c6c6c6</color>
+    <color name="alert_dialog_press">#509a9a9a</color>
+    <color name="action_sheet_press">#d8d8d8</color>
+    <color name="action_sheet_cancel">#414141</color>
+    <color name="action_sheet_title">#414141</color>
 </resources>

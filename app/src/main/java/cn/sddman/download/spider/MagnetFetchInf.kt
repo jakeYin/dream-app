@@ -9,8 +9,8 @@ abstract class MagnetFetchInf {
     open fun transformPage(page: Int?): Int {
         return if (page == null || page <= 0) 1 else page
     }
-    open fun parser(rule: MagnetRule, keyword: String, page: Int): List<MagnetInfo>? {
-        return null;
+    open fun parser(rule: MagnetRule, keyword: String, page: Int): List<MagnetInfo> {
+        return arrayListOf();
     }
     open fun parser(rule: MagnetRule, url:String): MagnetDetail? {
         return null;

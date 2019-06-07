@@ -1,15 +1,18 @@
 package cn.sddman.download.mvp.p
 
 import android.os.AsyncTask
+import cn.sddman.bt.spider.MagnetFetchInf
+import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.e.MagnetInfo
 import cn.sddman.download.mvp.e.MagnetRule
+import cn.sddman.download.mvp.e.MagnetSearchBean
 import cn.sddman.download.mvp.m.DownLoadModel
 import cn.sddman.download.mvp.m.DownLoadModelImp
 import cn.sddman.download.mvp.m.TaskModel
 import cn.sddman.download.mvp.m.TaskModelImp
 import cn.sddman.download.mvp.v.SourceView
 
-class SourcePresenterImp(private val sourceView: SourceView) : SourcePresenter {
+class SourcePresenterImp(val sourceView: SourceView) : SourcePresenter {
     private val taskModel: TaskModel
     private val downLoadModel: DownLoadModel
 
@@ -19,12 +22,25 @@ class SourcePresenterImp(private val sourceView: SourceView) : SourcePresenter {
     }
 
     override fun searchMagnet(rule: MagnetRule, keyword: String, page: Int) {
-
+        IAsyncTask(sourceView).executeOnExecutor(Const.THREAD_POOL_EXECUTOR,MagnetSearchBean(rule,keyword,page))
     }
 
-    class IAsyncTask : AsyncTask<MagnetRule, Object, MagnetInfo>() {
-        override fun doInBackground(vararg params: MagnetRule?): MagnetInfo {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    class IAsyncTask(val sourceView: SourceView) : AsyncTask<MagnetSearchBean, Int, List<MagnetInfo>>() {
+        override fun doInBackground(vararg params: MagnetSearchBean): List<MagnetInfo> {
+            val bean = params[0]
+            val fetchInf = Class.forName(bean.rule.parserClass).newInstance() as MagnetFetchInf
+            var list = listOf<MagnetInfo>()
+            try {
+                list = fetchInf.parser(bean.rule, bean.keyword, bean.page);
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+            return list
+        }
+
+        override fun onPostExecute(result: List<MagnetInfo>) {
+            sourceView.refreshData(result);
         }
 
     }

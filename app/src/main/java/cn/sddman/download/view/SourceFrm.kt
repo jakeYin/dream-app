@@ -25,8 +25,6 @@ import kotlinx.android.synthetic.main.frm_source.*
 import java.util.*
 
 class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
-
-    private var recyclerView: RecyclerView? = null
     private val list = ArrayList<MagnetInfo>()
     private lateinit var rule: MagnetRule
     private lateinit var magnetSearchPresenter: SourcePresenterImp
@@ -73,6 +71,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         magnetSearchPresenter = SourcePresenterImp(this)
         urlDownLoadPresenter = UrlDownLoadPresenterImp(this)
         initView()
+        loadData()
     }
 
     private lateinit var searchListAdapter: SourceListAdapter
@@ -94,7 +93,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         source_twinklingRefreshLayout.setOverScrollRefreshShow(false)
         source_twinklingRefreshLayout.setOnRefreshListener(object : RefreshListenerAdapter() {
             override fun onRefresh(refreshLayout: TwinklingRefreshLayout?) {
-                searchPage = 1
+                searchPage = 0
                 list.clear()
                 searchListAdapter!!.notifyDataSetChanged()
                 loadData()
@@ -108,7 +107,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     }
 
     private fun loadData() {
-        magnetSearchPresenter.searchMagnet(rule,"",searchPage)
+        magnetSearchPresenter.searchMagnet(rule,"妻子",searchPage)
     }
 
     override fun clickItem(magnet: MagnetInfo) {
