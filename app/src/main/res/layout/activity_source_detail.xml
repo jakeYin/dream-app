@@ -16,26 +16,33 @@
         android:overScrollMode="never"/>
     <LinearLayout
         android:id="@+id/start_download"
-        android:onClick="startDownClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@color/colorMain"
         android:gravity="center_vertical"
-        android:visibility="gone">
+        android:visibility="visible">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:onClick="selectAllClick"
             android:gravity="center_horizontal"
-            android:text="@string/download"
-            android:textSize="@dimen/filename_item_text_size"
+            android:text="@string/select_all"
+            android:textSize="@dimen/sp_12"
             android:textColor="@color/white"/>
+        <View
+            android:background="@color/white_ff"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
         <TextView
-            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:onClick="downloadSelectedClick"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="@string/not_diy_down_bt"
-            android:textSize="@dimen/file_item_text_size"
+            android:text="@string/download_selected"
+            android:textSize="@dimen/sp_12"
             android:textColor="@color/floralwhite"/>
     </LinearLayout>
 </LinearLayout>

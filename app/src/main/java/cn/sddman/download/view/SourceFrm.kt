@@ -49,9 +49,9 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         source_twinklingRefreshLayout?.finishRefreshing()
         source_twinklingRefreshLayout?.finishLoadmore()
         if (null == info) {
-            Util.alert(activity!!, "网络超时，请重试", Const.ERROR_ALERT)
+            activity?.let { Util.alert(it, "网络超时，请重试", Const.ERROR_ALERT) }
         } else if (info.isEmpty()) {
-            Util.alert(activity!!, "没有更多了", Const.ERROR_ALERT)
+            activity?.let { Util.alert(it, "没有更多了", Const.ERROR_ALERT) }
         } else {
             list.addAll(info)
             searchListAdapter.notifyDataSetChanged()
@@ -59,11 +59,11 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     }
 
     override fun addTaskSuccess() {
-        Util.alert(activity!!, getString(R.string.add_task_success), Const.SUCCESS_ALERT)
+        activity?.let { Util.alert(it, getString(R.string.add_task_success), Const.SUCCESS_ALERT) }
     }
 
     override fun addTaskFail(msg: String) {
-        Util.alert(activity!!, msg, Const.ERROR_ALERT)
+        activity?.let { Util.alert(it, msg, Const.ERROR_ALERT) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

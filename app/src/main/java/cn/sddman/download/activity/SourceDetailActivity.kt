@@ -2,16 +2,23 @@ package cn.sddman.download.activity
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import cn.sddman.download.R
 import cn.sddman.download.adapter.SourceDetailListAdapter
 import cn.sddman.download.common.BaseActivity
+import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.e.MagnetDetail
 import cn.sddman.download.mvp.e.MagnetRule
 import cn.sddman.download.mvp.p.SourceDetailPresenterImp
+import cn.sddman.download.mvp.p.UrlDownLoadPresenterImp
 import cn.sddman.download.mvp.v.SourceDetailView
+import cn.sddman.download.mvp.v.UrlDownLoadView
+import cn.sddman.download.util.Util
 import kotlinx.android.synthetic.main.activity_torrent_info.*
 
-class SourceDetailActivity : BaseActivity(), SourceDetailView {
+class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
+
+
     private var detailUrl: String? = null
     private lateinit var magnetRule:MagnetRule
     private lateinit var sourceDetailListAdapter: SourceDetailListAdapter
@@ -46,8 +53,10 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView {
         magnetRule = getIntent.getParcelableExtra(MAGNET_RULE)
         setTopBarTitle(title)
         val sourceDetailPresenterImp = SourceDetailPresenterImp(this)
+        urlDownLoadPresenter = UrlDownLoadPresenterImp(this)
         sourceDetailPresenterImp.parser(magnetRule,detailUrl!!)
         initRV()
+
     }
 
 
@@ -59,6 +68,31 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView {
         sourceDetailListAdapter = SourceDetailListAdapter(this, this, this.list!!)
         recyclerview.adapter = sourceDetailListAdapter
     }
+
+    fun selectAllClick(v: View){
+        for(x in list){
+            x.check = true
+        }
+    }
+
+    private lateinit var urlDownLoadPresenter: UrlDownLoadPresenterImp
+
+    fun downloadSelectedClick(v: View){
+        for (x in list){
+            if (x.check){
+                urlDownLoadPresenter.startTask(x.name)
+            }
+        }
+    }
+
+    override fun addTaskSuccess() {
+        Util.alert(this, "添加任务成功", Const.ERROR_ALERT)
+    }
+
+    override fun addTaskFail(msg: String) {
+        Util.alert(this, msg, Const.ERROR_ALERT)
+    }
+
 }
 
 

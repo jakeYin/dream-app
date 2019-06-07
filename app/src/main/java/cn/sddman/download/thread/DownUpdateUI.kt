@@ -115,12 +115,15 @@ class DownUpdateUI {
         if (tasks != null) {
             for (task in tasks) {
                 val filePath = task.localPath + File.separator + task.getmFileName()
-                if (FileTools.isVideoFile(task.getmFileName()) && (!FileTools.exists(task.thumbnailPath!!) || task.thumbnailPath == null)) {
-                    val bitmap = FileTools.getVideoThumbnail(filePath, 250, 150, MediaStore.Video.Thumbnails.FULL_SCREEN_KIND)
-                    if (bitmap != null) {
-                        val thumbnailPath = FileTools.saveBitmap(bitmap, System.currentTimeMillis().toString() + ".jpg")
-                        task.thumbnailPath = thumbnailPath
-                        taskModel.updateTask(task)
+
+                if (FileTools.isVideoFile(task.getmFileName())){
+                    if (task.thumbnailPath == null || FileTools.exists(task.thumbnailPath!!)){
+                        val bitmap = FileTools.getVideoThumbnail(filePath, 250, 150, MediaStore.Video.Thumbnails.FULL_SCREEN_KIND)
+                        if (bitmap != null) {
+                            val thumbnailPath = FileTools.saveBitmap(bitmap, System.currentTimeMillis().toString() + ".jpg")
+                            task.thumbnailPath = thumbnailPath
+                            taskModel.updateTask(task)
+                        }
                     }
                 }
             }
