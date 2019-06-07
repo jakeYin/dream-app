@@ -22,22 +22,24 @@
 
     <EditText
         android:id="@+id/input_search"
-        android:layout_width="match_parent"
+        android:inputType="none"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:imeOptions="actionSearch"
         android:layout_weight="8"
-        android:paddingLeft="15dp"
-        android:paddingRight="3dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="3dp"
         android:paddingBottom="1dp"
         android:textCursorDrawable="@null"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textColor="@color/white"
         android:singleLine="true"
         android:background="@null"
-        android:hint="输入搜索关键字"/>
+        android:hint="@string/search_hint"/>
 
     <com.coorchice.library.SuperTextView
         android:id="@+id/btn_search"
+        android:onClick="btnSearchClick"
         android:layout_width="@dimen/top_bar_height"
         android:layout_height="@dimen/top_bar_height"
         android:gravity="center"
