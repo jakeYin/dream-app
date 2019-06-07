@@ -12,7 +12,7 @@ abstract class MagnetFetchInf {
     open fun parser(rule: MagnetRule, keyword: String, page: Int): List<MagnetInfo> {
         return arrayListOf();
     }
-    open fun parser(rule: MagnetRule, url:String): MagnetDetail? {
-        return null;
+    open fun parser(rule: MagnetRule, url:String): List<MagnetDetail> {
+        return arrayListOf();
     }
 }

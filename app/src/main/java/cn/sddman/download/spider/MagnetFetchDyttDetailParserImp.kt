@@ -14,22 +14,22 @@ import javax.xml.xpath.XPathConstants
 import javax.xml.xpath.XPathFactory
 
 class MagnetFetchDyttDetailParserImp : MagnetFetchInf() {
-    override fun parser(rule: MagnetRule, url:String): MagnetDetail? {
+    override fun parser(rule: MagnetRule, url:String): List<MagnetDetail> {
         println("==========="+url)
         val html = Jsoup.connect(url).get().body().html()
         val xPath = XPathFactory.newInstance().newXPath()
         val tagNode = HtmlCleaner().clean(html)
         val dom = DomSerializer(CleanerProperties()).createDOM(tagNode)
         val result = xPath.evaluate(rule.detailLinks, dom, XPathConstants.NODESET) as NodeList
-        var links = arrayListOf<String>()
+        var links = arrayListOf<MagnetDetail>()
         for (i in 0 until result.length) {
             val node = result.item(i)
             if (node != null) {
                 val detailUrl = node.textContent.trim()
-                links.add(detailUrl)
+                links.add(MagnetDetail(detailUrl,false))
             }
         }
-        return MagnetDetail(links)
+        return links
     }
 
 

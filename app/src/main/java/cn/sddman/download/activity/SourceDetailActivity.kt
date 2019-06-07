@@ -16,16 +16,16 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView {
     private lateinit var magnetRule:MagnetRule
     private lateinit var sourceDetailListAdapter: SourceDetailListAdapter
 
-    private var list = arrayListOf<String>()
+    private var list = arrayListOf<MagnetDetail>()
 
     companion object {
         val DETAIL_URL:String = "detail_url"
         val TITLE:String = "title"
         val MAGNET_RULE:String = "magnet_rule"
     }
-    override fun refreshData(magnetDetail: MagnetDetail?) {
+    override fun refreshData(result: List<MagnetDetail>) {
         list?.clear()
-        list?.addAll(magnetDetail!!.link!!)
+        list?.addAll(result)
         sourceDetailListAdapter?.notifyDataSetChanged()
     }
 
