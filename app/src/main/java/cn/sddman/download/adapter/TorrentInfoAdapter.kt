@@ -11,9 +11,7 @@ import android.widget.TextView
 import com.coorchice.library.SuperTextView
 
 import cn.sddman.download.R
-import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.e.TorrentInfoEntity
-import cn.sddman.download.mvp.v.DownLoadSuccessView
 import cn.sddman.download.mvp.v.TorrentInfoView
 import cn.sddman.download.util.FileTools
 
@@ -74,7 +72,7 @@ class TorrentInfoAdapter(private val context: Context, private val torrentInfoVi
                     if (task.thumbnail != null) {
                         fileIcon.setImageBitmap(task.thumbnail)
                         filePlayer.visibility = View.VISIBLE
-                        itemView.setOnClickListener { torrentInfoView.playerViedo(task) }
+                        itemView.setOnClickListener { torrentInfoView.playVideo(task) }
                     } else {
                         filePlayer.visibility = View.GONE
                     }

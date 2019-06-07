@@ -8,5 +8,5 @@ interface TorrentInfoView {
     fun itemClick(index: Int)
     fun startTaskSuccess()
     fun startTaskFail(msg: String)
-    fun playerViedo(te: TorrentInfoEntity)
+    fun playVideo(te: TorrentInfoEntity)
 }

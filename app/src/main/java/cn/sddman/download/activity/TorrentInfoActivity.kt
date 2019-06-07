@@ -90,7 +90,7 @@ class TorrentInfoActivity : BaseActivity(), TorrentInfoView {
         Util.alert(this, msg, Const.ERROR_ALERT)
     }
 
-    override fun playerViedo(te: TorrentInfoEntity) {
+    override fun playVideo(te: TorrentInfoEntity) {
         val intent = Intent(this, PlayerActivity::class.java)
         intent.putExtra("videoPath", te.path)
         startActivity(intent)
