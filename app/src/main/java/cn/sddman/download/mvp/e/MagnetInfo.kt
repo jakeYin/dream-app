@@ -7,6 +7,4 @@ data class MagnetInfo(var name: String?,
                       var desc: String?){
 }
 
-data class MagnetDetail(var link:List<String>?
-){
-}
+
