@@ -36,7 +36,7 @@ class DownProgressNotify {
     }
 
     fun createDowneProgressNotify(task: DownloadTaskEntity) {
-        var notification  = downNotification.get(task.id as String)
+        var notification  = downNotification.get(task.id.toString())
         val mRemoteViews: RemoteViews
         if (notification != null) {
             return
@@ -109,8 +109,8 @@ class DownProgressNotify {
 
     fun cancelDownProgressNotify(task: DownloadTaskEntity) {
         notificationManager.cancel(task.id)
-        val notification = downNotification[task.id.toString() + ""] as String?
-        downNotification.remove(notification)
+//        val notification = downNotification[task.id.toString() + ""] as String?
+        downNotification.remove(task.id.toString() + "")
     }
 
     companion object {
