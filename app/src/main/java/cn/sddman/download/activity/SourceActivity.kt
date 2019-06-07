@@ -28,8 +28,6 @@ class SourceActivity : BaseActivity() {
         setContentView(R.layout.activity_source)
         val intent = Intent(this, DownService::class.java)
         startService(intent)
-        initViewPage()
-
         input_search.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEND
                     || actionId == EditorInfo.IME_ACTION_DONE
@@ -39,6 +37,8 @@ class SourceActivity : BaseActivity() {
             }
             false
         }
+        input_search.setText("疯狂")
+        initViewPage()
     }
 
     fun btnSearchClick(v:View){
@@ -52,6 +52,7 @@ class SourceActivity : BaseActivity() {
         for (rule in rules!!){
             val bundle = Bundle()
             bundle.putParcelable(SourceFrm.MAGNET_RULE,rule)
+            bundle.putString(SourceFrm.KEY_WORD, input_search.text.toString())
             val sourceFrm = SourceFrm.newInstance(bundle)
             mFragments.add(sourceFrm)
             tabs += rule.site

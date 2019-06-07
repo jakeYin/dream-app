@@ -1,5 +1,7 @@
 package cn.sddman.download.view
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -16,12 +18,17 @@ import cn.sddman.download.mvp.p.SourcePresenterImp
 import cn.sddman.download.mvp.p.UrlDownLoadPresenterImp
 import cn.sddman.download.mvp.v.SourceView
 import cn.sddman.download.mvp.v.UrlDownLoadView
+import cn.sddman.download.util.StringUtil
 import cn.sddman.download.util.Util
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout
 import kotlinx.android.synthetic.main.frm_source.*
 import java.util.*
+import cn.sddman.download.activity.BrowseActivity
+import com.cocosw.bottomsheet.BottomSheet
+
+
 
 class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     private val list = ArrayList<MagnetInfo>()
@@ -37,6 +44,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
             return fragment
         }
         const val MAGNET_RULE = "magnet_rule"
+        const val KEY_WORD = "key_word"
     }
 
     override fun refreshData(info: List<MagnetInfo>?) {
@@ -68,6 +76,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         rule = arguments?.getParcelable(MAGNET_RULE) as MagnetRule
+        keyword = arguments?.getString(KEY_WORD).toString()
         magnetSearchPresenter = SourcePresenterImp(this)
         urlDownLoadPresenter = UrlDownLoadPresenterImp(this)
         initView()
@@ -106,11 +115,31 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         })
     }
     private fun loadData() {
-        magnetSearchPresenter.searchMagnet(rule,keyword,searchPage)
+        if (!StringUtil.isEmpty(keyword)){
+            magnetSearchPresenter.searchMagnet(rule,keyword,searchPage)
+        }
     }
 
     override fun clickItem(magnet: MagnetInfo) {
         println("todo ====")
+
+        BottomSheet.Builder(activity!!)
+                .title(R.string.slest_option)
+                .sheet(R.menu.magnet_option)
+                .listener(object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface, which: Int) {
+                        when (which) {
+                            R.id.down -> urlDownLoadPresenter.startTask(magnet.magnet!!)
+                            R.id.copy -> Util.putTextIntoClip(magnet.magnet!!)
+//                            R.id.xl -> openXL(magnet)
+                            R.id.sourcepage -> {
+                                val intent = Intent(activity, BrowseActivity::class.java)
+                                intent.putExtra("url", magnet.detailUrl)
+                                startActivity(intent)
+                            }
+                        }
+                    }
+                }).show()
     }
 
     fun search(keyword: String) {
