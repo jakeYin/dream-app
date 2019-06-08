@@ -10,7 +10,7 @@
     "desc": ".//tbody/tr[2]",
     "detailBaseUrl":"http://www.ygdy8.com",
     "detailUrl": ".//tbody/tr[2]",
-    "detailLinks":"//*[@id='Zoom']/span/table/tbody/tr",
+    "detailLinks":"//*[@id='Zoom']//a",
     "source": "http://s.ygdy8.com/plus/so.php?keyword=%1$s&searchtype=titlekeyword&channeltype=0&orderby=&kwtype=0&pagesize=10&typeid=1&PageNo=%2$s"
   },
 

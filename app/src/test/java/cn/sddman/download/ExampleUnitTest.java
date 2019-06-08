@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 
 import org.junit.Test;
 
-import cn.sddman.bt.spider.MagnetFetchDyttDetailParserImp;
+import cn.sddman.download.spider.MagnetFetchDyttDetailParserImp;
 import cn.sddman.download.mvp.e.MagnetRule;
 
 import static org.junit.Assert.*;
@@ -26,7 +26,7 @@ public class ExampleUnitTest {
             String ruleStr = "{\"site\": \"电影天堂-Movie\",\n" +
                     "    \"url\": \"http://www.ygdy8.net\",\n" +
                     "    \"parserClass\": \"cn.sddman.bt.spider.MagnetFetchDyttImp\",\n" +
-                    "    \"parserDetailClass\":\"cn.sddman.bt.spider.MagnetFetchDyttDetailParserImp\",\n" +
+                    "    \"parserDetailClass\":\"cn.sddman.download.spider.MagnetFetchDyttDetailParserImp\",\n" +
                     "    \"list\": \"//*[@id='header']/div/div[3]/div[3]/div[2]/div[2]/div[2]/ul/table\",\n" +
                     "    \"href\": \".//tbody/tr[2]/td[2]/b/a//@href\",\n" +
                     "    \"name\": \".//tbody/tr[1]/td[2]/b/a\",\n" +

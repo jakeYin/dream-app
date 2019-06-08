@@ -1,5 +1,6 @@
-package cn.sddman.bt.spider
+package cn.sddman.download.spider
 
+import cn.sddman.bt.spider.MagnetFetchInf
 import cn.sddman.download.mvp.e.MagnetDetail
 import cn.sddman.download.mvp.e.MagnetRule
 import org.htmlcleaner.CleanerProperties
@@ -21,15 +22,20 @@ class MagnetFetchDyttDetailParserImp : MagnetFetchInf() {
         val tagNode = HtmlCleaner().clean(html)
         val dom = DomSerializer(CleanerProperties()).createDOM(tagNode)
         val result = xPath.evaluate(rule.detailLinks, dom, XPathConstants.NODESET) as NodeList
-        var links = arrayListOf<MagnetDetail>()
+        val list = arrayListOf<MagnetDetail>()
         for (i in 0 until result.length) {
             val node = result.item(i)
             if (node != null) {
-                val detailUrl = node.textContent.trim()
-                links.add(MagnetDetail(detailUrl,false))
+                val downloadUrl = node.attributes.getNamedItem("href").textContent
+                if (downloadUrl.toLowerCase().startsWith("ftp://")){
+                    list.add(MagnetDetail(downloadUrl))
+                }
+                if (downloadUrl.toLowerCase().startsWith("magnet:")){
+                    list.add(MagnetDetail(downloadUrl.substringBefore("&")))
+                }
             }
         }
-        return links
+        return list
     }
 
 
@@ -54,7 +60,7 @@ class MagnetFetchDyttDetailParserImp : MagnetFetchInf() {
      * @return
      */
     private fun transformMagnet(url: String): String {
-        val regex = "magnet:?[^\\\"]+"
+        val regex = "magnet:?[^\"]+"
         val matches = Pattern.matches(regex, url)
         if (matches) {
             return url
