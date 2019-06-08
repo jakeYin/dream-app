@@ -12,8 +12,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/common_bg">
+        android:layout_height="40dp"
+        android:background="@color/colorMain">
 
         <android.support.design.widget.TabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/tab_sources"
@@ -24,9 +24,9 @@
             app:tabMaxWidth="200dp"
             app:tabMinWidth="16dp"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="#f85959"
+            app:tabSelectedTextColor="@color/white"
             app:tabTextAppearance="@style/tab_index_common"
-            app:tabTextColor="#222222" />
+            app:tabTextColor="@color/trwhite" />
     </FrameLayout>
     <View style="@style/divider_line_normal"></View>
     <android.support.v4.view.ViewPager
