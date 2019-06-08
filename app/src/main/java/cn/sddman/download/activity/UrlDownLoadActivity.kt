@@ -24,7 +24,7 @@ class UrlDownLoadActivity : BaseActivity(), UrlDownLoadView {
         urlDownLoadPresenter = UrlDownLoadPresenterImp(this)
     }
 
-    private fun startDownloadClick(view: View) {
+    fun startDownloadClick(view: View) {
         urlDownLoadPresenter!!.startTask(url_input!!.text.toString().trim())
     }
 
