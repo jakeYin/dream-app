@@ -44,7 +44,6 @@ class DownUpdateUI {
         val downLoadModel = DownLoadModelImp()
         tasks = taskModel.findLoadingTask()
         if (tasks != null) {
-            val netType = SystemConfig.netType
             if (!AppSettingUtil.instance.isDown!!) {
                 //downLoadIngView.alert("没有网络,下载暂停", Const.ERROR_ALERT);
                 for (task in tasks!!) {
@@ -103,7 +102,7 @@ class DownUpdateUI {
                     }
                 }
             }
-            getDownMovieThumbnails()
+//            getDownMovieThumbnails()
             EventBus.getDefault().postSticky(MessageEvent(Msg(Const.MESSAGE_TYPE_APP_UPDATA_PRESS, tasks!!)))
             //downLoadIngView.refreshData(tasks);
         }
@@ -111,7 +110,7 @@ class DownUpdateUI {
 
     fun getDownMovieThumbnails() {
         tasks = taskModel.findAllTask()
-        var tasks: List<DownloadTaskEntity>? = tasks
+        val tasks: List<DownloadTaskEntity>? = tasks
         if (tasks != null) {
             for (task in tasks) {
                 val filePath = task.localPath + File.separator + task.getmFileName()
