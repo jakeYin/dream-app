@@ -112,7 +112,7 @@ class TorrentInfoActivity : BaseActivity(), TorrentInfoView {
         //        }
     }
 
-    private fun startDownClick(view: View) {
+    fun startDownClick(view: View) {
         checkList()
         torrentInfoPresenter!!.startTask(checkList)
         //finish();
