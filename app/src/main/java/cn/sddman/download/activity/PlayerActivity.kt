@@ -238,7 +238,7 @@ class PlayerActivity : BaseActivity(), PlayerView {
         currSecond = if (currSecond > 0) currSecond else 0
         var duraSecond = durationTimeMs / 1000
         duraSecond = if (duraSecond > 0) duraSecond else 0
-        play_time!!.text = getString(R.string.play_time, TimeUtil.formatFromSecond(duraSecond), TimeUtil.formatFromSecond(currSecond))
+        play_time!!.text = getString(R.string.play_time, TimeUtil.formatFromSecond(currSecond),TimeUtil.formatFromSecond(duraSecond))
         val batteryicon = SystemConfig.instance.batteryIcon
         battery_icon!!.setImageDrawable(resources.getDrawable(batteryicon))
         system_time!!.text = TimeUtil.getNowTime("HH:mm")
@@ -263,12 +263,12 @@ class PlayerActivity : BaseActivity(), PlayerView {
         }
     }
 
-    private fun playPauseClick(view: View) {
+    fun playPauseClick(view: View) {
         playPause()
         controlViewShow()
     }
 
-    private fun moreViewClick(view: View) {
+    fun moreViewClick(view: View) {
         if (null == aPlayer) {
             return
         }

@@ -2,8 +2,8 @@
   {
     "site": "电影天堂-Movie",
     "url": "http://www.ygdy8.net",
-    "parserClass": "cn.sddman.bt.spider.MagnetFetchDyttImp",
-    "parserDetailClass":"cn.sddman.bt.spider.MagnetFetchDyttDetailParserImp",
+    "parserClass": "cn.sddman.download.spider.MagnetFetchDyttImp",
+    "parserDetailClass":"cn.sddman.download.spider.MagnetFetchDyttDetailParserImp",
     "list": "//*[@id='header']/div/div[3]/div[3]/div[2]/div[2]/div[2]/ul/table",
     "href": ".//tbody/tr[2]/td[2]/b/a//@href",
     "name": ".//tbody/tr[1]/td[2]/b/a",
@@ -17,22 +17,22 @@
   {
     "site": "电影天堂-TV",
     "url": "http://www.ygdy8.net",
-    "parserClass": "cn.sddman.bt.spider.MagnetFetchDyttTvImp",
-    "parserDetailClass":"cn.sddman.bt.spider.MagnetFetchDyttDetailParserImp",
+    "parserClass": "cn.sddman.download.spider.MagnetFetchDyttTvImp",
+    "parserDetailClass":"cn.sddman.download.spider.MagnetFetchDyttDetailParserImp",
     "list": "//*[@id='header']/div/div[3]/div[3]/div[2]/div[2]/div[2]/ul/table",
     "href": ".//tbody/tr[2]/td[2]/b/a//@href",
     "name": ".//tbody/tr[1]/td[2]/b/a",
     "desc": ".//tbody/tr[2]",
     "detailBaseUrl":"http://www.ygdy8.com",
     "detailUrl": ".//tbody/tr[2]",
-    "detailLinks":"//*[@id='Zoom']/span/table/tbody/tr",
+    "detailLinks":"//*[@id='Zoom']//a",
     "source": "http://s.ygdy8.com/plus/so.php?keyword=%1$s&searchtype=titlekeyword&channeltype=0&orderby=&kwtype=0&pagesize=10&typeid=2&PageNo=%2$s"
   },
 
   {
     "site": "BT磁力链",
     "url": "https://www.cilisky.com",
-    "parserClass": "cn.sddman.bt.spider.MagnetFetchImp",
+    "parserClass": "cn.sddman.download.spider.MagnetFetchImp",
     "list": "//div[@class='panel panel-default']",
     "href": ".//h5/a//@href",
     "name": ".//h5/a",

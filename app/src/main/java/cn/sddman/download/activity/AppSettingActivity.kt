@@ -51,7 +51,7 @@ class AppSettingActivity : BaseActivity(), AppSettingView {
         }
     }
 
-    private fun setLocalPathClick(view: View) {
+    fun setLocalPathClick(view: View) {
         FilePicker.from(this@AppSettingActivity)
                 .chooseForFloder()
                 .isSingle

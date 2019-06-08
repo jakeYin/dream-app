@@ -1,4 +1,4 @@
-package cn.sddman.bt.spider
+package cn.sddman.download.spider
 
 import cn.sddman.download.mvp.e.MagnetInfo
 import cn.sddman.download.mvp.e.MagnetRule

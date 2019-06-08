@@ -1,6 +1,5 @@
 package cn.sddman.download.spider
 
-import cn.sddman.bt.spider.MagnetFetchInf
 import cn.sddman.download.mvp.e.MagnetDetail
 import cn.sddman.download.mvp.e.MagnetRule
 import org.htmlcleaner.CleanerProperties
@@ -16,25 +15,34 @@ import javax.xml.xpath.XPathFactory
 
 class MagnetFetchDyttDetailParserImp : MagnetFetchInf() {
     override fun parser(rule: MagnetRule, url:String): List<MagnetDetail> {
-        println("==========="+url)
-        val html = Jsoup.connect(url).get().body().html()
-        val xPath = XPathFactory.newInstance().newXPath()
-        val tagNode = HtmlCleaner().clean(html)
-        val dom = DomSerializer(CleanerProperties()).createDOM(tagNode)
-        val result = xPath.evaluate(rule.detailLinks, dom, XPathConstants.NODESET) as NodeList
+        println("========MagnetFetchDyttDetailParserImp====$url")
         val list = arrayListOf<MagnetDetail>()
-        for (i in 0 until result.length) {
-            val node = result.item(i)
-            if (node != null) {
-                val downloadUrl = node.attributes.getNamedItem("href").textContent
-                if (downloadUrl.toLowerCase().startsWith("ftp://")){
-                    list.add(MagnetDetail(downloadUrl))
-                }
-                if (downloadUrl.toLowerCase().startsWith("magnet:")){
-                    list.add(MagnetDetail(downloadUrl.substringBefore("&")))
+        try {
+            val html = Jsoup.connect(url).get().body().html()
+            val xPath = XPathFactory.newInstance().newXPath()
+            val tagNode = HtmlCleaner().clean(html)
+            val dom = DomSerializer(CleanerProperties()).createDOM(tagNode)
+            val result = xPath.evaluate(rule.detailLinks, dom, XPathConstants.NODESET) as NodeList
+
+            for (i in 0 until result.length) {
+                val node = result.item(i)
+                if (node != null) {
+                    val downloadUrl = node.attributes.getNamedItem("href")?.textContent
+                    downloadUrl?.let {
+                        if (it.toLowerCase().startsWith("ftp://")){
+                            list.add(MagnetDetail(it))
+                        }
+                        if (it.toLowerCase().startsWith("magnet:")){
+                            list.add(MagnetDetail(it.substringBefore("&")))
+                        }
+                    }
                 }
             }
+        }catch (e:Exception){
+            println("===fail===$url")
+            e.printStackTrace()
         }
+
         return list
     }
 

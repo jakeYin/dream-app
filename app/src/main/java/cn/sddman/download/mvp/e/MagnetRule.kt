@@ -8,7 +8,7 @@ data class MagnetRule(
         var site: String,
         var url: String,
         var parserClass: String,
-        var parserDetailClass: String,
+        var parserDetailClass: String?,
         var list: String,
         var href: String,
         var name: String,
