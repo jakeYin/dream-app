@@ -18,7 +18,7 @@ class DBTools private constructor() {
         daoConfig = DbManager.DaoConfig()
                 .setDbName(Const.DB_NAME)
                 .setDbDir(File(Const.DB_SDCARD_PATH))
-                .setDbVersion(2)
+                .setDbVersion(3)
                 .setDbOpenListener { db ->
                     // 开启WAL, 对写入加速提升巨大
                     db.database.enableWriteAheadLogging()
