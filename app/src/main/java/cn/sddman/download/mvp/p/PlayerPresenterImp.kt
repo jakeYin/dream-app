@@ -1,16 +1,11 @@
 package cn.sddman.download.mvp.p
 
-import com.aplayer.aplayerandroid.APlayerAndroid
-
-import java.io.File
-
 import cn.sddman.download.mvp.e.PlayerVideoEntity
 import cn.sddman.download.mvp.m.PlayerVideoModel
 import cn.sddman.download.mvp.m.PlayerVideoModelImp
 import cn.sddman.download.mvp.v.PlayerView
-import cn.sddman.download.util.FileTools
 
-class PlayerPresenterImp(private val playerView: PlayerView, private val videoPath: String) : PlayerPresenter {
+class PlayerPresenterImp(private val playerView: PlayerView, private val videoPath: String,private val name: String) : PlayerPresenter {
     private val playerVideoModel: PlayerVideoModel
     private var video: PlayerVideoEntity? = null
 
@@ -22,7 +17,7 @@ class PlayerPresenterImp(private val playerView: PlayerView, private val videoPa
         } else {
             video = PlayerVideoEntity()
             video!!.localPath = videoPath
-            video!!.name = FileTools.getFileName(videoPath)
+            video!!.name = name
             video = playerVideoModel.saveOrUpdata(video!!)
         }
         playerView.initPlayer()

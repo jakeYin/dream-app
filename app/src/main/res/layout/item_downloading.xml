@@ -75,6 +75,7 @@
 
                     <TextView
                         android:id="@+id/down_cdnspeed"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/default_pad2"

@@ -95,7 +95,8 @@ class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
                     .start()
         } else if (FileTools.isVideoFile(task.getmFileName())) {
             val intent = Intent(activity, PlayerActivity::class.java)
-            intent.putExtra("videoPath", filePath)
+            intent.putExtra(PlayerActivity.VIDEO_PATH, filePath)
+            intent.putExtra(PlayerActivity.VIDEO_NAME, task.getmFileName())
             startActivity(intent)
         } else if (!task.file!! && task.taskType == Const.BT_DOWNLOAD) {
             val intent = Intent(activity, TorrentInfoActivity::class.java)

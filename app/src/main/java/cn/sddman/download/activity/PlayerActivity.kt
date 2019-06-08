@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_player.*
 
 class PlayerActivity : BaseActivity(), PlayerView {
 
-    private var videoPath: String? = null
+    private var videoPath: String = ""
     private var playerPresenter: PlayerPresenter? = null
     private var aPlayer: APlayerAndroid? = null
     private var mPopupWindow: PlayerPopupWindow? = null
@@ -35,6 +35,13 @@ class PlayerActivity : BaseActivity(), PlayerView {
     private var downY: Float = 0.toFloat()
 
 
+    private var videoName: String = ""
+
+    companion object {
+        val VIDEO_PATH:String = "video_path"
+        val VIDEO_NAME:String = "video_name"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -42,12 +49,16 @@ class PlayerActivity : BaseActivity(), PlayerView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
         val getIntent = intent
-        videoPath = getIntent.getStringExtra("videoPath")
-        if (null == videoPath || !FileTools.exists(videoPath!!)) {
+        videoPath = getIntent.getStringExtra(VIDEO_PATH)
+        videoName = getIntent.getStringExtra(VIDEO_NAME)
+        if (StringUtil.isEmpty(videoPath)){
             Util.alert(this, "视频不存在", Const.ERROR_ALERT)
-            return
         } else {
-            playerPresenter = PlayerPresenterImp(this, videoPath!!)
+            if (videoPath.startsWith("http://") || FileTools.exists(videoPath)){
+                playerPresenter = PlayerPresenterImp(this, videoPath,videoName)
+            } else {
+                Util.alert(this, "视频不存在", Const.ERROR_ALERT)
+            }
         }
     }
 
@@ -238,7 +249,7 @@ class PlayerActivity : BaseActivity(), PlayerView {
         currSecond = if (currSecond > 0) currSecond else 0
         var duraSecond = durationTimeMs / 1000
         duraSecond = if (duraSecond > 0) duraSecond else 0
-        play_time!!.text = getString(R.string.play_time, TimeUtil.formatFromSecond(currSecond),TimeUtil.formatFromSecond(duraSecond))
+        play_time!!.text = getString(R.string.play_time, TimeUtil.formatFromSecond(currSecond), TimeUtil.formatFromSecond(duraSecond))
         val batteryicon = SystemConfig.instance.batteryIcon
         battery_icon!!.setImageDrawable(resources.getDrawable(batteryicon))
         system_time!!.text = TimeUtil.getNowTime("HH:mm")

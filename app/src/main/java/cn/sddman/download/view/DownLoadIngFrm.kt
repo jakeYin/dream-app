@@ -73,9 +73,11 @@ class DownLoadIngFrm : Fragment(), DownLoadIngView {
             intent.putExtra("isDown", true)
             startActivity(intent)
         } else if (FileTools.isVideoFile(task.getmFileName())) {
-            val videoPath = task.localPath + File.separator + task.getmFileName()
+            downloadIngPresenter!!.startTask(task)
+            val localUrl = downloadIngPresenter?.getLoclUrl(task)
             val intent = Intent(activity, PlayerActivity::class.java)
-            intent.putExtra("videoPath", videoPath)
+            intent.putExtra(PlayerActivity.VIDEO_PATH, localUrl)
+            intent.putExtra(PlayerActivity.VIDEO_NAME, task.getmFileName())
             startActivity(intent)
         } else if (!task.file!! && task.taskType == Const.BT_DOWNLOAD) {
             val intent = Intent(activity, TorrentInfoActivity::class.java)

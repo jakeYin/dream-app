@@ -43,6 +43,10 @@ class DownLoadModelImp : DownLoadModel {
         return startTorrentTask(path, indexs)
     }
 
+    override fun getLoclUrl(task: DownloadTaskEntity): String {
+        return XLTaskHelper.instance(x.app().applicationContext).getLoclUrl(task.localPath+"/"+task.getmFileName());
+    }
+
     override fun startUrlTask(url: String): Boolean {
         val task = DownloadTaskEntity()
         task.taskType = Const.URL_DOWNLOAD

@@ -51,6 +51,10 @@ class DownloadIngPresenterImp(private val downLoadIngView: DownLoadIngView) : Do
         downLoadModel.stopTask(task)
     }
 
+    override fun getLoclUrl(task: DownloadTaskEntity):String {
+        return downLoadModel.getLoclUrl(task)
+    }
+
     override fun deleTask(task: DownloadTaskEntity, deleFile: Boolean) {
         downLoadModel.deleTask(task, true, deleFile)
         DownProgressNotify.instance.cancelDownProgressNotify(task)

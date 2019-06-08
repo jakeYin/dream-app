@@ -92,7 +92,8 @@ class TorrentInfoActivity : BaseActivity(), TorrentInfoView {
 
     override fun playVideo(te: TorrentInfoEntity) {
         val intent = Intent(this, PlayerActivity::class.java)
-        intent.putExtra("videoPath", te.path)
+        intent.putExtra(PlayerActivity.VIDEO_PATH, te.path)
+        intent.putExtra(PlayerActivity.VIDEO_NAME, te.getmFileName())
         startActivity(intent)
     }
 

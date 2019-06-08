@@ -11,6 +11,7 @@ interface DownLoadModel {
     fun startTorrentTask(btpath: String, indexs: IntArray?): Boolean
     fun startTask(task: DownloadTaskEntity): Boolean
     fun stopTask(task: DownloadTaskEntity): Boolean
+    fun getLoclUrl(task: DownloadTaskEntity): String
     fun deleTask(task: DownloadTaskEntity, deleFile: Boolean): Boolean
     fun deleTask(task: DownloadTaskEntity, stopTask: Boolean, deleFile: Boolean): Boolean
     fun getTorrentInfo(bt: DownloadTaskEntity): List<TorrentInfoEntity>
