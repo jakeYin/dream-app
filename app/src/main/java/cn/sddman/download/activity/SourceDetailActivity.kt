@@ -71,6 +71,7 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
         for(x in linkList){
             x.check = true
         }
+        sourceDetailListAdapter.notifyDataSetChanged()
     }
 
     private lateinit var urlDownLoadPresenter: UrlDownLoadPresenterImp

@@ -54,7 +54,7 @@ class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
     override fun deleTask(task: DownloadTaskEntity) {
         val items = arrayOf(context!!.getString(R.string.dele_data_and_file))
         LovelyChoiceDialog(context)
-                .setTopColorRes(R.color.colorAccent)
+                .setTopColorRes(R.color.colorMain)
                 .setTitle(R.string.determine_dele)
                 .setIcon(R.drawable.ic_error)
                 .setItemsMultiChoice(items) { positions, items ->

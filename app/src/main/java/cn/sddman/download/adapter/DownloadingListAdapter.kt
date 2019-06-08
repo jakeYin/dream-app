@@ -147,7 +147,7 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
                 startTask.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_wait))
                 downStatus.setText(R.string.wait_down)
             } else {
-                startTask.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_stop))
+                startTask.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pause))
                 downStatus.setText(R.string.downloading)
             }
         }
