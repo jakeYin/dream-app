@@ -32,35 +32,28 @@ import cn.sddman.download.mvp.p.DownloadSuccessPresenterImp
 import cn.sddman.download.mvp.v.DownLoadSuccessView
 import cn.sddman.download.util.FileTools
 import cn.sddman.download.util.Util
+import kotlinx.android.synthetic.main.frm_download_success.*
 
 class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
-    private var recyclerView: RecyclerView? = null
     private var downloadSuccessListAdapter: DownloadSuccessListAdapter? = null
     private var downloadSuccessPresenter: DownloadSuccessPresenter? = null
-    private var list: MutableList<DownloadTaskEntity>? = null
-    private val lovelyChoiceDialog: LovelyChoiceDialog? = null
+    private var list: MutableList<DownloadTaskEntity> = arrayListOf()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frm_download_success, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initView()
         downloadSuccessPresenter = DownloadSuccessPresenterImp(this)
-
     }
 
-    private fun initView() {
-        recyclerView = view!!.findViewById(R.id.recyclerview)
-
-    }
 
     override fun initTaskListView(list: MutableList<DownloadTaskEntity>) {
         val manager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false)
-        recyclerView!!.layoutManager = manager
+        recyclerview!!.layoutManager = manager
         downloadSuccessListAdapter = DownloadSuccessListAdapter(context!!, this, list)
-        recyclerView!!.adapter = downloadSuccessListAdapter
+        recyclerview!!.adapter = downloadSuccessListAdapter
     }
 
     override fun deleTask(task: DownloadTaskEntity) {
@@ -112,8 +105,8 @@ class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
     }
 
     override fun refreshData() {
-        list?.clear()
-        list?.addAll(downloadSuccessPresenter!!.downSuccessTaskList!!)
+        list.clear()
+        list.addAll(downloadSuccessPresenter!!.downSuccessTaskList!!)
         downloadSuccessListAdapter?.notifyDataSetChanged()
     }
 
