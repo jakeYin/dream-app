@@ -2,6 +2,7 @@ package cn.sddman.download.adapter
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -91,23 +92,23 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
             this.task = task
             fileNameText.text = task.getmFileName()
             if (task.file!!) {
-                fileIcon.setImageDrawable(itemView.resources.getDrawable(FileTools.getFileIcon(task.getmFileName())))
+                fileIcon.setImageDrawable(ContextCompat.getDrawable(context, FileTools.getFileIcon(task.getmFileName())))
             } else {
-                fileIcon.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_floder))
+                fileIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_floder))
             }
-            //            if(task.getThumbnail()!=null){
-            //                fileIcon.setImageBitmap(task.getThumbnail());
-            //            }
-            downSize.setText(String.format(itemView.resources.getString(R.string.down_count),
-                    FileTools.convertFileSize(task.getmFileSize()), FileTools.convertFileSize(task.getmDownloadSize())))
-            downSpeed.setText(String.format(itemView.resources.getString(R.string.down_speed),
-                    FileTools.convertFileSize(task.getmDownloadSpeed())))
-            downCDNSpeed.setText(String.format(itemView.resources.getString(R.string.down_speed_up),
-                    FileTools.convertFileSize(task.getmDCDNSpeed())))
+//            if (task.getThumbnail() != null) {
+//                fileIcon.setImageBitmap(task.getThumbnail());
+//            }
+            downSize.text = String.format(itemView.resources.getString(R.string.down_count),
+                    FileTools.convertFileSize(task.getmDownloadSize()), FileTools.convertFileSize(task.getmFileSize()))
+            downSpeed.text = String.format(itemView.resources.getString(R.string.down_speed),
+                    FileTools.convertFileSize(task.getmDownloadSpeed()))
+            downCDNSpeed.text = String.format(itemView.resources.getString(R.string.down_speed_up),
+                    FileTools.convertFileSize(task.getmDCDNSpeed()))
             if (task.getmFileSize() != 0L && task.getmDownloadSize() != 0L) {
                 val speed = if (task.getmDownloadSpeed() == 0L) 1 else task.getmDownloadSpeed()
                 val time = (task.getmFileSize() - task.getmDownloadSize()) / speed
-                RemainingTime.setText(String.format(itemView.resources.getString(R.string.remaining_time), TimeUtil.formatFromSecond(time.toInt())))
+                RemainingTime.text = String.format(itemView.resources.getString(R.string.remaining_time), TimeUtil.formatFromSecond(time.toInt()))
             }
             if (task.thumbnailPath != null) {
                 fileIcon2.visibility = View.VISIBLE
@@ -134,19 +135,19 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
             }
             //if(SystemConfig.getNetType())
             if (task.getmTaskStatus() == Const.DOWNLOAD_STOP || task.getmTaskStatus() == Const.DOWNLOAD_CONNECTION && task.taskId == 0L) {
-                startTask.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_download))
+                startTask.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_download))
                 downStatus.setText(R.string.is_stop)
             } else if (task.getmTaskStatus() == Const.DOWNLOAD_CONNECTION) {
-                startTask.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_connent))
+                startTask.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_connent))
                 downStatus.text = "连接中"
             } else if (task.getmTaskStatus() == Const.DOWNLOAD_FAIL) {
-                startTask.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_fail))
+                startTask.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_fail))
                 downStatus.text = "下载失败"
             } else if (task.getmTaskStatus() == Const.DOWNLOAD_WAIT) {
-                startTask.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_wait))
+                startTask.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_wait))
                 downStatus.setText(R.string.wait_down)
             } else {
-                startTask.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_stop))
+                startTask.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_stop))
                 downStatus.setText(R.string.downloading)
             }
         }
