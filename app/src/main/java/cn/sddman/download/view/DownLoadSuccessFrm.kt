@@ -4,40 +4,34 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.yanzhenjie.permission.AndPermission
-import com.yarolegovich.lovelydialog.LovelyChoiceDialog
-
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
-
-import java.io.File
-import java.util.ArrayList
-
 import cn.sddman.download.R
 import cn.sddman.download.activity.PlayerActivity
 import cn.sddman.download.activity.TorrentInfoActivity
 import cn.sddman.download.adapter.DownloadSuccessListAdapter
+import cn.sddman.download.common.Const
 import cn.sddman.download.common.MessageEvent
 import cn.sddman.download.common.Msg
-import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.p.DownloadSuccessPresenter
 import cn.sddman.download.mvp.p.DownloadSuccessPresenterImp
 import cn.sddman.download.mvp.v.DownLoadSuccessView
 import cn.sddman.download.util.FileTools
 import cn.sddman.download.util.Util
+import com.yanzhenjie.permission.AndPermission
+import com.yarolegovich.lovelydialog.LovelyChoiceDialog
 import kotlinx.android.synthetic.main.frm_download_success.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import java.io.File
 
 class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
     private var downloadSuccessListAdapter: DownloadSuccessListAdapter? = null
     private var downloadSuccessPresenter: DownloadSuccessPresenter? = null
-    private var list: MutableList<DownloadTaskEntity> = arrayListOf()
+    private var list: MutableList<DownloadTaskEntity>? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frm_download_success, container, false)
     }
@@ -52,6 +46,7 @@ class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
         val manager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false)
         recyclerview!!.layoutManager = manager
+        this.list = list
         downloadSuccessListAdapter = DownloadSuccessListAdapter(context!!, this, list)
         recyclerview!!.adapter = downloadSuccessListAdapter
     }
@@ -105,8 +100,8 @@ class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
     }
 
     override fun refreshData() {
-        list.clear()
-        list.addAll(downloadSuccessPresenter!!.downSuccessTaskList!!)
+        list?.clear()
+        list?.addAll(downloadSuccessPresenter!!.downSuccessTaskList!!)
         downloadSuccessListAdapter?.notifyDataSetChanged()
     }
 

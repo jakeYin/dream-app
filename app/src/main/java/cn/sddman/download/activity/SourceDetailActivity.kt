@@ -23,17 +23,17 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
     private lateinit var magnetRule:MagnetRule
     private lateinit var sourceDetailListAdapter: SourceDetailListAdapter
 
-    private var list = arrayListOf<MagnetDetail>()
+    private var linkList = arrayListOf<MagnetDetail>()
 
     companion object {
         val DETAIL_URL:String = "detail_url"
         val TITLE:String = "title"
         val MAGNET_RULE:String = "magnet_rule"
     }
-    override fun refreshData(result: List<MagnetDetail>) {
-        list?.clear()
-        list?.addAll(result)
-        sourceDetailListAdapter?.notifyDataSetChanged()
+    override fun refreshData(list: List<MagnetDetail>) {
+        linkList.clear()
+        linkList.addAll(list)
+        sourceDetailListAdapter.notifyDataSetChanged()
     }
 
     override fun clickItem(url: String) {
@@ -59,18 +59,16 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
 
     }
 
-
-
     private fun initRV(){
         val manager = LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false)
         recyclerview!!.layoutManager = manager
-        sourceDetailListAdapter = SourceDetailListAdapter(this, this, this.list!!)
+        sourceDetailListAdapter = SourceDetailListAdapter(this, this, this.linkList)
         recyclerview.adapter = sourceDetailListAdapter
     }
 
     fun selectAllClick(v: View){
-        for(x in list){
+        for(x in linkList){
             x.check = true
         }
     }
@@ -78,7 +76,7 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
     private lateinit var urlDownLoadPresenter: UrlDownLoadPresenterImp
 
     fun downloadSelectedClick(v: View){
-        for (x in list){
+        for (x in linkList){
             if (x.check){
                 urlDownLoadPresenter.startTask(x.name)
             }
@@ -86,7 +84,7 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
     }
 
     override fun addTaskSuccess() {
-        Util.alert(this, "添加任务成功", Const.ERROR_ALERT)
+        Util.alert(this, "添加任务成功", Const.SUCCESS_ALERT)
     }
 
     override fun addTaskFail(msg: String) {
