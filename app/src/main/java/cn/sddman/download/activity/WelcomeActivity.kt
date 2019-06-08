@@ -41,7 +41,7 @@ class WelcomeActivity : AppCompatActivity() {
                 .runtime()
                 .permission(Permission.WRITE_EXTERNAL_STORAGE,
                         Permission.READ_EXTERNAL_STORAGE,
-                        Permission.CAMERA,
+//                        Permission.CAMERA,
                         Permission.READ_PHONE_STATE)
                 .rationale(RuntimeRationale())
                 .onGranted {
