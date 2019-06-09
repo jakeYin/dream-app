@@ -1,5 +1,6 @@
 package cn.sddman.download.activity
 
+import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
@@ -17,6 +18,7 @@ import cn.sddman.download.util.*
 import cn.sddman.download.view.PlayerPopupWindow
 import com.aplayer.aplayerandroid.APlayerAndroid
 import kotlinx.android.synthetic.main.activity_player.*
+
 
 class PlayerActivity : BaseActivity(), PlayerView {
 
@@ -38,9 +40,12 @@ class PlayerActivity : BaseActivity(), PlayerView {
     private var videoName: String = ""
 
     companion object {
-        val VIDEO_PATH:String = "video_path"
-        val VIDEO_NAME:String = "video_name"
+        val VIDEO_PATH: String = "video_path"
+        val VIDEO_NAME: String = "video_name"
     }
+
+    private var SCREEN_WIDTH: Int = 0
+    private var SCREEN_HEIGHT: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -51,15 +56,19 @@ class PlayerActivity : BaseActivity(), PlayerView {
         val getIntent = intent
         videoPath = getIntent.getStringExtra(VIDEO_PATH)
         videoName = getIntent.getStringExtra(VIDEO_NAME)
-        if (StringUtil.isEmpty(videoPath)){
+        if (StringUtil.isEmpty(videoPath)) {
             Util.alert(this, "视频不存在", Const.ERROR_ALERT)
         } else {
-            if (videoPath.startsWith("http://") || FileTools.exists(videoPath)){
-                playerPresenter = PlayerPresenterImp(this, videoPath,videoName)
+            if (videoPath.startsWith("http://") || FileTools.exists(videoPath)) {
+                playerPresenter = PlayerPresenterImp(this, videoPath, videoName)
             } else {
                 Util.alert(this, "视频不存在", Const.ERROR_ALERT)
             }
         }
+        val size = Point()
+        windowManager.defaultDisplay.getSize(size)
+        SCREEN_WIDTH = size.x
+        SCREEN_HEIGHT = size.y
     }
 
     override fun initPlayer() {
@@ -121,22 +130,45 @@ class PlayerActivity : BaseActivity(), PlayerView {
                 }
                 MotionEvent.ACTION_MOVE -> {
                     mIsTouchingSeekbar = true
-                    val distanceX = motionEvent.x - downX
-                    val distanceY = motionEvent.y - downY
-                    if (Math.abs(distanceY) < 50 && distanceX > 100) {
-                        setPlaySpeedTime(downX, motionEvent.x)
-                        downX = motionEvent.x
-                        downY = motionEvent.y
-                    } else if (Math.abs(distanceY) < 50 && distanceX < -100) {
-                        setPlaySpeedTime(downX, motionEvent.x)
-                        downX = motionEvent.x
-                        downY = motionEvent.y
+                    val disX = motionEvent.x - downX
+                    val disY = motionEvent.y - downY
+                    if (Math.abs(disX) > Math.abs(disY)) {
+                        // x control
+                        if (Math.abs(disX) > 10){
+                            val fastLength = 10 * disX
+                            val newProgress = (aPlayer!!.position + fastLength);
+                            userSeekPlayProgress(newProgress.toInt())
+                            hidePlayControl!!.resetHideTimer()
+                        }
+
                     } else {
-                        // controlViewToggle();;
+                        // y control
+                        if (Math.abs(disY) > 20){
+                            if (downX > SCREEN_WIDTH/2){
+                                //volume
+                                if (disY>0){
+                                    SystemConfig.instance.streamVolume--
+                                } else {
+                                    SystemConfig.instance.streamVolume++
+                                }
+                            }
+//                            else {
+//                                //brightness
+//                                var old = SystemConfig.instance.screenBrightness
+//                                if (disY>0){
+//                                    old+=15
+//                                } else {
+//                                    old-=15
+//                                }
+//                                println("================old = $old")
+//                                SystemConfig.instance.setWindowBrightness(this,old)
+//                            }
+                        }
                     }
+
+
                 }
                 MotionEvent.ACTION_UP -> {
-                    setPlaySpeedTime(downX, motionEvent.x)
                     mIsTouchingSeekbar = false
                     startUIUpdateThread()
                 }
@@ -147,13 +179,6 @@ class PlayerActivity : BaseActivity(), PlayerView {
         top_panel!!.setOnTouchListener(playViewClick)
         bottom_panel!!.setOnTouchListener(playViewClick)
         //fullscreen_content.setOnTouchListener(playViewClick);
-    }
-
-    private fun setPlaySpeedTime(distanceX: Float, distance2X: Float) {
-        val offset = distance2X - distanceX
-        val newProgress = (aPlayer!!.position + offset * 10).toInt()
-        userSeekPlayProgress(newProgress)
-        hidePlayControl!!.resetHideTimer()
     }
 
     private fun destroyPopWind() {
@@ -286,7 +311,7 @@ class PlayerActivity : BaseActivity(), PlayerView {
         if (mPopupWindow == null) {
             mPopupWindow = PlayerPopupWindow(this, play_view_root!!, aPlayer!!)
         }
-        mPopupWindow!!.showAtLocation(play_view_root, Gravity.RIGHT, 0, 0)
+        mPopupWindow!!.showAtLocation(play_view_root, Gravity.END, 0, 0)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
