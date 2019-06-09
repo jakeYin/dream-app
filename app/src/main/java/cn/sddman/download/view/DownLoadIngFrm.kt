@@ -73,7 +73,11 @@ class DownLoadIngFrm : Fragment(), DownLoadIngView {
             intent.putExtra("isDown", true)
             startActivity(intent)
         } else if (FileTools.isVideoFile(task.getmFileName())) {
-            downloadIngPresenter!!.startTask(task)
+            if (task!!.getmTaskStatus() == Const.DOWNLOAD_STOP ||
+                    task!!.getmTaskStatus() == Const.DOWNLOAD_CONNECTION && task!!.taskId == 0L ||
+                    task!!.getmTaskStatus() == Const.DOWNLOAD_WAIT) {
+                downloadIngPresenter?.startTask(task!!)
+            }
             val localUrl = downloadIngPresenter?.getLoclUrl(task)
             val intent = Intent(activity, PlayerActivity::class.java)
             intent.putExtra(PlayerActivity.VIDEO_PATH, localUrl)
