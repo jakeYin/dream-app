@@ -2,16 +2,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 27
-
+    compileSdkVersion rootProject.ext.versions.compileSdkVersion
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.versions.minSdkVersion
+        targetSdkVersion rootProject.ext.versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -30,15 +27,15 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:recyclerview-v7:27.1.0'
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support:design:27.1.0'
-    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation rootProject.ext.deps.appcompat
+    implementation rootProject.ext.deps.recyclerview
+    implementation rootProject.ext.deps.design
+    implementation rootProject.ext.deps.appcompat
+    implementation rootProject.ext.deps.support_v4
+    implementation rootProject.ext.deps.constraint
+    implementation rootProject.ext.deps.eventbus
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.github.bumptech.glide:glide:4.6.1'
-    implementation 'com.android.support:support-v4:27.1.0'
-    implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'top.zibin:Luban:1.1.3'
 }
 
