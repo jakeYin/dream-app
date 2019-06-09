@@ -7,9 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.view.View
 import cn.sddman.download.R
-import cn.sddman.download.common.BaseActivity
-import cn.sddman.download.common.Const
-import cn.sddman.download.common.CusAdapter
+import cn.sddman.download.common.*
 import cn.sddman.download.mvp.p.AppConfigPresenter
 import cn.sddman.download.mvp.p.AppConfigPresenterImp
 import cn.sddman.download.mvp.p.DownloadManagementPresenter
@@ -27,6 +25,7 @@ import com.yarolegovich.lovelydialog.LovelyStandardDialog
 import com.yzq.zxinglibrary.android.CaptureActivity
 import com.yzq.zxinglibrary.common.Constant
 import kotlinx.android.synthetic.main.activity_download_management.*
+import org.greenrobot.eventbus.EventBus
 import java.util.*
 
 class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
@@ -44,7 +43,6 @@ class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
         appConfigPresenter = AppConfigPresenterImp()
         initViewPage()
         initBottomMenu()
-        println("============= oncreate")
     }
 
     private fun initViewPage() {
@@ -59,7 +57,6 @@ class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
             override fun onPageSelected(i: Int) {
                 changeTab(i)
             }
-
             override fun onPageScrollStateChanged(i: Int) {}
         })
     }
@@ -72,6 +69,7 @@ class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
             downloading!!.setTextColor(resources.getColor(R.color.trwhite))
             downloadfinish!!.setTextColor(resources.getColor(R.color.white))
         }
+        EventBus.getDefault().postSticky(MessageEvent(Msg(Const.MESSAGE_TYPE_REFRESH_DATA)))
     }
 
     fun downloadingClick(view: View) {

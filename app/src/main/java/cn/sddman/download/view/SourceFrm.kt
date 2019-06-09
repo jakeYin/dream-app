@@ -84,7 +84,6 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
 
 
     private fun initView(){
-        //recyclerView;
         source_rv!!.layoutManager = RecyclerViewNoBugLinearLayoutManager(context!!,
                 LinearLayoutManager.VERTICAL, false)
         searchListAdapter = SourceListAdapter(context!!, this, list)
