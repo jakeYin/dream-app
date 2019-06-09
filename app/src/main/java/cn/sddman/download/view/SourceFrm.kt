@@ -1,12 +1,18 @@
 package cn.sddman.download.view
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import cn.sddman.download.App
 import cn.sddman.download.R
 import cn.sddman.download.activity.SourceDetailActivity
 import cn.sddman.download.adapter.SourceListAdapter
@@ -28,7 +34,7 @@ import java.util.*
 
 
 class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
-    private val list = ArrayList<MagnetInfo>()
+    private val sourceList = ArrayList<MagnetInfo>()
     private lateinit var rule: MagnetRule
     private lateinit var magnetSearchPresenter: SourcePresenterImp
     private lateinit var urlDownLoadPresenter: UrlDownLoadPresenterImp
@@ -53,7 +59,10 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         } else if (info.isEmpty()) {
             activity?.let { Util.alert(it, "没有更多了", Const.ERROR_ALERT) }
         } else {
-            list.addAll(info)
+            if (searchPage == 0){
+                sourceList.clear();
+            }
+            sourceList.addAll(info)
             searchListAdapter.notifyDataSetChanged()
         }
     }
@@ -86,7 +95,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     private fun initView(){
         source_rv!!.layoutManager = RecyclerViewNoBugLinearLayoutManager(context!!,
                 LinearLayoutManager.VERTICAL, false)
-        searchListAdapter = SourceListAdapter(context!!, this, list)
+        searchListAdapter = SourceListAdapter(context!!, this, sourceList)
         source_rv.adapter = searchListAdapter
         //source_twinklingRefreshLayout
         val header = ProgressLayout(context)
@@ -98,7 +107,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         source_twinklingRefreshLayout.setOnRefreshListener(object : RefreshListenerAdapter() {
             override fun onRefresh(refreshLayout: TwinklingRefreshLayout) {
                 searchPage = 0
-                list.clear()
+                sourceList.clear()
                 searchListAdapter.notifyDataSetChanged()
                 loadData()
             }
@@ -142,9 +151,20 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
 
     fun search(keyword: String) {
         this.keyword = keyword
+        hideSoftKeyboard(activity!!)
         searchPage = 0
-        list.clear()
         loadData()
+    }
+
+
+    protected fun hideSoftKeyboard(hostActivity: Activity) {
+        var inputMethodManager: InputMethodManager? = null
+            inputMethodManager = App.instance?.applicationContext?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if (hostActivity.window.getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
+            if (hostActivity.getCurrentFocus() != null)
+                inputMethodManager.hideSoftInputFromWindow(hostActivity.getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS)
+        }
     }
 
 
