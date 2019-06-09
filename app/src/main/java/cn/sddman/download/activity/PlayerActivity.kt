@@ -95,6 +95,13 @@ class PlayerActivity : BaseActivity(), PlayerView {
             // String s="";
         }
         registerListener()
+
+        val decoder = aPlayer!!.getConfig(APlayerAndroid.CONFIGID.HW_DECODER_ENABLE)
+        if ("1" == decoder) {
+            aPlayer?.setConfig(APlayerAndroid.CONFIGID.HW_DECODER_USE, "1")
+        }
+
+
     }
 
     private fun registerListener() {
@@ -143,7 +150,7 @@ class PlayerActivity : BaseActivity(), PlayerView {
 
                     } else {
                         // y control
-                        if (Math.abs(disY) > 20){
+                        if (Math.abs(disY) > 80){
                             if (downX > SCREEN_WIDTH/2){
                                 //volume
                                 if (disY>0){

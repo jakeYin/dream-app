@@ -87,6 +87,8 @@ class PlayerPopupWindow(private val parentActivity: Activity, parentView: View, 
 
             }
         }
+        val bool = aPlayer!!.getConfig(APlayerAndroid.CONFIGID.HW_DECODER_ENABLE)
+        playDecoder!!.isChecked = bool == "1"
         playDecoder!!.setOnCheckedChangeListener { compoundButton, b ->
             val decoder = aPlayer!!.getConfig(APlayerAndroid.CONFIGID.HW_DECODER_ENABLE)
             if ("0" == decoder) {
