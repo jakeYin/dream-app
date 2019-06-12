@@ -52,6 +52,7 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
         private val startTask: ImageView
         private val deleTask: ImageView
         private val fileIcon: ImageView
+        private val fileCheckBox: ImageView
         private val fileIcon2: ImageView
         private val progressBar: NumberProgressBar
 
@@ -75,6 +76,7 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
         }
 
         init {
+            fileCheckBox = itemView.findViewById<View>(R.id.file_check_box) as ImageView
             fileNameText = itemView.findViewById<View>(R.id.file_name) as TextView
             downSize = itemView.findViewById<View>(R.id.down_size) as TextView
             downSpeed = itemView.findViewById<View>(R.id.down_speed) as TextView
@@ -149,6 +151,29 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
             } else {
                 startTask.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pause))
                 downStatus.setText(R.string.downloading)
+            }
+
+            if (downLoadIngView.deleteState()){
+                fileCheckBox.visibility = View.VISIBLE
+                if (task.check) {
+                    fileCheckBox.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_check))
+                } else {
+                    fileCheckBox.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_uncheck))
+                }
+                fileCheckBox.setOnClickListener {
+                    task.check = !task.check
+                    notifyDataSetChanged()
+                    downLoadIngView.updateTask(task)
+                }
+
+            } else {
+                fileCheckBox.visibility = View.GONE
+            }
+
+            itemView.setOnLongClickListener {
+                downLoadIngView.toggleDeleteButton()
+                notifyDataSetChanged()
+                true
             }
         }
 

@@ -10,7 +10,7 @@ class DownLoadingTask : AsyncTask<Void, List<DownloadTaskEntity>, List<DownloadT
     override fun doInBackground(vararg objects: Void): List<DownloadTaskEntity>? {
         while (DownUtil.instance.isIsLoopDown) {
             DownUpdateUI.instance.downUpdate()
-            SystemClock.sleep(1000)
+            SystemClock.sleep(2000)
         }
         return null
     }

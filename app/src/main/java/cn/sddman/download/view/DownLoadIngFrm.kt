@@ -31,6 +31,7 @@ import cn.sddman.download.mvp.p.DownloadIngPresenterImp
 import cn.sddman.download.mvp.v.DownLoadIngView
 import cn.sddman.download.util.FileTools
 import cn.sddman.download.util.Util
+import kotlinx.android.synthetic.main.frm_download_ing.*
 
 class DownLoadIngFrm : Fragment(), DownLoadIngView {
     private var recyclerView: RecyclerView? = null
@@ -45,6 +46,22 @@ class DownLoadIngFrm : Fragment(), DownLoadIngView {
         super.onActivityCreated(savedInstanceState)
         initView()
         downloadIngPresenter = DownloadIngPresenterImp(this)
+        delete_button.setOnClickListener {
+            val items = arrayOf(context!!.getString(R.string.dele_data_and_file))
+            LovelyChoiceDialog(context)
+                    .setTopColorRes(R.color.colorMain)
+                    .setTitle(R.string.determine_dele)
+                    .setIcon(R.drawable.ic_error)
+                    .setItemsMultiChoice(items) { positions, items ->
+                        val deleFile = items.size > 0
+                        downloadIngPresenter!!.deleTask(list, deleFile)
+                    }.show()
+        }
+
+        delete_cancel_button.setOnClickListener {
+            toggleDeleteButton()
+            downloadingListAdapter?.notifyDataSetChanged()
+        }
 
     }
 
@@ -57,8 +74,24 @@ class DownLoadIngFrm : Fragment(), DownLoadIngView {
         recyclerView!!.adapter = downloadingListAdapter
     }
 
+    override fun toggleDeleteButton() {
+        if (delete_bottom_layout.visibility == View.VISIBLE){
+            delete_bottom_layout.visibility = View.GONE
+        } else {
+            delete_bottom_layout.visibility = View.VISIBLE
+        }
+    }
+
+    override fun deleteState(): Boolean {
+        return delete_bottom_layout.visibility == View.VISIBLE
+    }
+
     override fun startTask(task: DownloadTaskEntity) {
         downloadIngPresenter!!.startTask(task)
+    }
+
+    override fun updateTask(task: DownloadTaskEntity) {
+        downloadIngPresenter!!.updateTask(task)
     }
 
     override fun stopTask(task: DownloadTaskEntity) {

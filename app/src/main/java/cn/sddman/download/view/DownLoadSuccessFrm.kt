@@ -39,7 +39,36 @@ class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         downloadSuccessPresenter = DownloadSuccessPresenterImp(this)
+        delete_button.setOnClickListener {
+            val items = arrayOf(context!!.getString(R.string.dele_data_and_file))
+            LovelyChoiceDialog(context)
+                    .setTopColorRes(R.color.colorMain)
+                    .setTitle(R.string.determine_dele)
+                    .setIcon(R.drawable.ic_error)
+                    .setItemsMultiChoice(items) { positions, items ->
+                        val deleFile = items.size > 0
+                        downloadSuccessPresenter!!.deleTask(list, deleFile)
+                    }.show()
+        }
+
+        delete_cancel_button.setOnClickListener {
+            toggleDeleteButton()
+            downloadSuccessListAdapter?.notifyDataSetChanged()
+        }
     }
+
+    override fun toggleDeleteButton() {
+        if (delete_bottom_layout.visibility == View.VISIBLE){
+            delete_bottom_layout.visibility = View.GONE
+        } else {
+            delete_bottom_layout.visibility = View.VISIBLE
+        }
+    }
+
+    override fun deleteState(): Boolean {
+        return delete_bottom_layout.visibility == View.VISIBLE
+    }
+
 
 
     override fun initTaskListView(list: MutableList<DownloadTaskEntity>) {

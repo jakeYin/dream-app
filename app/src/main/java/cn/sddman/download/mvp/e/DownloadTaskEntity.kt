@@ -40,6 +40,8 @@ class DownloadTaskEntity {
     @Column(name = "thumbnailPath")
     var thumbnailPath: String? = null
     var thumbnail: Bitmap? = null
+    @Column(name = "isCheck")
+    var check: Boolean = false
 
     fun getmTaskStatus(): Int {
         return mTaskStatus

@@ -40,6 +40,7 @@ class DownloadSuccessListAdapter(private val context: Context, private val downL
         private val fileNameText: TextView
         private val downSize: TextView
         private val fileIcon: ImageView
+        private val fileCheckBox: ImageView
         private val deleTask: ImageView
         private val btnOpen: SuperTextView
         private val fileIsDele: SuperTextView
@@ -55,6 +56,7 @@ class DownloadSuccessListAdapter(private val context: Context, private val downL
             fileNameText = itemView.findViewById<View>(R.id.file_name) as TextView
             downSize = itemView.findViewById<View>(R.id.down_size) as TextView
             fileIcon = itemView.findViewById<View>(R.id.file_icon) as ImageView
+            fileCheckBox = itemView.findViewById<View>(R.id.file_check_box) as ImageView
             deleTask = itemView.findViewById<View>(R.id.dele_task) as ImageView
             btnOpen = itemView.findViewById<View>(R.id.btn_open) as SuperTextView
             fileIsDele = itemView.findViewById<View>(R.id.file_is_dele) as SuperTextView
@@ -93,6 +95,28 @@ class DownloadSuccessListAdapter(private val context: Context, private val downL
                 btnOpen.visibility = View.VISIBLE
             } else if (!task.file!!) {
                 btnOpen.visibility = View.VISIBLE
+            }
+
+            if (downLoadSuccessView.deleteState()){
+                fileCheckBox.visibility = View.VISIBLE
+                if (task.check) {
+                    fileCheckBox.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_check))
+                } else {
+                    fileCheckBox.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_uncheck))
+                }
+                fileCheckBox.setOnClickListener {
+                    task.check = !task.check
+                    notifyDataSetChanged()
+                }
+
+            } else {
+                fileCheckBox.visibility = View.GONE
+            }
+
+            itemView.setOnLongClickListener {
+                downLoadSuccessView.toggleDeleteButton()
+                notifyDataSetChanged()
+                true
             }
 
         }

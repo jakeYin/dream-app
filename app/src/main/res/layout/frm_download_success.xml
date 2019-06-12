@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+
     android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
         android:overScrollMode="never"/>
+
+    <LinearLayout
+        android:id="@+id/delete_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/colorMain"
+        android:gravity="center_vertical"
+        android:visibility="visible">
+        <TextView
+            android:id="@+id/delete_cancel_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/cancel"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/white"/>
+        <View
+            android:background="@color/white_ff"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/delete_button"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/delete_selected"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/floralwhite"/>
+    </LinearLayout>
 </LinearLayout>

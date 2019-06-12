@@ -39,5 +39,18 @@ class DownloadSuccessPresenterImp(private val downLoadSuccessView: DownLoadSucce
         }
     }
 
+    override fun deleTask(tasks: MutableList<DownloadTaskEntity>?, deleFile: Boolean) {
+        if (tasks != null) {
+            for (x in tasks){
+                if (x.check){
+                    downLoadModel.deleTask(x, deleFile)
+                }
+            }
+            downLoadSuccessView.toggleDeleteButton()
+            downLoadSuccessView.refreshData()
+            downLoadSuccessView.alert(x.app().getString(R.string.dele_success), Const.SUCCESS_ALERT)
+        }
+    }
+
 
 }

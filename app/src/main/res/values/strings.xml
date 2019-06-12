@@ -68,5 +68,6 @@
     <string name="search_hint">输入搜索关键字</string>
     <string name="download_selected">下载选中文件</string>
     <string name="select_all">全选</string>
+    <string name="delete_selected">删除选中文件</string>
 
 </resources>

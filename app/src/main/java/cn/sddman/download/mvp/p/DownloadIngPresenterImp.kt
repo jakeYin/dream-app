@@ -25,6 +25,10 @@ class DownloadIngPresenterImp(private val downLoadIngView: DownLoadIngView) : Do
         //refreshData();
     }
 
+    override fun updateTask(task: DownloadTaskEntity) {
+        taskModel.updateTask(task);
+    }
+
     override fun startTask(task: DownloadTaskEntity) {
         val netType = SystemConfig.netType
         if (netType == Const.NET_TYPE_UNKNOW) {
@@ -58,6 +62,15 @@ class DownloadIngPresenterImp(private val downLoadIngView: DownLoadIngView) : Do
     override fun deleTask(task: DownloadTaskEntity, deleFile: Boolean) {
         downLoadModel.deleTask(task, true, deleFile)
         DownProgressNotify.instance.cancelDownProgressNotify(task)
+    }
+
+    override fun deleTask(tasks: List<DownloadTaskEntity>, deleFile: Boolean) {
+        for (x in tasks){
+            if (x.check){
+                downLoadModel.deleTask(x, true, deleFile)
+                DownProgressNotify.instance.cancelDownProgressNotify(x)
+            }
+        }
     }
 
     override fun refreshData() {

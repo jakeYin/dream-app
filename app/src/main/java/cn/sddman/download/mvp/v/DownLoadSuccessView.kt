@@ -8,4 +8,6 @@ interface DownLoadSuccessView {
     fun openFile(task: DownloadTaskEntity)
     fun refreshData()
     fun alert(msg: String, msgType: Int)
+    fun toggleDeleteButton()
+    fun deleteState():Boolean
 }
