@@ -99,7 +99,6 @@
                         android:id="@+id/dele_task"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/file_item_btn_icon_height"
-                        android:visibility="gone"
                         android:layout_weight="1"
                         android:src="@drawable/ic_dele" />
                     </LinearLayout>
