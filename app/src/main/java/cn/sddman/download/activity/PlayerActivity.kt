@@ -148,30 +148,31 @@ class PlayerActivity : BaseActivity(), PlayerView {
                             hidePlayControl!!.resetHideTimer()
                         }
 
-                    } else {
-                        // y control
-                        if (Math.abs(disY) > 80){
-                            if (downX > SCREEN_WIDTH/2){
-                                //volume
-                                if (disY>0){
-                                    SystemConfig.instance.streamVolume--
-                                } else {
-                                    SystemConfig.instance.streamVolume++
-                                }
-                            }
-//                            else {
-//                                //brightness
-//                                var old = SystemConfig.instance.screenBrightness
-//                                if (disY>0){
-//                                    old+=15
-//                                } else {
-//                                    old-=15
-//                                }
-//                                println("================old = $old")
-//                                SystemConfig.instance.setWindowBrightness(this,old)
-//                            }
-                        }
                     }
+//                    else {
+//                        // y control
+//                        if (Math.abs(disY) > 80){
+//                            if (downX > SCREEN_WIDTH/2){
+//                                //volume
+//                                if (disY>0){
+//                                    SystemConfig.instance.streamVolume--
+//                                } else {
+//                                    SystemConfig.instance.streamVolume++
+//                                }
+//                            }
+////                            else {
+////                                //brightness
+////                                var old = SystemConfig.instance.screenBrightness
+////                                if (disY>0){
+////                                    old+=15
+////                                } else {
+////                                    old-=15
+////                                }
+////                                println("================old = $old")
+////                                SystemConfig.instance.setWindowBrightness(this,old)
+////                            }
+//                        }
+//                    }
 
 
                 }
