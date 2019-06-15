@@ -90,8 +90,6 @@ class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
     }
 
     fun sourceClick(view: View) {
-//        intent = Intent(this@DownloadManagementActivity, MagnetSearchActivity::class.java)
-//        startActivity(intent)
         intent = Intent(this@DownloadManagementActivity, SourceActivity::class.java)
         intent.putExtra(SourceActivity.RULE, "source.json")
         intent.putExtra(SourceActivity.TYPE,SourceActivity.TYPE_SOURCE)
@@ -99,10 +97,8 @@ class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
     }
 
     fun magnetSearchClick(view: View) {
-//        intent = Intent(this@DownloadManagementActivity, MagnetSearchActivity::class.java)
-//        startActivity(intent)
         intent = Intent(this@DownloadManagementActivity, SourceActivity::class.java)
-        intent.putExtra(SourceActivity.RULE, "rule.json")
+        intent.putExtra(SourceActivity.RULE, "search.json")
         intent.putExtra(SourceActivity.TYPE,SourceActivity.TYPE_SEARCH)
         startActivity(intent)
     }

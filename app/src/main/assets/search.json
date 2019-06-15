@@ -27,5 +27,19 @@
     "detailUrl": ".//tbody/tr[2]",
     "detailLinks":"//*[@id='Zoom']//a",
     "source": "http://s.ygdy8.com/plus/so.php?keyword=%1$s&searchtype=titlekeyword&channeltype=0&orderby=&kwtype=0&pagesize=10&typeid=2&PageNo=%2$s"
+  },
+  {
+    "site": "综合",
+    "url": "https://www.dygod.net",
+    "parserClass": "cn.sddman.download.spider.MagnetFetchDygodImp",
+    "parserDetailClass":"cn.sddman.download.spider.MagnetFetchDyttDetailParserImp",
+    "list": "//*[@id='header']/div/div[3]/div[2]/div[1]/div[5]/div[2]/ul/table",
+    "href": ".//tbody/tr[2]/td[2]/b/a//@href",
+    "name": ".//tbody/tr[2]/td[2]/b/a",
+    "desc": ".//tbody/tr[4]/td",
+    "detailBaseUrl":"https://www.dygod.net",
+    "detailUrl": ".//tbody/tr[2]",
+    "detailLinks":"//*[@id='Zoom']//a",
+    "source": "https://www.dygod.net/e/search/index.php"
   }
 ]

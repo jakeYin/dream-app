@@ -1,6 +1,5 @@
 package cn.sddman.download.util
 
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 
 import org.xutils.x
@@ -11,7 +10,7 @@ class AppConfigUtil {
     var rules: List<MagnetRule>? = null
         get() {
             if (null == field) {
-                GsonUtil.getRule(x.app().applicationContext, "rule.json")
+                GsonUtil.getRule(x.app().applicationContext, "search.json")
             }
             return field
         }

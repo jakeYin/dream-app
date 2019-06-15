@@ -10,7 +10,6 @@ import cn.sddman.download.adapter.SourceFrmAdapter
 import cn.sddman.download.common.BaseActivity
 import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.e.MagnetRule
-import cn.sddman.download.service.DownService
 import cn.sddman.download.util.GsonUtil
 import cn.sddman.download.util.Util
 import cn.sddman.download.view.SourceFrm
@@ -52,7 +51,7 @@ class SourceActivity : BaseActivity() {
             input_search.setText("电影天堂")
             input_search.isFocusable = false
         } else if (type == TYPE_SEARCH){
-            input_search.setText("疯狂")
+            input_search.setText("")
         }
         initViewPage()
     }
@@ -63,7 +62,7 @@ class SourceActivity : BaseActivity() {
             adapter.currentFragment.search(input_search.text?.trim().toString())
         } else {
             val intent = Intent(this@SourceActivity, SourceActivity::class.java)
-            intent.putExtra(SourceActivity.RULE, "rule.json")
+            intent.putExtra(SourceActivity.RULE, "search.json")
             intent.putExtra(SourceActivity.TYPE,SourceActivity.TYPE_SEARCH)
             startActivity(intent)
         }
