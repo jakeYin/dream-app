@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.AsyncTask
 import android.os.IBinder
 
-import cn.sddman.download.thread.DownLoadingTask
+import cn.sddman.download.thread.DownLoadingUpdateTask
 
 class DownService : Service() {
     private val manager: AlarmManager? = null
@@ -15,7 +15,7 @@ class DownService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        DownLoadingTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+        DownLoadingUpdateTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         return super.onStartCommand(intent, flags, startId)
     }
 
