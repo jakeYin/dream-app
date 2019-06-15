@@ -50,7 +50,7 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
         detailUrl = intent.getStringExtra(DETAIL_URL)
         val title = intent.getStringExtra(TITLE)
         magnetRule = intent.getParcelableExtra(MAGNET_RULE)
-        setTopBarTitle(title)
+        title?.let { setTopBarTitle(it) }
         val sourceDetailPresenterImp = SourceDetailPresenterImp(this)
         urlDownLoadPresenter = UrlDownLoadPresenterImp(this)
         sourceDetailPresenterImp.parser(magnetRule,detailUrl!!)

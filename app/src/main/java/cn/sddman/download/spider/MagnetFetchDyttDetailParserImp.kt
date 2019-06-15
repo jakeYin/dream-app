@@ -1,5 +1,6 @@
 package cn.sddman.download.spider
 
+import cn.sddman.download.cache.CacheHttpUtils
 import cn.sddman.download.mvp.e.MagnetDetail
 import cn.sddman.download.mvp.e.MagnetRule
 import org.htmlcleaner.CleanerProperties
@@ -15,10 +16,9 @@ import javax.xml.xpath.XPathFactory
 
 class MagnetFetchDyttDetailParserImp : MagnetFetchInf() {
     override fun parser(rule: MagnetRule, url:String): List<MagnetDetail> {
-        println("========MagnetFetchDyttDetailParserImp====$url")
         val list = arrayListOf<MagnetDetail>()
         try {
-            val html = Jsoup.connect(url).validateTLSCertificates(false).get().body().html()
+            val html = CacheHttpUtils.get(url)
             val xPath = XPathFactory.newInstance().newXPath()
             val tagNode = HtmlCleaner().clean(html)
             val dom = DomSerializer(CleanerProperties()).createDOM(tagNode)

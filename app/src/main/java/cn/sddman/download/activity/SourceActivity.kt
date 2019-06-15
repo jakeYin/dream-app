@@ -37,10 +37,8 @@ class SourceActivity : BaseActivity() {
         setContentView(R.layout.activity_source)
         path = intent.getStringExtra(RULE)
         type = intent.getIntExtra(TYPE,-1)
-
-
-        val intent = Intent(this, DownService::class.java)
-        startService(intent)
+//        val intent = Intent(this, DownService::class.java)
+//        startService(intent)
         input_search.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEND
                     || actionId == EditorInfo.IME_ACTION_DONE
