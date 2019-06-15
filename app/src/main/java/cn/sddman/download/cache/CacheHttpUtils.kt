@@ -3,6 +3,7 @@ package cn.sddman.download.cache
 import android.os.AsyncTask
 import android.util.LruCache
 import cn.sddman.download.common.Const
+import cn.sddman.download.util.AppSettingUtil
 import cn.sddman.download.util.StringUtil
 import com.jakewharton.disklrucache.DiskLruCache
 import okhttp3.OkHttpClient
@@ -18,7 +19,7 @@ object CacheHttpUtils {
 
     val maxMemory = Runtime.getRuntime().maxMemory().toInt()
     val cacheSize = maxMemory / 8
-    val diskLruCache: DiskLruCache = DiskLruCache.open(File("sdcard/"), 1, 1, 100 * 1024 * 1024)
+    val diskLruCache: DiskLruCache = DiskLruCache.open(File(AppSettingUtil.instance.fileCachePath), 1, 1, 100 * 1024 * 1024)
     val memoryCache: LruCache<String, String> = LruCache(cacheSize)
 
     fun get(url: String): String? {

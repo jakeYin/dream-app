@@ -17,6 +17,7 @@ object Const {
     val DB_NAME = "sddmandownload.db"
     val DB_SDCARD_PATH = FileTools.sdCardPath + x.app().getString(R.string.app_db_path)
     val File_SAVE_PATH = FileTools.sdCardPath + x.app().getString(R.string.app_down_path)
+    val File_CACHE_PATH = FileTools.sdCardPath + x.app().getString(R.string.app_cache_path)
     val VIDEO_PIC_PATH = FileTools.sdCardPath + x.app().getString(R.string.app_video_thumbnail_path)
     val APP_CRASH_PATH = FileTools.sdCardPath + x.app().getString(R.string.app_crash_path)
 

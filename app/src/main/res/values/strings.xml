@@ -2,6 +2,7 @@
     <string name="app_name">SD下载器</string>
     <string name="app_db_path">sddman/dowload/db</string>
     <string name="app_down_path">sddman/dowload/file</string>
+    <string name="app_cache_path">sddman/dowload/cache</string>
     <string name="app_crash_path">sddman/dowload/crash</string>
     <string name="app_video_thumbnail_path">sddman/dowload/.pic</string>
     <string name="xl_package_name">com.xunlei.downloadprovider</string>

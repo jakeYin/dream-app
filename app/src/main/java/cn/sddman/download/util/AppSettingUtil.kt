@@ -21,6 +21,12 @@ class AppSettingUtil {
             FileTools.mkdirs(savePath)
             return savePath
         }
+    val fileCachePath: String
+        get() {
+            val savePath = Const.File_CACHE_PATH
+            FileTools.mkdirs(savePath)
+            return savePath
+        }
     val downCount: Int
         get() {
             var count = 0
