@@ -47,10 +47,9 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_source_detail)
-        val getIntent = intent
-        detailUrl = getIntent.getStringExtra(DETAIL_URL)
-        val title = getIntent.getStringExtra(TITLE)
-        magnetRule = getIntent.getParcelableExtra(MAGNET_RULE)
+        detailUrl = intent.getStringExtra(DETAIL_URL)
+        val title = intent.getStringExtra(TITLE)
+        magnetRule = intent.getParcelableExtra(MAGNET_RULE)
         setTopBarTitle(title)
         val sourceDetailPresenterImp = SourceDetailPresenterImp(this)
         urlDownLoadPresenter = UrlDownLoadPresenterImp(this)

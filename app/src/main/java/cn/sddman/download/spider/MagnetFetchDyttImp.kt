@@ -19,7 +19,7 @@ class MagnetFetchDyttImp : MagnetFetchInf() {
     override fun parser(rule: MagnetRule, keyword: String, page: Int): List<MagnetInfo> {
         val newUrl = transformUrl(rule.source, keyword, transformPage(page))
         println("==========="+newUrl)
-        val html = Jsoup.connect(newUrl).get().body().html()
+        val html = Jsoup.connect(newUrl).validateTLSCertificates(false).get().body().html()
         val xPath = XPathFactory.newInstance().newXPath()
         val tagNode = HtmlCleaner().clean(html)
         val dom = DomSerializer(CleanerProperties()).createDOM(tagNode)
@@ -29,7 +29,9 @@ class MagnetFetchDyttImp : MagnetFetchInf() {
         for (i in 0 until result.length-1) {
             val node = result.item(i)
             if (node != null) {
-
+////*[@id="header"]/div/div[3]/div[3]/div[2]/div[2]/div[2]/ul/table[1]/tbody/tr[2]/td[2]/b/a
+//                //*[@id="header"]/div/div[3]/div[3]/div[2]/div[2]/div[2]/ul/table[1]/tbody/tr[4]/td
+//                //*[@id="header"]/div/div[3]/div[3]/div[2]/div[2]/div[2]/ul/table[2]/tbody/tr[4]
                 val nameNote:Node? = xPath.evaluate(rule.name, node, XPathConstants.NODE)as? Node
                 val name = nameNote?.textContent
 

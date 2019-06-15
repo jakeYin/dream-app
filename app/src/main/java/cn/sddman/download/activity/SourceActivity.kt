@@ -21,11 +21,24 @@ import java.util.*
 
 class SourceActivity : BaseActivity() {
 
+    companion object {
+        val TYPE:String = "type"
+        val TYPE_SOURCE:Int = 1
+        val TYPE_SEARCH:Int = 2
+        val RULE:String = "rule"
+    }
+
     private val mFragments = ArrayList<SourceFrm>()
     private var rules: List<MagnetRule>? = null
+    private var path: String = ""
+    private var type: Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_source)
+        path = intent.getStringExtra(RULE)
+        type = intent.getIntExtra(TYPE,-1)
+
+
         val intent = Intent(this, DownService::class.java)
         startService(intent)
         input_search.setOnEditorActionListener { _, actionId, event ->
@@ -37,13 +50,25 @@ class SourceActivity : BaseActivity() {
             }
             false
         }
-        input_search.setText("疯狂")
+        if (type == TYPE_SOURCE){
+            input_search.setText("电影天堂")
+            input_search.isFocusable = false
+        } else if (type == TYPE_SEARCH){
+            input_search.setText("疯狂")
+        }
         initViewPage()
     }
 
     fun btnSearchClick(v:View){
-        val adapter = source_vp.adapter as SourceFrmAdapter
-        adapter.currentFragment.search(input_search.text?.trim().toString())
+        if (type == TYPE_SEARCH){
+            val adapter = source_vp.adapter as SourceFrmAdapter
+            adapter.currentFragment.search(input_search.text?.trim().toString())
+        } else {
+            val intent = Intent(this@SourceActivity, SourceActivity::class.java)
+            intent.putExtra(SourceActivity.RULE, "rule.json")
+            intent.putExtra(SourceActivity.TYPE,SourceActivity.TYPE_SEARCH)
+            startActivity(intent)
+        }
     }
 
     private fun initViewPage() {
@@ -57,13 +82,13 @@ class SourceActivity : BaseActivity() {
             mFragments.add(sourceFrm)
             tabs += rule.site
         }
-        source_vp!!.offscreenPageLimit = rules!!.size
+        source_vp!!.offscreenPageLimit = 2
         source_vp.adapter = SourceFrmAdapter(supportFragmentManager, mFragments,tabs)
         tab_sources.setupWithViewPager(source_vp)
     }
 
     private fun loadRules() {
-        rules = GsonUtil.getRule(this, "rule.json")
+        rules = GsonUtil.getRule(this, path)
         if (rules == null) {
             Util.alert(this, "获取种子来源网站失败，请重新打开本页面或者重启APP", Const.ERROR_ALERT)
             return

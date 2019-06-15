@@ -18,7 +18,7 @@ class MagnetFetchDyttDetailParserImp : MagnetFetchInf() {
         println("========MagnetFetchDyttDetailParserImp====$url")
         val list = arrayListOf<MagnetDetail>()
         try {
-            val html = Jsoup.connect(url).get().body().html()
+            val html = Jsoup.connect(url).validateTLSCertificates(false).get().body().html()
             val xPath = XPathFactory.newInstance().newXPath()
             val tagNode = HtmlCleaner().clean(html)
             val dom = DomSerializer(CleanerProperties()).createDOM(tagNode)
