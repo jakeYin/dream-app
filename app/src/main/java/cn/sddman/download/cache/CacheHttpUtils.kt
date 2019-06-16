@@ -21,7 +21,7 @@ object CacheHttpUtils {
     val cacheSize = maxMemory / 8
     val diskLruCache: DiskLruCache = DiskLruCache.open(File(AppSettingUtil.instance.fileCachePath), 1, 1, 100 * 1024 * 1024)
     val memoryCache: LruCache<String, String> = LruCache(cacheSize)
-
+    val searchContextMap = hashMapOf<String,String>()
     fun get(url: String): String {
         val key = md5(url)
         var result = memoryCache.get(key)
@@ -40,7 +40,7 @@ object CacheHttpUtils {
         return result
     }
 
-    fun search(url:String,keyword:String):String{
+    fun search(url:String,keyword:String,page:Int):String{
         val key = md5(url+keyword)
         var result = memoryCache.get(key)
         if (StringUtil.isEmpty(result)) {
@@ -50,7 +50,16 @@ object CacheHttpUtils {
             }
         }
         if (StringUtil.isEmpty(result)) {
-            result = postRemote(url,keyword)
+            if (page == 1){
+                result = postRemote(url,keyword)
+            } else {
+                var newUrl = searchContextMap[key]
+                newUrl?.let {
+                    val pageUrl = it.replace(".html","-page-"+page+".html")
+                    Logger.d(pageUrl)
+                    return get(pageUrl)
+                }
+            }
         } else {
             SaveCachePostRemoteTask().executeOnExecutor(Const.THREAD_POOL_EXECUTOR, url,keyword)
         }
@@ -104,6 +113,7 @@ object CacheHttpUtils {
                 editor.set(0, result);
                 editor.commit();
                 memoryCache.put(key, result)
+                searchContextMap[md5(url+keyword)] = response.request().url().toString()
                 return result
             } else {
                 return ""

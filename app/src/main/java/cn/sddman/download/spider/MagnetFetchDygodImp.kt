@@ -18,12 +18,10 @@ import javax.xml.xpath.XPathFactory
 
 class MagnetFetchDygodImp : MagnetFetchInf() {
     override fun parser(rule: MagnetRule, keyword: String, page: Int): List<MagnetInfo> {
-        val newUrl = transformUrl(rule.source, keyword, transformPage(page))
-        Logger.d("==========="+newUrl)
         val content = "show=title&tempid=1&keyboard=" +
                 URLEncoder.encode(keyword,"gb2312") +
                 "&Submit=%C1%A2%BC%B4%CB%D1%CB%F7"
-        val html = CacheHttpUtils.search(rule.source,content)
+        val html = CacheHttpUtils.search(rule.source,content,transformPage(page))
         val xPath = XPathFactory.newInstance().newXPath()
         val tagNode = HtmlCleaner().clean(html)
         val dom = DomSerializer(CleanerProperties()).createDOM(tagNode)
