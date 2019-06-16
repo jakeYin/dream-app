@@ -55,8 +55,8 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
         private val fileCheckBox: ImageView
         private val fileIcon2: ImageView
         private val progressBar: NumberProgressBar
-
-        private val listener = View.OnClickListener { view ->
+        private val btnSource: SuperTextView = itemView.findViewById<View>(R.id.btn_source) as SuperTextView
+        private val onClickListener = View.OnClickListener { view ->
             when (view.id) {
                 R.id.start_task -> if (task!!.getmTaskStatus() == Const.DOWNLOAD_FAIL) {
                     downLoadIngView.stopTask(task!!)
@@ -70,12 +70,20 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
                 }
                 R.id.dele_task -> downLoadIngView.deleTask(task!!)
                 R.id.file_icon2 -> downLoadIngView.openFile(task!!)
-                R.id.file_icon -> if (task!!.file!!)
+                R.id.file_icon -> if (task!!.file!!) {
                     downLoadIngView.openFile(task!!)
+                }
+                R.id.btn_source -> task?.let { downLoadIngView.gotoSource(it) }
+                R.id.file_check_box->task?.let {
+                    it.check = !it.check
+                    notifyDataSetChanged()
+                    downLoadIngView.updateTask(it)
+                }
             }
         }
 
         init {
+
             fileCheckBox = itemView.findViewById<View>(R.id.file_check_box) as ImageView
             fileNameText = itemView.findViewById<View>(R.id.file_name) as TextView
             downSize = itemView.findViewById<View>(R.id.down_size) as TextView
@@ -135,7 +143,6 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
             } else {
                 progressBar.progress = 0
             }
-            //if(SystemConfig.getNetType())
             if (task.getmTaskStatus() == Const.DOWNLOAD_STOP || task.getmTaskStatus() == Const.DOWNLOAD_CONNECTION && task.taskId == 0L) {
                 startTask.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_download))
                 downStatus.setText(R.string.is_stop)
@@ -160,12 +167,6 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
                 } else {
                     fileCheckBox.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_uncheck))
                 }
-                fileCheckBox.setOnClickListener {
-                    task.check = !task.check
-                    notifyDataSetChanged()
-                    downLoadIngView.updateTask(task)
-                }
-
             } else {
                 fileCheckBox.visibility = View.GONE
             }
@@ -178,10 +179,12 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
         }
 
         fun onClick() {
-            startTask.setOnClickListener(listener)
-            deleTask.setOnClickListener(listener)
-            fileIcon2.setOnClickListener(listener)
-            fileIcon.setOnClickListener(listener)
+            startTask.setOnClickListener(onClickListener)
+            deleTask.setOnClickListener(onClickListener)
+            fileIcon2.setOnClickListener(onClickListener)
+            fileIcon.setOnClickListener(onClickListener)
+            fileCheckBox.setOnClickListener(onClickListener)
+            btnSource.setOnClickListener(onClickListener)
         }
     }
 }

@@ -20,6 +20,7 @@ import java.util.ArrayList
 
 import cn.sddman.download.R
 import cn.sddman.download.activity.PlayerActivity
+import cn.sddman.download.activity.SourceDetailActivity
 import cn.sddman.download.activity.TorrentInfoActivity
 import cn.sddman.download.adapter.DownloadingListAdapter
 import cn.sddman.download.common.Const
@@ -29,6 +30,7 @@ import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.p.DownloadIngPresenter
 import cn.sddman.download.mvp.p.DownloadIngPresenterImp
 import cn.sddman.download.mvp.v.DownLoadIngView
+import cn.sddman.download.rule.Rule
 import cn.sddman.download.util.FileTools
 import cn.sddman.download.util.Util
 import kotlinx.android.synthetic.main.frm_download_ing.*
@@ -144,6 +146,14 @@ class DownLoadIngFrm : Fragment(), DownLoadIngView {
 
     override fun alert(msg: String, msgType: Int) {
         Util.alert(this.activity!!, msg, msgType)
+    }
+
+    override fun gotoSource(task: DownloadTaskEntity) {
+        val intent = Intent(activity, SourceDetailActivity::class.java)
+        intent.putExtra(SourceDetailActivity.DETAIL_URL, task.source)
+        intent.putExtra(SourceDetailActivity.TITLE, task.getmFileName())
+        intent.putExtra(SourceDetailActivity.MAGNET_RULE, Rule.getRuleById(task.ruleId))
+        startActivity(intent)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)

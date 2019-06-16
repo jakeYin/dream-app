@@ -51,7 +51,7 @@ class SourceActivity : BaseActivity() {
             input_search.isFocusable = false
             rules = Rule.sourceRule
         } else if (type == TYPE_SEARCH){
-            rules = Rule.sourceRule
+            rules = Rule.searchRule
             input_search.setText("")
         }
         initViewPage()

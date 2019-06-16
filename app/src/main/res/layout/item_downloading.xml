@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/item_layout"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -103,6 +104,20 @@
                             android:layout_height="@dimen/file_item_btn_icon_height"
                             android:layout_weight="1"
                             android:src="@drawable/ic_stop" />
+                        <com.coorchice.library.SuperTextView
+                            android:id="@+id/btn_source"
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:gravity="center"
+                            android:padding="@dimen/default_pad2"
+                            android:text="@string/source"
+                            android:textColor="@color/colorMain"
+                            android:textSize="10sp"
+                            app:corner="@dimen/default_pad2"
+                            app:stroke_color="@color/colorMain"
+                            app:stroke_width="1dp" />
 
                         <ImageView
                             android:id="@+id/dele_task"

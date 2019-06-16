@@ -12,4 +12,5 @@ interface DownLoadIngView {
     fun toggleDeleteButton()
     fun deleteState():Boolean
     fun alert(msg: String, msgType: Int)
+    fun gotoSource(task: DownloadTaskEntity)
 }
