@@ -10,7 +10,6 @@ object Rule{
     var searchRule:List<MagnetRule>? = null
 
     init {
-        println("==========init")
         sourceRule = loadRules(App.instance!!.applicationContext,"source.json")
         searchRule = loadRules(App.instance!!.applicationContext,"search.json")
     }

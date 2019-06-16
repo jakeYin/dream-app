@@ -4,6 +4,7 @@ import cn.sddman.download.cache.CacheHttpUtils
 import cn.sddman.download.mvp.e.MagnetInfo
 import cn.sddman.download.mvp.e.MagnetRule
 import cn.sddman.download.util.StringUtil
+import com.orhanobut.logger.Logger
 import org.htmlcleaner.CleanerProperties
 import org.htmlcleaner.DomSerializer
 import org.htmlcleaner.HtmlCleaner
@@ -20,7 +21,7 @@ import javax.xml.xpath.XPathFactory
 class MagnetFetchImp : MagnetFetchInf() {
     override fun parser(rule: MagnetRule, keyword: String, page: Int): List<MagnetInfo> {
         val newUrl = transformUrl(rule.source, keyword, transformPage(page))
-        println("==========="+newUrl)
+        Logger.d("==========="+newUrl)
 //        val html = Jsoup.connect(newUrl).get().body().html()
         val html = CacheHttpUtils.get(newUrl)
         val xPath = XPathFactory.newInstance().newXPath()

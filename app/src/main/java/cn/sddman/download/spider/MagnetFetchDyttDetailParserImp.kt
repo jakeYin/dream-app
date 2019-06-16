@@ -3,6 +3,7 @@ package cn.sddman.download.spider
 import cn.sddman.download.cache.CacheHttpUtils
 import cn.sddman.download.mvp.e.MagnetDetail
 import cn.sddman.download.mvp.e.MagnetRule
+import com.orhanobut.logger.Logger
 import org.htmlcleaner.CleanerProperties
 import org.htmlcleaner.DomSerializer
 import org.htmlcleaner.HtmlCleaner
@@ -39,7 +40,7 @@ class MagnetFetchDyttDetailParserImp : MagnetFetchInf() {
                 }
             }
         }catch (e:Exception){
-            println("===fail===$url")
+            Logger.d("===fail===$url")
             e.printStackTrace()
         }
 

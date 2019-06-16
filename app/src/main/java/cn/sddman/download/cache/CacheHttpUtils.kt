@@ -6,6 +6,7 @@ import cn.sddman.download.common.Const
 import cn.sddman.download.util.AppSettingUtil
 import cn.sddman.download.util.StringUtil
 import com.jakewharton.disklrucache.DiskLruCache
+import com.orhanobut.logger.Logger
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
@@ -33,6 +34,7 @@ object CacheHttpUtils {
         if (StringUtil.isEmpty(result)) {
             result = getRemote(url)
         } else {
+            Logger.d("get %1s data from cache",url)
             SaveCacheGetRemoteTask().executeOnExecutor(Const.THREAD_POOL_EXECUTOR, url)
         }
         return result
@@ -94,7 +96,6 @@ object CacheHttpUtils {
                     .build()
             val call = client.newCall(request)
             var response = call.execute()
-            println("=========="+response.toString())
             var responseBytes = response.body()?.bytes()
             var result = responseBytes?.let { String(it, Charset.forName("GBK")) }
             if (result != null) {
