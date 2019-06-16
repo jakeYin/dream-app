@@ -29,14 +29,11 @@ class SourceActivity : BaseActivity() {
 
     private val mFragments = ArrayList<SourceFrm>()
     private var rules: List<MagnetRule>? = null
-    private var path: String = ""
     private var type: Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_source)
         type = intent.getIntExtra(TYPE,-1)
-//        val intent = Intent(this, DownService::class.java)
-//        startService(intent)
         input_search.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEND
                     || actionId == EditorInfo.IME_ACTION_DONE
@@ -78,7 +75,7 @@ class SourceActivity : BaseActivity() {
             mFragments.add(sourceFrm)
             tabs += rule.site
         }
-        source_vp!!.offscreenPageLimit = 2
+        source_vp!!.offscreenPageLimit = 3
         source_vp.adapter = SourceFrmAdapter(supportFragmentManager, mFragments,tabs)
         tab_sources.setupWithViewPager(source_vp)
     }

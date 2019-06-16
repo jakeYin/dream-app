@@ -17,11 +17,11 @@ import java.nio.charset.Charset
 
 object CacheHttpUtils {
 
-    val maxMemory = Runtime.getRuntime().maxMemory().toInt()
-    val cacheSize = maxMemory / 8
-    val diskLruCache: DiskLruCache = DiskLruCache.open(File(AppSettingUtil.instance.fileCachePath), 1, 1, 100 * 1024 * 1024)
-    val memoryCache: LruCache<String, String> = LruCache(cacheSize)
-    val searchContextMap = hashMapOf<String,String>()
+    private val maxMemory = Runtime.getRuntime().maxMemory().toInt()
+    private val cacheSize = maxMemory / 8
+    private val diskLruCache: DiskLruCache = DiskLruCache.open(File(AppSettingUtil.instance.fileCachePath), 1, 1, 100 * 1024 * 1024)
+    private val memoryCache: LruCache<String, String> = LruCache(cacheSize)
+    private val searchContextMap = hashMapOf<String,String>()
     fun get(url: String): String {
         val key = md5(url)
         var result = memoryCache.get(key)
@@ -55,7 +55,7 @@ object CacheHttpUtils {
             } else {
                 var newUrl = searchContextMap[key]
                 newUrl?.let {
-                    val pageUrl = it.replace(".html","-page-"+page+".html")
+                    val pageUrl = it.replace(".html", "-page-$page.html")
                     Logger.d(pageUrl)
                     return get(pageUrl)
                 }
@@ -98,15 +98,15 @@ object CacheHttpUtils {
     private fun postRemote(url: String, keyword: String): String {
         try {
             val client = OkHttpClient()
-            var body = RequestBody.create(null, keyword)
+            val body = RequestBody.create(null, keyword)
             val request = Request.Builder().url(url)
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .post(body)
                     .build()
             val call = client.newCall(request)
-            var response = call.execute()
-            var responseBytes = response.body()?.bytes()
-            var result = responseBytes?.let { String(it, Charset.forName("GBK")) }
+            val response = call.execute()
+            val responseBytes = response.body()?.bytes()
+            val result = responseBytes?.let { String(it, Charset.forName("GBK")) }
             if (result != null) {
                 val key = md5(url)
                 val editor = diskLruCache.edit(key)
@@ -123,10 +123,6 @@ object CacheHttpUtils {
         }
         return ""
     }
-
-
-
-
 
     internal class SaveCacheGetRemoteTask : AsyncTask<String, Void, String>() {
 

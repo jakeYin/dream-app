@@ -5,11 +5,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-
 import cn.sddman.download.R
 import cn.sddman.download.mvp.e.MagnetInfo
 import cn.sddman.download.mvp.v.SourceView
+import kotlinx.android.synthetic.main.item_search_magnet_result.view.*
 
 class SourceListAdapter(private val context: Context, private val sourceView: SourceView, private val list: List<MagnetInfo>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
@@ -29,24 +28,11 @@ class SourceListAdapter(private val context: Context, private val sourceView: So
     }
 
     internal inner class MagnetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val magnetNameText: TextView
-//        private val magnetSize: TextView
-        private val magnetDate: TextView
-//        private val magnetHot: TextView
 
-        init {
-            magnetNameText = itemView.findViewById<View>(R.id.magnet_name) as TextView
-            magnetDate = itemView.findViewById<View>(R.id.magnet_date) as TextView
-//            magnetSize = itemView.findViewById<View>(R.id.magnet_size) as TextView
-//            magnetHot = itemView.findViewById<View>(R.id.magnet_hot) as TextView
-        }
 
         fun bind(magnet: MagnetInfo) {
-            magnetNameText.text = magnet.name
-            magnetDate.text = magnet.desc
-//            magnetDate.setText(String.format(itemView.resources.getString(R.string.magnet_date), magnet.count))
-//            magnetSize.setText(String.format(itemView.resources.getString(R.string.magnet_size), magnet.formatSize))
-//            magnetHot.setText(String.format(itemView.resources.getString(R.string.magnet_hot), magnet.hot))
+            itemView.magnet_name.text = magnet.name
+            itemView.magnet_desc.text = magnet.desc
             itemView.setOnClickListener { sourceView.clickItem(magnet) }
         }
 

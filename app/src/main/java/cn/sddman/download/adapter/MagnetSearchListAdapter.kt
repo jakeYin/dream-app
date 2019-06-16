@@ -5,21 +5,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-
-import com.coorchice.library.SuperTextView
-import com.daimajia.numberprogressbar.NumberProgressBar
-
-import java.math.BigDecimal
-
 import cn.sddman.download.R
-import cn.sddman.download.common.Const
-import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.e.MagnetInfo
 import cn.sddman.download.mvp.v.MagnetSearchView
-import cn.sddman.download.util.FileTools
-import cn.sddman.download.util.TimeUtil
+import kotlinx.android.synthetic.main.item_search_magnet_result.view.*
 
 class MagnetSearchListAdapter(private val context: Context, private val magnetSearchView: MagnetSearchView, private val list: List<MagnetInfo>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
@@ -39,16 +28,9 @@ class MagnetSearchListAdapter(private val context: Context, private val magnetSe
     }
 
     internal inner class MagnetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val magnetNameText: TextView
-        private val magnetDate: TextView
-
-        init {
-            magnetNameText = itemView.findViewById<View>(R.id.magnet_name) as TextView
-            magnetDate = itemView.findViewById<View>(R.id.magnet_date) as TextView
-        }
 
         fun bind(magnet: MagnetInfo) {
-            magnetNameText.text = magnet.name
+            itemView.magnet_name.text = magnet.name
             itemView.setOnClickListener { magnetSearchView.moreOption(magnet) }
         }
 

@@ -10,6 +10,8 @@ import android.widget.TextView
 import cn.sddman.download.R
 import cn.sddman.download.mvp.e.MagnetDetail
 import cn.sddman.download.mvp.v.SourceDetailView
+import kotlinx.android.synthetic.main.item_downloading.view.*
+import kotlinx.android.synthetic.main.item_search_magnet_result.view.*
 
 class SourceDetailListAdapter(private val context: Context, private val sourceView: SourceDetailView, private val list: List<MagnetDetail>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
@@ -29,17 +31,14 @@ class SourceDetailListAdapter(private val context: Context, private val sourceVi
     }
 
     internal inner class MagnetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val magnetNameText: TextView = itemView.findViewById<View>(R.id.file_name) as TextView
-        private val fileCheckBox: ImageView = itemView.findViewById<View>(R.id.file_check_box) as ImageView
-
         fun bind(detail:MagnetDetail) {
-            magnetNameText.text = detail.name
+            itemView.magnet_name.text = detail.name
             if (detail.check) {
-                fileCheckBox.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_check))
+                itemView.file_check_box.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_check))
             } else {
-                fileCheckBox.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_uncheck))
+                itemView.file_check_box.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_uncheck))
             }
-            fileCheckBox.setOnClickListener {
+            itemView.file_check_box.setOnClickListener {
                 detail.check = !detail.check
                 notifyDataSetChanged()
             }

@@ -24,7 +24,7 @@
             android:paddingEnd="@dimen/default_pad"
             >
             <TextView
-                android:id="@+id/magnet_date"
+                android:id="@+id/magnet_desc"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
