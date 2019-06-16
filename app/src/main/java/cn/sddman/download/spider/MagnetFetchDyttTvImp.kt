@@ -21,7 +21,6 @@ class MagnetFetchDyttTvImp : MagnetFetchInf() {
     override fun parser(rule: MagnetRule, keyword: String, page: Int): List<MagnetInfo> {
         val newUrl = transformUrl(rule.source, keyword, transformPage(page))
         Logger.d("==========="+newUrl)
-//        val html = Jsoup.connect(newUrl).validateTLSCertificates(false).get().body().html()
         val html = CacheHttpUtils.get(newUrl)
         val xPath = XPathFactory.newInstance().newXPath()
         val tagNode = HtmlCleaner().clean(html)

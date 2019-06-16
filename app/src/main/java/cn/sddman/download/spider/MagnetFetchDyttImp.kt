@@ -28,7 +28,7 @@ class MagnetFetchDyttImp : MagnetFetchInf() {
         val result = xPath.evaluate(rule.list, dom, XPathConstants.NODESET) as NodeList
         val infos = ArrayList<MagnetInfo>()
 
-        for (i in 0 until result.length-1) {
+        for (i in 0 until result.length) {
             val node = result.item(i)
             if (node != null) {
                 val nameNote:Node? = xPath.evaluate(rule.name, node, XPathConstants.NODE)as? Node
