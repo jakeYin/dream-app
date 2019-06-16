@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
+import android.view.KeyEvent
 import android.view.View
+import android.widget.Toast
 import cn.sddman.download.R
 import cn.sddman.download.common.*
 import cn.sddman.download.mvp.p.AppConfigPresenter
@@ -31,9 +33,14 @@ import java.util.*
 class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
     private val mFragments = ArrayList<Fragment>()
     private var bottomSheet: BottomSheet.Builder? = null
-
+    private var exitTime: Long = 0
     private var downloadManagementPresenter: DownloadManagementPresenter? = null
     private var appConfigPresenter: AppConfigPresenter? = null
+
+    companion object {
+        private val REQUEST_CODE_CHOOSE = 10086
+        private val REQUEST_CODE_SCAN = 10010
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_download_management)
@@ -180,8 +187,23 @@ class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
                 .show()
     }
 
-    companion object {
-        private val REQUEST_CODE_CHOOSE = 10086
-        private val REQUEST_CODE_SCAN = 10010
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit()
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
+
+
+    private fun exit() {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            Toast.makeText(this@DownloadManagementActivity, "再按一次退出", Toast.LENGTH_SHORT).show()
+            exitTime = System.currentTimeMillis()
+        } else {
+            finish()
+            System.exit(0)
+        }
+    }
+
 }
