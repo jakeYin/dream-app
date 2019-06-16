@@ -10,6 +10,7 @@ import cn.sddman.download.adapter.SourceFrmAdapter
 import cn.sddman.download.common.BaseActivity
 import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.e.MagnetRule
+import cn.sddman.download.rule.Rule
 import cn.sddman.download.util.GsonUtil
 import cn.sddman.download.util.Util
 import cn.sddman.download.view.SourceFrm
@@ -24,7 +25,6 @@ class SourceActivity : BaseActivity() {
         val TYPE:String = "type"
         val TYPE_SOURCE:Int = 1
         val TYPE_SEARCH:Int = 2
-        val RULE:String = "rule"
     }
 
     private val mFragments = ArrayList<SourceFrm>()
@@ -34,7 +34,6 @@ class SourceActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_source)
-        path = intent.getStringExtra(RULE)
         type = intent.getIntExtra(TYPE,-1)
 //        val intent = Intent(this, DownService::class.java)
 //        startService(intent)
@@ -50,7 +49,9 @@ class SourceActivity : BaseActivity() {
         if (type == TYPE_SOURCE){
             input_search.setText("电影天堂")
             input_search.isFocusable = false
+            rules = Rule.sourceRule
         } else if (type == TYPE_SEARCH){
+            rules = Rule.sourceRule
             input_search.setText("")
         }
         initViewPage()
@@ -62,14 +63,12 @@ class SourceActivity : BaseActivity() {
             adapter.currentFragment.search(input_search.text?.trim().toString())
         } else {
             val intent = Intent(this@SourceActivity, SourceActivity::class.java)
-            intent.putExtra(SourceActivity.RULE, "search.json")
             intent.putExtra(SourceActivity.TYPE,SourceActivity.TYPE_SEARCH)
             startActivity(intent)
         }
     }
 
     private fun initViewPage() {
-        loadRules()
         val tabs = arrayListOf<String>()
         for (rule in rules!!){
             val bundle = Bundle()
@@ -82,13 +81,5 @@ class SourceActivity : BaseActivity() {
         source_vp!!.offscreenPageLimit = 2
         source_vp.adapter = SourceFrmAdapter(supportFragmentManager, mFragments,tabs)
         tab_sources.setupWithViewPager(source_vp)
-    }
-
-    private fun loadRules() {
-        rules = GsonUtil.getRule(this, path)
-        if (rules == null) {
-            Util.alert(this, "获取种子来源网站失败，请重新打开本页面或者重启APP", Const.ERROR_ALERT)
-            return
-        }
     }
 }

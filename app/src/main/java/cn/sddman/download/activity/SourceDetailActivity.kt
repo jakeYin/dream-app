@@ -36,14 +36,6 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
         sourceDetailListAdapter.notifyDataSetChanged()
     }
 
-    override fun clickItem(url: String) {
-
-
-    }
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_source_detail)
@@ -78,7 +70,7 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
     fun downloadSelectedClick(v: View){
         for (x in linkList){
             if (x.check){
-                urlDownLoadPresenter.startTask(x.name)
+                urlDownLoadPresenter.startTask(x.name,detailUrl,magnetRule.id)
             }
         }
     }

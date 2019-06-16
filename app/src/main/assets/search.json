@@ -1,5 +1,6 @@
 [
   {
+    "id":"search1",
     "site": "电影天堂-Movie",
     "url": "http://www.ygdy8.net",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDyttImp",
@@ -15,6 +16,7 @@
   },
 
   {
+    "id":"search2",
     "site": "电影天堂-TV",
     "url": "http://www.ygdy8.net",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDyttTvImp",
@@ -29,6 +31,7 @@
     "source": "http://s.ygdy8.com/plus/so.php?keyword=%1$s&searchtype=titlekeyword&channeltype=0&orderby=&kwtype=0&pagesize=10&typeid=2&PageNo=%2$s"
   },
   {
+    "id":"search3",
     "site": "综合",
     "url": "https://www.dygod.net",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDygodImp",

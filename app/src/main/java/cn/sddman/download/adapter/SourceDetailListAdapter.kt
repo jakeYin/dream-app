@@ -29,12 +29,8 @@ class SourceDetailListAdapter(private val context: Context, private val sourceVi
     }
 
     internal inner class MagnetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val magnetNameText: TextView
-        private val fileCheckBox: ImageView
-        init {
-            magnetNameText = itemView.findViewById<View>(R.id.file_name) as TextView
-            fileCheckBox = itemView.findViewById<View>(R.id.file_check_box) as ImageView
-        }
+        private val magnetNameText: TextView = itemView.findViewById<View>(R.id.file_name) as TextView
+        private val fileCheckBox: ImageView = itemView.findViewById<View>(R.id.file_check_box) as ImageView
 
         fun bind(detail:MagnetDetail) {
             magnetNameText.text = detail.name
@@ -47,7 +43,6 @@ class SourceDetailListAdapter(private val context: Context, private val sourceVi
                 detail.check = !detail.check
                 notifyDataSetChanged()
             }
-            itemView.setOnClickListener { sourceView.clickItem(detail.name) }
         }
     }
 }

@@ -7,6 +7,7 @@ interface DownLoadModel {
     fun startTorrentTask(bt: DownloadTaskEntity): Boolean
     fun startTorrentTask(btpath: String): Boolean
     fun startTorrentTask(bt: DownloadTaskEntity, indexs: IntArray): Boolean
+    fun startUrlTask(url: String,source:String?,ruleId:String): Boolean
     fun startUrlTask(url: String): Boolean
     fun startTorrentTask(btpath: String, indexs: IntArray?): Boolean
     fun startTask(task: DownloadTaskEntity): Boolean

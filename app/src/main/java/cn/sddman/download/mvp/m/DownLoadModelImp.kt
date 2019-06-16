@@ -44,13 +44,43 @@ class DownLoadModelImp : DownLoadModel {
     }
 
     override fun getLoclUrl(task: DownloadTaskEntity): String {
-        return XLTaskHelper.instance(x.app().applicationContext).getLoclUrl(task.localPath+"/"+task.getmFileName());
+        return XLTaskHelper.instance(x.app().applicationContext).getLoclUrl(task.localPath + "/" + task.getmFileName());
     }
 
     override fun startUrlTask(url: String): Boolean {
         val task = DownloadTaskEntity()
         task.taskType = Const.URL_DOWNLOAD
         task.url = url
+        task.localPath = AppSettingUtil.instance.fileSavePath
+        try {
+            val taskId = XLTaskHelper.instance(x.app().applicationContext).addThunderTask(url, AppSettingUtil.instance.fileSavePath, null)
+            val taskInfo = XLTaskHelper.instance(x.app().applicationContext).getTaskInfo(taskId)
+            task.setmFileName(XLTaskHelper.instance(x.app().applicationContext).getFileName(url))
+            task.setmFileSize(taskInfo.mFileSize)
+            task.setmTaskStatus(taskInfo.mTaskStatus)
+            task.taskId = taskId
+            task.setmDCDNSpeed(taskInfo.mAdditionalResDCDNSpeed)
+            task.setmDownloadSize(taskInfo.mDownloadSize)
+            task.setmDownloadSpeed(taskInfo.mDownloadSpeed)
+            task.file = true
+            task.createDate = Date()
+            DBTools.instance.db().saveBindingId(task)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return false
+        }
+
+        return true
+    }
+
+    override fun startUrlTask(url: String, source: String?, ruleId: String): Boolean {
+        val task = DownloadTaskEntity()
+        task.taskType = Const.URL_DOWNLOAD
+        task.url = url
+        source?.let {
+            task.source = it
+            task.ruleId = ruleId
+        }
         task.localPath = AppSettingUtil.instance.fileSavePath
         try {
             val taskId = XLTaskHelper.instance(x.app().applicationContext).addThunderTask(url, AppSettingUtil.instance.fileSavePath, null)
@@ -96,7 +126,7 @@ class DownLoadModelImp : DownLoadModel {
                 task.setmFileName(torrentInfo.mSubFileInfo[0].mFileName)
             }
         }
-        var taskId: Long = 0
+        var taskId: Long
         try {
             taskId = XLTaskHelper.instance(x.app().applicationContext).addTorrentTask(btpath, savePath, indexs)
             val taskInfo = XLTaskHelper.instance(x.app().applicationContext).getTaskInfo(taskId)
@@ -184,7 +214,7 @@ class DownLoadModelImp : DownLoadModel {
     }
 
     override fun deleTask(task: DownloadTaskEntity, stopTask: Boolean, deleFile: Boolean): Boolean {
-        if (stopTask!!) {
+        if (stopTask) {
             XLTaskHelper.instance(x.app().applicationContext).stopTask(task.taskId)
         }
         return deleTask(task, deleFile)

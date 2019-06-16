@@ -29,8 +29,6 @@ class UrlDownLoadActivity : BaseActivity(), UrlDownLoadView {
     }
 
     override fun addTaskSuccess() {
-        // Intent intent =new Intent(UrlDownLoadActivity.this,DownloadManagementActivity.class);
-        // startActivity(intent);
         finish()
     }
 

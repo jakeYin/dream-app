@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:padding="@dimen/default_pad">
+
             <ImageView
                 android:id="@+id/file_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_video"/>
+                android:src="@drawable/ic_video" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="0px"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
@@ -34,82 +38,100 @@
                     android:id="@+id/file_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/default_pad2"
+                    android:ellipsize="end"
                     android:gravity="left|center_vertical"
-                    android:textSize="@dimen/filename_item_text_size"
                     android:lines="2"
+                    android:padding="@dimen/default_pad2"
                     android:text="@string/app_name"
-                    android:ellipsize="end" />
+                    android:textSize="@dimen/filename_item_text_size" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="@dimen/default_pad2">
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
-                    <TextView
-                        android:id="@+id/down_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/default_pad2"
-                        android:textColor="@color/gray_8f"
-                        android:text="1.31G"
-                        android:textSize="@dimen/file_item_text_size" />
+
+                        <TextView
+                            android:id="@+id/down_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/default_pad2"
+                            android:text="1.31G"
+                            android:textColor="@color/gray_8f"
+                            android:textSize="@dimen/file_item_text_size" />
+
                         <com.coorchice.library.SuperTextView
                             android:id="@+id/file_is_dele"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="8sp"
-                            android:text="@string/file_is_dele"
-                            app:stroke_color="@color/gray_8f"
                             android:padding="2dp"
-                            app:stroke_width="1dp"
+                            android:text="@string/file_is_dele"
+                            android:textSize="8sp"
                             app:corner="2dp"
-                            android:visibility="gone"/>
+                            app:stroke_color="@color/gray_8f"
+                            app:stroke_width="1dp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="2">
+
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:gravity="right">
+
                             <com.coorchice.library.SuperTextView
                                 android:id="@+id/btn_open"
                                 android:layout_width="50dp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:textSize="10sp"
+                                android:padding="@dimen/default_pad2"
                                 android:text="@string/open"
                                 android:textColor="@color/colorMain"
-                                android:padding="@dimen/default_pad2"
-                                app:stroke_color="@color/colorMain"
-                                app:stroke_width="1dp"
+                                android:textSize="10sp"
                                 app:corner="@dimen/default_pad2"
-                                android:visibility="gone"
-                                />
+                                app:stroke_color="@color/colorMain"
+                                app:stroke_width="1dp" />
+
+                            <com.coorchice.library.SuperTextView
+                                android:id="@+id/btn_source"
+                                android:layout_width="25dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:gravity="center"
+                                android:padding="@dimen/default_pad2"
+                                android:text="@string/source"
+                                android:textColor="@color/colorMain"
+                                android:textSize="10sp"
+                                app:corner="@dimen/default_pad2"
+                                app:stroke_color="@color/colorMain"
+                                app:stroke_width="1dp" />
                         </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/dele_task"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/file_item_btn_icon_height"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_dele" />
+                        <ImageView
+                            android:id="@+id/dele_task"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/file_item_btn_icon_height"
+                            android:src="@drawable/ic_dele" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:padding="@dimen/default_pad">
+
             <ImageView
                 android:id="@+id/file_check_box"
                 android:layout_width="45dp"
@@ -119,11 +141,12 @@
                 android:src="@drawable/ic_uncheck" />
         </RelativeLayout>
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray_cccc"
         android:layout_marginLeft="@dimen/default_pad"
-        android:layout_marginRight="@dimen/default_pad"/>
+        android:layout_marginRight="@dimen/default_pad"
+        android:background="@color/gray_cccc" />
 
 </LinearLayout>

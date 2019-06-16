@@ -1,5 +1,6 @@
 [
   {
+    "id":"source1",
     "site": "最新电影",
     "url": "http://www.ygdy8.com",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDyttImp",
@@ -15,6 +16,7 @@
   },
 
   {
+    "id":"source2",
     "site": "国内电影",
     "url": "http://www.ygdy8.com",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDyttImp",
@@ -29,6 +31,7 @@
     "source": "https://www.ygdy8.com/html/gndy/china/list_4_%2$s.html?t=%1$s"
   },
   {
+    "id":"source3",
     "site": "欧美电影",
     "url": "http://www.ygdy8.com",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDyttImp",
@@ -43,6 +46,7 @@
     "source": "https://www.ygdy8.com/html/gndy/oumei/list_7_%2$s.html?t=%1$s"
   },
   {
+    "id":"source4",
     "site": "华语电视",
     "url": "http://www.ygdy8.com",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDyttImp",
@@ -57,6 +61,7 @@
     "source": "https://www.ygdy8.com/html/tv/hytv/list_71_%2$s.html?t=%1$s"
   },
   {
+    "id":"source5",
     "site": "欧美电视",
     "url": "http://www.ygdy8.com",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDyttImp",
@@ -71,6 +76,7 @@
     "source": "https://www.ygdy8.com/html/tv/oumeitv/list_9_%2$s.html?t=%1$s"
   },
   {
+    "id":"source6",
     "site": "日韩电视",
     "url": "http://www.ygdy8.com",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDyttImp",
@@ -85,6 +91,7 @@
     "source": "https://www.ygdy8.com/html/tv/rihantv/list_8_%2$s.html?t=%1$s"
   },
   {
+    "id":"source7",
     "site": "动漫",
     "url": "http://www.ygdy8.com",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDyttImp",
@@ -99,6 +106,7 @@
     "source": "https://www.ygdy8.com/html/dongman/list_16_%2$s.html?t=%1$s"
   },
   {
+    "id":"source8",
     "site": "综艺",
     "url": "http://www.ygdy8.com",
     "parserClass": "cn.sddman.download.spider.MagnetFetchDyttImp",

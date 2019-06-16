@@ -47,7 +47,7 @@ class DownProgressNotify {
                 progress = (f1 * 100).toInt()
             }
             mRemoteViews = RemoteViews(x.app().packageName, R.layout.item_down_progress_notify)
-            val fileName = if (task?.file!!) task.getmFileName() else ""
+            val fileName = if (task.file!!) task.getmFileName() else ""
             mRemoteViews.setImageViewResource(R.id.file_icon, FileTools.getFileIcon(fileName))
             mRemoteViews.setTextViewText(R.id.file_name, task.getmFileName())
             mRemoteViews.setTextViewText(R.id.down_size, String.format(x.app().resources.getString(R.string.down_count),

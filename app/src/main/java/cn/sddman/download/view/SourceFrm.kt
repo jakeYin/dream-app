@@ -41,12 +41,14 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     private var keyword: String = ""
     private lateinit var searchListAdapter: SourceListAdapter
     private var searchPage: Int = 0
+
     companion object {
         fun newInstance(args: Bundle): SourceFrm {
             val fragment = SourceFrm()
             fragment.arguments = args
             return fragment
         }
+
         const val MAGNET_RULE = "magnet_rule"
         const val KEY_WORD = "key_word"
     }
@@ -59,7 +61,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         } else if (info.isEmpty()) {
             activity?.let { Util.alert(it, "没有更多了", Const.ERROR_ALERT) }
         } else {
-            if (searchPage == 0){
+            if (searchPage == 0) {
                 sourceList.clear();
             }
             sourceList.addAll(info)
@@ -91,8 +93,7 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     }
 
 
-
-    private fun initView(){
+    private fun initView() {
         source_rv!!.layoutManager = RecyclerViewNoBugLinearLayoutManager(context!!,
                 LinearLayoutManager.VERTICAL, false)
         searchListAdapter = SourceListAdapter(context!!, this, sourceList)
@@ -118,9 +119,10 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
             }
         })
     }
+
     private fun loadData() {
-        if (!StringUtil.isEmpty(keyword)){
-            magnetSearchPresenter.searchMagnet(rule,keyword,searchPage)
+        if (!StringUtil.isEmpty(keyword)) {
+            magnetSearchPresenter.searchMagnet(rule, keyword, searchPage)
         }
     }
 
@@ -157,12 +159,11 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
     }
 
 
-    protected fun hideSoftKeyboard(hostActivity: Activity) {
-        var inputMethodManager: InputMethodManager? = null
-            inputMethodManager = App.instance?.applicationContext?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (hostActivity.window.getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
-            if (hostActivity.getCurrentFocus() != null)
-                inputMethodManager.hideSoftInputFromWindow(hostActivity.getCurrentFocus().getWindowToken(),
+    private fun hideSoftKeyboard(hostActivity: Activity) {
+        var inputMethodManager: InputMethodManager = App.instance?.applicationContext?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if (hostActivity.window.attributes.softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
+            if (hostActivity.currentFocus != null)
+                inputMethodManager.hideSoftInputFromWindow(hostActivity.currentFocus.getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS)
         }
     }

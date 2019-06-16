@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class MagnetRule(
+        var id: String,
         var site: String,
         var url: String,
         var parserClass: String,

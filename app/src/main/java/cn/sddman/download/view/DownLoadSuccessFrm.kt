@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import cn.sddman.download.R
 import cn.sddman.download.activity.PlayerActivity
+import cn.sddman.download.activity.SourceDetailActivity
 import cn.sddman.download.activity.TorrentInfoActivity
 import cn.sddman.download.adapter.DownloadSuccessListAdapter
 import cn.sddman.download.common.Const
@@ -18,6 +19,7 @@ import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.p.DownloadSuccessPresenter
 import cn.sddman.download.mvp.p.DownloadSuccessPresenterImp
 import cn.sddman.download.mvp.v.DownLoadSuccessView
+import cn.sddman.download.rule.Rule
 import cn.sddman.download.util.FileTools
 import cn.sddman.download.util.Util
 import com.yanzhenjie.permission.AndPermission
@@ -31,7 +33,7 @@ import java.io.File
 class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
     private var downloadSuccessListAdapter: DownloadSuccessListAdapter? = null
     private var downloadSuccessPresenter: DownloadSuccessPresenter? = null
-    private var list: MutableList<DownloadTaskEntity>? = null
+    private var list: MutableList<DownloadTaskEntity>? = arrayListOf()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frm_download_success, container, false)
     }
@@ -69,6 +71,13 @@ class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
         return delete_bottom_layout.visibility == View.VISIBLE
     }
 
+    override fun gotoSource(task: DownloadTaskEntity) {
+        val intent = Intent(activity, SourceDetailActivity::class.java)
+        intent.putExtra(SourceDetailActivity.DETAIL_URL, task.source)
+        intent.putExtra(SourceDetailActivity.TITLE, task.getmFileName())
+        intent.putExtra(SourceDetailActivity.MAGNET_RULE, Rule.getRuleById(task.ruleId))
+        startActivity(intent)
+    }
 
 
     override fun initTaskListView(list: MutableList<DownloadTaskEntity>) {

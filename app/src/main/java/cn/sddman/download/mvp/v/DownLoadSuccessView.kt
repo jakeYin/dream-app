@@ -10,4 +10,5 @@ interface DownLoadSuccessView {
     fun alert(msg: String, msgType: Int)
     fun toggleDeleteButton()
     fun deleteState():Boolean
+    fun gotoSource(task: DownloadTaskEntity)
 }

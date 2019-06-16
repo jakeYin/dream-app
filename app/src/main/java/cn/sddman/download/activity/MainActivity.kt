@@ -35,7 +35,7 @@ class MainActivity : BaseActivity() {
         bottomSheet = BottomSheet.Builder(this)
                 .title(R.string.new_download)
                 .sheet(R.menu.down_source)
-                .listener { dialog, which ->
+                .listener { _, which ->
                     when (which) {
                         R.id.qr -> {
                         }

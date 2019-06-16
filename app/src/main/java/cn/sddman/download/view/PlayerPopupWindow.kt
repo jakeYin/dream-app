@@ -118,7 +118,7 @@ class PlayerPopupWindow(private val parentActivity: Activity, parentView: View, 
                 var speed2: Double = StringUtil.stringToDouble(playSpeedText!!.text.toString())
                 if (speed2 <= 0.5) return
                 speed2 -= 0.1
-                setPlaySpeed(StringUtil.stringToDouble(speed2!!.toString() + ""))
+                setPlaySpeed(StringUtil.stringToDouble(speed2.toString() + ""))
                 playSpeedText!!.text = StringUtil.stringToDouble(speed2.toString() + "").toString() + ""
             }
             R.id.play_audio_plus -> {

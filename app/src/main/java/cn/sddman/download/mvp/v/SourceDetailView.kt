@@ -5,6 +5,4 @@ import cn.sddman.download.mvp.e.MagnetInfo
 
 interface SourceDetailView {
     fun refreshData(list: List<MagnetDetail>)
-    fun clickItem(url: String)
-
 }

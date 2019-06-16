@@ -12,6 +12,7 @@ import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.v.DownLoadSuccessView
 import cn.sddman.download.util.FileTools
+import cn.sddman.download.util.StringUtil
 import cn.sddman.download.util.Util
 import com.coorchice.library.SuperTextView
 import org.xutils.x
@@ -37,36 +38,34 @@ class DownloadSuccessListAdapter(private val context: Context, private val downL
 
     internal inner class TaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var task: DownloadTaskEntity? = null
-        private val fileNameText: TextView
-        private val downSize: TextView
-        private val fileIcon: ImageView
-        private val fileCheckBox: ImageView
-        private val deleTask: ImageView
-        private val btnOpen: SuperTextView
-        private val fileIsDele: SuperTextView
+        private val fileNameText: TextView = itemView.findViewById<View>(R.id.file_name) as TextView
+        private val downSize: TextView = itemView.findViewById<View>(R.id.down_size) as TextView
+        private val fileIcon: ImageView = itemView.findViewById<View>(R.id.file_icon) as ImageView
+        private val fileCheckBox: ImageView = itemView.findViewById<View>(R.id.file_check_box) as ImageView
+        private val deleTask: ImageView = itemView.findViewById<View>(R.id.dele_task) as ImageView
+        private val btnOpen: SuperTextView = itemView.findViewById<View>(R.id.btn_open) as SuperTextView
+        private val btnSource: SuperTextView = itemView.findViewById<View>(R.id.btn_source) as SuperTextView
+        private val fileIsDele: SuperTextView = itemView.findViewById<View>(R.id.file_is_dele) as SuperTextView
 
         private val listener = View.OnClickListener { view ->
             when (view.id) {
                 R.id.btn_open -> task?.let { downLoadSuccessView.openFile(it) }
                 R.id.dele_task -> task?.let { downLoadSuccessView.deleTask(it) }
+                R.id.btn_source -> task?.let { downLoadSuccessView.gotoSource(it) }
             }
         }
 
-        init {
-            fileNameText = itemView.findViewById<View>(R.id.file_name) as TextView
-            downSize = itemView.findViewById<View>(R.id.down_size) as TextView
-            fileIcon = itemView.findViewById<View>(R.id.file_icon) as ImageView
-            fileCheckBox = itemView.findViewById<View>(R.id.file_check_box) as ImageView
-            deleTask = itemView.findViewById<View>(R.id.dele_task) as ImageView
-            btnOpen = itemView.findViewById<View>(R.id.btn_open) as SuperTextView
-            fileIsDele = itemView.findViewById<View>(R.id.file_is_dele) as SuperTextView
-        }
 
         fun bind(task: DownloadTaskEntity) {
             this.task = task
             val filePath = task.localPath + File.separator + task.getmFileName()
             fileNameText.text = task.getmFileName()
 
+            if (StringUtil.isEmpty(task.source)){
+                btnSource.visibility = View.GONE
+            } else {
+                btnSource.visibility = View.VISIBLE
+            }
             if (task.thumbnailPath != null && FileTools.isVideoFile(filePath)) {
                 x.image().bind(fileIcon, task.thumbnailPath)
             } else {
@@ -124,6 +123,7 @@ class DownloadSuccessListAdapter(private val context: Context, private val downL
         fun onClick() {
             btnOpen.setOnClickListener(listener)
             deleTask.setOnClickListener(listener)
+            btnSource.setOnClickListener(listener)
         }
     }
 }
