@@ -24,8 +24,7 @@ import cn.sddman.download.mvp.m.TaskModelImp
 import cn.sddman.download.util.AppSettingUtil
 import cn.sddman.download.util.DownUtil
 import cn.sddman.download.util.FileTools
-import cn.sddman.download.util.SystemConfig
-import cn.sddman.download.view.DownProgressNotify
+import cn.sddman.download.fragment.DownProgressNotify
 
 class DownUpdateUI {
     private val taskModel: TaskModel

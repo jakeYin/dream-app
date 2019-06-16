@@ -1,4 +1,4 @@
-package cn.sddman.download.view
+package cn.sddman.download.fragment
 
 import android.content.Intent
 import android.os.Bundle

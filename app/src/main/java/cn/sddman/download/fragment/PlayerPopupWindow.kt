@@ -1,10 +1,8 @@
-package cn.sddman.download.view
+package cn.sddman.download.fragment
 
 import android.app.Activity
-import android.media.AudioManager
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.SeekBar
@@ -12,8 +10,6 @@ import android.widget.Switch
 import android.widget.TextView
 
 import com.aplayer.aplayerandroid.APlayerAndroid
-
-import org.xutils.x
 
 import cn.sddman.download.R
 import cn.sddman.download.common.Const

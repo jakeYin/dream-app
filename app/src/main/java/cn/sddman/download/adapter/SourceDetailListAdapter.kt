@@ -5,13 +5,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import cn.sddman.download.R
 import cn.sddman.download.mvp.e.MagnetDetail
 import cn.sddman.download.mvp.v.SourceDetailView
-import kotlinx.android.synthetic.main.item_downloading.view.*
-import kotlinx.android.synthetic.main.item_search_magnet_result.view.*
+import kotlinx.android.synthetic.main.item_source_rv.view.*
 
 class SourceDetailListAdapter(private val context: Context, private val sourceView: SourceDetailView, private val list: List<MagnetDetail>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
@@ -32,7 +29,7 @@ class SourceDetailListAdapter(private val context: Context, private val sourceVi
 
     internal inner class MagnetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(detail:MagnetDetail) {
-            itemView.magnet_name.text = detail.name
+            itemView.file_name.text = detail.name
             if (detail.check) {
                 itemView.file_check_box.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_check))
             } else {

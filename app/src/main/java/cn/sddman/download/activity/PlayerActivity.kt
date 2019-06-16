@@ -15,7 +15,7 @@ import cn.sddman.download.thread.HidePlayControl
 import cn.sddman.download.thread.UpdataUIPlayHandler
 import cn.sddman.download.thread.UpdatePlayUIProcess
 import cn.sddman.download.util.*
-import cn.sddman.download.view.PlayerPopupWindow
+import cn.sddman.download.fragment.PlayerPopupWindow
 import com.aplayer.aplayerandroid.APlayerAndroid
 import kotlinx.android.synthetic.main.activity_player.*
 

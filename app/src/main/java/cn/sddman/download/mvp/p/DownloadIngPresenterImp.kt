@@ -9,7 +9,7 @@ import cn.sddman.download.mvp.m.TaskModelImp
 import cn.sddman.download.mvp.v.DownLoadIngView
 import cn.sddman.download.util.AppSettingUtil
 import cn.sddman.download.util.SystemConfig
-import cn.sddman.download.view.DownProgressNotify
+import cn.sddman.download.fragment.DownProgressNotify
 
 class DownloadIngPresenterImp(private val downLoadIngView: DownLoadIngView) : DownloadIngPresenter {
     private val taskModel: TaskModel

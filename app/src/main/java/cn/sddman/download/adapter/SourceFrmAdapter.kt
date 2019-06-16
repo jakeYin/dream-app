@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.ViewGroup
-import cn.sddman.download.view.SourceFrm
+import cn.sddman.download.fragment.SourceFrm
 
 class SourceFrmAdapter(fm: FragmentManager, private val mFragments: List<SourceFrm>,private val mTabs: List<String>) : FragmentPagerAdapter(fm) {
 

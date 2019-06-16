@@ -16,8 +16,8 @@ import cn.sddman.download.mvp.v.DownloadManagementView
 import cn.sddman.download.service.DownService
 import cn.sddman.download.util.AppConfigUtil
 import cn.sddman.download.util.Util
-import cn.sddman.download.view.DownLoadIngFrm
-import cn.sddman.download.view.DownLoadSuccessFrm
+import cn.sddman.download.fragment.DownLoadIngFrm
+import cn.sddman.download.fragment.DownLoadSuccessFrm
 import com.cocosw.bottomsheet.BottomSheet
 import com.ess.filepicker.FilePicker
 import com.ess.filepicker.model.EssFile
