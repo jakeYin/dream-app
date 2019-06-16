@@ -45,9 +45,7 @@ class DownloadIngPresenterImp(private val downLoadIngView: DownLoadIngView) : Do
             taskModel.updateTask(task)
             return
         }
-        //List<DownloadTaskEntity> tasks=taskModel.findLoadingTask();
-        val b = downLoadModel.startTask(task)!!
-        if (!b)
+        if (!downLoadModel.startTask(task))
             downLoadIngView.alert("开始任务失败,无法获取下载资源,可尝试多点几次开始任务", Const.ERROR_ALERT)
     }
 

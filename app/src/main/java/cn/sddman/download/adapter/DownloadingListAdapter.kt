@@ -20,6 +20,7 @@ import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.v.DownLoadIngView
 import cn.sddman.download.util.FileTools
+import cn.sddman.download.util.StringUtil
 import cn.sddman.download.util.TimeUtil
 
 class DownloadingListAdapter(private val context: Context, private val downLoadIngView: DownLoadIngView, private val list: List<DownloadTaskEntity>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -59,7 +60,6 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
         private val onClickListener = View.OnClickListener { view ->
             when (view.id) {
                 R.id.start_task -> if (task!!.getmTaskStatus() == Const.DOWNLOAD_FAIL) {
-                    downLoadIngView.stopTask(task!!)
                     downLoadIngView.startTask(task!!)
                 } else if (task!!.getmTaskStatus() == Const.DOWNLOAD_STOP ||
                         task!!.getmTaskStatus() == Const.DOWNLOAD_CONNECTION && task!!.taskId == 0L ||
@@ -105,6 +105,12 @@ class DownloadingListAdapter(private val context: Context, private val downLoadI
                 fileIcon.setImageDrawable(ContextCompat.getDrawable(context, FileTools.getFileIcon(task.getmFileName())))
             } else {
                 fileIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_floder))
+            }
+
+            if (StringUtil.isEmpty(task.source)){
+                btnSource.visibility = View.GONE
+            } else {
+                btnSource.visibility = View.VISIBLE
             }
 //            if (task.getThumbnail() != null) {
 //                fileIcon.setImageBitmap(task.getThumbnail());
