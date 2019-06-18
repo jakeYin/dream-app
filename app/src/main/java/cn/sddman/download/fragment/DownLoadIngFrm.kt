@@ -33,6 +33,7 @@ import cn.sddman.download.mvp.v.DownLoadIngView
 import cn.sddman.download.rule.Rule
 import cn.sddman.download.util.FileTools
 import cn.sddman.download.util.Util
+import com.yarolegovich.lovelydialog.LovelyStandardDialog
 import kotlinx.android.synthetic.main.frm_download_ing.*
 
 class DownLoadIngFrm : Fragment(), DownLoadIngView {
@@ -49,14 +50,13 @@ class DownLoadIngFrm : Fragment(), DownLoadIngView {
         initView()
         downloadIngPresenter = DownloadIngPresenterImp(this)
         delete_button.setOnClickListener {
-            val items = arrayOf(context!!.getString(R.string.dele_data_and_file))
-            LovelyChoiceDialog(context)
+            LovelyStandardDialog(context)
                     .setTopColorRes(R.color.colorMain)
                     .setTitle(R.string.determine_dele)
                     .setIcon(R.drawable.ic_error)
-                    .setItemsMultiChoice(items) { positions, items ->
-                        val deleFile = items.size > 0
-                        downloadIngPresenter!!.deleTask(list, deleFile)
+                    .setNegativeButton(android.R.string.no, null)
+                    .setPositiveButton(android.R.string.ok) {
+                        downloadIngPresenter!!.deleTask(list, true)
                     }.show()
         }
 
@@ -127,14 +127,13 @@ class DownLoadIngFrm : Fragment(), DownLoadIngView {
     }
 
     override fun deleTask(task: DownloadTaskEntity) {
-        val items = arrayOf(context!!.getString(R.string.dele_data_and_file))
-        LovelyChoiceDialog(context)
+        LovelyStandardDialog(context)
                 .setTopColorRes(R.color.colorMain)
                 .setTitle(R.string.determine_dele)
                 .setIcon(R.drawable.ic_error)
-                .setItemsMultiChoice(items) { positions, items ->
-                    val deleFile = if (items.size > 0) true else false
-                    downloadIngPresenter!!.deleTask(task, deleFile)
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.ok) {
+                    downloadIngPresenter!!.deleTask(task, true)
                 }.show()
     }
 

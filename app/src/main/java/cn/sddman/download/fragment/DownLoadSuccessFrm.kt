@@ -23,7 +23,7 @@ import cn.sddman.download.rule.Rule
 import cn.sddman.download.util.FileTools
 import cn.sddman.download.util.Util
 import com.yanzhenjie.permission.AndPermission
-import com.yarolegovich.lovelydialog.LovelyChoiceDialog
+import com.yarolegovich.lovelydialog.LovelyStandardDialog
 import kotlinx.android.synthetic.main.frm_download_success.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -42,14 +42,13 @@ class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
         super.onActivityCreated(savedInstanceState)
         downloadSuccessPresenter = DownloadSuccessPresenterImp(this)
         delete_button.setOnClickListener {
-            val items = arrayOf(context!!.getString(R.string.dele_data_and_file))
-            LovelyChoiceDialog(context)
+            LovelyStandardDialog(context)
                     .setTopColorRes(R.color.colorMain)
                     .setTitle(R.string.determine_dele)
                     .setIcon(R.drawable.ic_error)
-                    .setItemsMultiChoice(items) { positions, items ->
-                        val deleFile = items.size > 0
-                        downloadSuccessPresenter!!.deleTask(list, deleFile)
+                    .setNegativeButton(android.R.string.no, null)
+                    .setPositiveButton(android.R.string.ok) {
+                        downloadSuccessPresenter!!.deleTask(list, true)
                     }.show()
         }
 
@@ -90,14 +89,13 @@ class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
     }
 
     override fun deleTask(task: DownloadTaskEntity) {
-        val items = arrayOf(context!!.getString(R.string.dele_data_and_file))
-        LovelyChoiceDialog(context)
+        LovelyStandardDialog(context)
                 .setTopColorRes(R.color.colorMain)
                 .setTitle(R.string.determine_dele)
                 .setIcon(R.drawable.ic_error)
-                .setItemsMultiChoice(items) { positions, items ->
-                    val deleFile = if (items.size > 0) true else false
-                    downloadSuccessPresenter!!.deleTask(task, deleFile)
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.ok) {
+                    downloadSuccessPresenter!!.deleTask(task, true)
                 }.show()
     }
 
