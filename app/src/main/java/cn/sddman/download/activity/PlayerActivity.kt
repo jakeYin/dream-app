@@ -1,13 +1,17 @@
 package cn.sddman.download.activity
 
+import android.content.Context
 import android.graphics.Point
+import android.media.AudioManager
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings
 import android.view.*
 import android.widget.SeekBar
 import cn.sddman.download.R
 import cn.sddman.download.common.BaseActivity
 import cn.sddman.download.common.Const
+import cn.sddman.download.fragment.PlayerPopupWindow
 import cn.sddman.download.mvp.p.PlayerPresenter
 import cn.sddman.download.mvp.p.PlayerPresenterImp
 import cn.sddman.download.mvp.v.PlayerView
@@ -15,9 +19,9 @@ import cn.sddman.download.thread.HidePlayControl
 import cn.sddman.download.thread.UpdataUIPlayHandler
 import cn.sddman.download.thread.UpdatePlayUIProcess
 import cn.sddman.download.util.*
-import cn.sddman.download.fragment.PlayerPopupWindow
 import com.aplayer.aplayerandroid.APlayerAndroid
 import kotlinx.android.synthetic.main.activity_player.*
+import java.util.*
 
 
 class PlayerActivity : BaseActivity(), PlayerView {
@@ -33,8 +37,8 @@ class PlayerActivity : BaseActivity(), PlayerView {
     private var mIsTouchingSeekbar = false
     private var mIsNeedUpdateUIProgress = false   //标志位，是否需要更新播放进度
     private var mVisible = false
-    private var downX: Float = 0.toFloat()
-    private var downY: Float = 0.toFloat()
+    private var mDownX: Float = 0.toFloat()
+    private var mDownY: Float = 0.toFloat()
 
 
     private var videoName: String = ""
@@ -104,7 +108,20 @@ class PlayerActivity : BaseActivity(), PlayerView {
 
     }
 
+    private var mChangeVolume: Boolean = false
+    private var mChangePosition: Boolean = false
+    private var mChangeBrightness: Boolean = false
+    private val THRESHOLD = 80
+    private var mGestureDownPosition: Int = 0
+    private var mGestureDownVolume: Int = 0
+    private var mGestureDownBrightness: Float = 0.toFloat()
+    private var mSeekTimePosition: Int = 0
+    private var mScreenWidth: Int = 0
+    private var mScreenHeight: Int = 0
     private fun registerListener() {
+        mScreenWidth = resources.displayMetrics.widthPixels
+        mScreenHeight = resources.displayMetrics.heightPixels
+        val mAudioManager = applicationContext!!.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         play_seek_bar!!.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             private val SEEK_MIN_GATE_MS = 1000
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -125,59 +142,94 @@ class PlayerActivity : BaseActivity(), PlayerView {
         val playViewClick = View.OnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    downX = motionEvent.x
-                    downY = motionEvent.y
+                    mDownX = motionEvent.x
+                    mDownY = motionEvent.y
+                    mChangeVolume = false
+                    mChangePosition = false
+                    mChangeBrightness = false
                     Handler().postDelayed({
-                        when (view.id) {
-                            R.id.play_view_root -> controlViewToggle()
-                            R.id.top_panel, R.id.bottom_panel -> controlViewShow()
+                        if (!mChangeBrightness&&!mChangePosition&&!mChangeVolume){
+                            when (view.id) {
+                                R.id.play_view_root -> controlViewToggle()
+                                R.id.top_panel, R.id.bottom_panel -> controlViewShow()
+                            }
                         }
                         destroyPopWind()
                     }, 100)
                 }
                 MotionEvent.ACTION_MOVE -> {
                     mIsTouchingSeekbar = true
-                    val disX = motionEvent.x - downX
-                    val disY = motionEvent.y - downY
-                    if (Math.abs(disX) > Math.abs(disY)) {
-                        // x control
-                        if (Math.abs(disX) > 10){
-                            val fastLength = 10 * disX
-                            val newProgress = (aPlayer!!.position + fastLength);
-                            userSeekPlayProgress(newProgress.toInt())
-                            hidePlayControl!!.resetHideTimer()
+                    val deltaX = motionEvent.x - mDownX
+                    var deltaY = motionEvent.y - mDownY
+                    val absDeltaX = Math.abs(deltaX)
+                    val absDeltaY = Math.abs(deltaY)
+
+                    if (!mChangePosition && !mChangeVolume && !mChangeBrightness) {
+                        if (absDeltaX > THRESHOLD || absDeltaY > THRESHOLD) {
+                            if (absDeltaX >= THRESHOLD) {
+                                mChangePosition = true
+                                mGestureDownPosition = aPlayer!!.position
+                            } else {
+                                if (mDownX < mScreenWidth * 0.5f) {//左侧改变亮度
+                                    mChangeBrightness = true
+                                    val lp = window.attributes
+                                    if (lp.screenBrightness < 0) {
+                                        mGestureDownBrightness = Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS).toFloat()
+                                    } else {
+                                        mGestureDownBrightness = lp.screenBrightness * 255
+                                    }
+                                } else {//右侧改变声音
+                                    mChangeVolume = true
+                                    mGestureDownVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+                                }
+                            }
                         }
-
                     }
-//                    else {
-//                        // y control
-//                        if (Math.abs(disY) > 80){
-//                            if (downX > SCREEN_WIDTH/2){
-//                                //volume
-//                                if (disY>0){
-//                                    SystemConfig.instance.streamVolume--
-//                                } else {
-//                                    SystemConfig.instance.streamVolume++
-//                                }
-//                            }
-////                            else {
-////                                //brightness
-////                                var old = SystemConfig.instance.screenBrightness
-////                                if (disY>0){
-////                                    old+=15
-////                                } else {
-////                                    old-=15
-////                                }
-////                                println("================old = $old")
-////                                SystemConfig.instance.setWindowBrightness(this,old)
-////                            }
-//                        }
-//                    }
 
+                    if (mChangePosition) {
+                        val totalTimeDuration = aPlayer!!.duration
+                        mSeekTimePosition = (mGestureDownPosition + deltaX * 0.3 * totalTimeDuration / mScreenWidth).toInt()
+                        if (mSeekTimePosition > totalTimeDuration)
+                            mSeekTimePosition = totalTimeDuration
+                        val seekTime = stringForTime(mSeekTimePosition)
+                        val totalTime = stringForTime(totalTimeDuration)
+                        showProgressDialog(deltaX, seekTime, mSeekTimePosition, totalTime, totalTimeDuration)
+                    }
+                    if (mChangeVolume) {
+                        deltaY = -deltaY
+                        val max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+                        val deltaV = (max.toFloat() * deltaY * 3f / mScreenHeight).toInt()
+                        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mGestureDownVolume + deltaV, 0)
+                        val volumePercent = (mGestureDownVolume * 100 / max + deltaY * 3f * 100f / mScreenHeight).toInt()
+                        showVolumeDialog(volumePercent)
+                    }
+
+                    if (mChangeBrightness) {
+                        deltaY = -deltaY
+                        val deltaV = (255f * deltaY * 3f / mScreenHeight).toInt()
+                        val params = window.attributes
+                        if ((mGestureDownBrightness + deltaV) / 255 >= 1) {//这和声音有区别，必须自己过滤一下负值
+                            params.screenBrightness = 1f
+                        } else if ((mGestureDownBrightness + deltaV) / 255 <= 0) {
+                            params.screenBrightness = 0.01f
+                        } else {
+                            params.screenBrightness = (mGestureDownBrightness + deltaV) / 255
+                        }
+                        window.setAttributes(params)
+                        //dialog中显示百分比
+                        val brightnessPercent = (mGestureDownBrightness * 100 / 255 + deltaY * 3f * 100f / mScreenHeight).toInt()
+                        showBrightnessDialog(brightnessPercent)
+                    }
 
                 }
                 MotionEvent.ACTION_UP -> {
                     mIsTouchingSeekbar = false
+                    volume_layout.visibility = View.GONE
+                    brightness_layout.visibility = View.GONE
+                    dialog_progress.visibility = View.GONE
+                    if (mChangePosition) {
+                        userSeekPlayProgress(mSeekTimePosition)
+                    }
                     startUIUpdateThread()
                 }
             }
@@ -186,7 +238,65 @@ class PlayerActivity : BaseActivity(), PlayerView {
         play_view_root!!.setOnTouchListener(playViewClick)
         top_panel!!.setOnTouchListener(playViewClick)
         bottom_panel!!.setOnTouchListener(playViewClick)
-        //fullscreen_content.setOnTouchListener(playViewClick);
+    }
+
+    fun showProgressDialog(deltaX: Float, seekTime: String, seekTimePosition: Int, totalTime: String, totalTimeDuration: Int) {
+        dialog_progress.visibility = View.VISIBLE
+        tv_current.text = seekTime
+        tv_duration.text = " / $totalTime"
+        duration_progressbar.progress = if (totalTimeDuration <= 0) 0 else (seekTimePosition * 100 / totalTimeDuration)
+        if (deltaX > 0) {
+            duration_image_tip.setBackgroundResource(R.drawable.jz_forward_icon)
+        } else {
+            duration_image_tip.setBackgroundResource(R.drawable.jz_backward_icon)
+        }
+    }
+
+    fun showVolumeDialog(volumePercent: Int) {
+        volume_layout.visibility = View.VISIBLE
+        var volumePercent = volumePercent
+
+        if (volumePercent <= 0) {
+            volume_image_tip.setBackgroundResource(R.drawable.jz_close_volume)
+        } else {
+            volume_image_tip.setBackgroundResource(R.drawable.jz_add_volume)
+        }
+        if (volumePercent > 100) {
+            volumePercent = 100
+        } else if (volumePercent < 0) {
+            volumePercent = 0
+        }
+        tv_volume.text = volumePercent.toString() + "%"
+        volume_progressbar.setProgress(volumePercent)
+    }
+
+    fun showBrightnessDialog(brightnessPercent: Int) {
+        var brightnessPercent = brightnessPercent
+        brightness_layout.visibility = View.VISIBLE
+        if (brightnessPercent > 100) {
+            brightnessPercent = 100
+        } else if (brightnessPercent < 0) {
+            brightnessPercent = 0
+        }
+        tv_brightness.text = brightnessPercent.toString() + "%"
+        brightness_progressbar.setProgress(brightnessPercent)
+    }
+
+    fun stringForTime(timeMs: Int): String {
+        if (timeMs <= 0 || timeMs >= 24 * 60 * 60 * 1000) {
+            return "00:00"
+        }
+        val totalSeconds = timeMs / 1000
+        val seconds = (totalSeconds % 60)
+        val minutes = (totalSeconds / 60 % 60)
+        val hours = (totalSeconds / 3600)
+        val stringBuilder = StringBuilder()
+        val mFormatter = Formatter(stringBuilder, Locale.getDefault())
+        return if (hours > 0) {
+            mFormatter.format("%d:%02d:%02d", hours, minutes, seconds).toString()
+        } else {
+            mFormatter.format("%02d:%02d", minutes, seconds).toString()
+        }
     }
 
     private fun destroyPopWind() {
