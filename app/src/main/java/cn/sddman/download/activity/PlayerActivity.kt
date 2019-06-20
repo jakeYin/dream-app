@@ -148,10 +148,15 @@ class PlayerActivity : BaseActivity(), PlayerView {
                     mChangePosition = false
                     mChangeBrightness = false
                     Handler().postDelayed({
-                        if (!mChangeBrightness&&!mChangePosition&&!mChangeVolume){
+                        if (!mChangeBrightness && !mChangePosition && !mChangeVolume) {
                             when (view.id) {
-                                R.id.play_view_root -> controlViewToggle()
-                                R.id.top_panel, R.id.bottom_panel -> controlViewShow()
+                                R.id.play_view_root -> if (!lock) {
+                                    controlViewToggle()
+                                } else {
+                                    player_lock.visibility = View.VISIBLE
+                                    hidePlayControl!!.resetHideTimer()
+                                }
+                                R.id.top_panel, R.id.bottom_panel -> if (!lock) controlViewShow()
                             }
                         }
                         destroyPopWind()
@@ -159,85 +164,87 @@ class PlayerActivity : BaseActivity(), PlayerView {
                 }
                 MotionEvent.ACTION_MOVE -> {
                     mIsTouchingSeekbar = true
-                    val deltaX = motionEvent.x - mDownX
-                    var deltaY = motionEvent.y - mDownY
-                    val absDeltaX = Math.abs(deltaX)
-                    val absDeltaY = Math.abs(deltaY)
-
-                    if (!mChangePosition && !mChangeVolume && !mChangeBrightness) {
-                        if (absDeltaX > THRESHOLD || absDeltaY > THRESHOLD) {
-                            if (absDeltaX >= THRESHOLD) {
-                                mChangePosition = true
-                                mGestureDownPosition = aPlayer!!.position
-                            } else {
-                                if (mDownX < mScreenWidth * 0.5f) {//左侧改变亮度
-                                    mChangeBrightness = true
-                                    val lp = window.attributes
-                                    if (lp.screenBrightness < 0) {
-                                        mGestureDownBrightness = Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS).toFloat()
-                                    } else {
-                                        mGestureDownBrightness = lp.screenBrightness * 255
+                    if (!lock) {
+                        val deltaX = motionEvent.x - mDownX
+                        var deltaY = motionEvent.y - mDownY
+                        val absDeltaX = Math.abs(deltaX)
+                        val absDeltaY = Math.abs(deltaY)
+                        if (!mChangePosition && !mChangeVolume && !mChangeBrightness) {
+                            if (absDeltaX > THRESHOLD || absDeltaY > THRESHOLD) {
+                                if (absDeltaX >= THRESHOLD) {
+                                    mChangePosition = true
+                                    mGestureDownPosition = aPlayer!!.position
+                                } else {
+                                    if (mDownX < mScreenWidth * 0.5f) {//左侧改变亮度
+                                        mChangeBrightness = true
+                                        val lp = window.attributes
+                                        if (lp.screenBrightness < 0) {
+                                            mGestureDownBrightness = Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS).toFloat()
+                                        } else {
+                                            mGestureDownBrightness = lp.screenBrightness * 255
+                                        }
+                                    } else {//右侧改变声音
+                                        mChangeVolume = true
+                                        mGestureDownVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
                                     }
-                                } else {//右侧改变声音
-                                    mChangeVolume = true
-                                    mGestureDownVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
                                 }
                             }
                         }
-                    }
 
-                    if (mChangePosition) {
-                        val totalTimeDuration = aPlayer!!.duration
-                        mSeekTimePosition = (mGestureDownPosition + deltaX * 0.3 * totalTimeDuration / mScreenWidth).toInt()
-                        if (mSeekTimePosition > totalTimeDuration)
-                            mSeekTimePosition = totalTimeDuration
-                        val seekTime = stringForTime(mSeekTimePosition)
-                        val totalTime = stringForTime(totalTimeDuration)
-                        showProgressDialog(deltaX, seekTime, mSeekTimePosition, totalTime, totalTimeDuration)
-                    }
-                    if (mChangeVolume) {
-                        deltaY = -deltaY
-                        val max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-                        val deltaV = (max.toFloat() * deltaY * 3f / mScreenHeight).toInt()
-                        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mGestureDownVolume + deltaV, 0)
-                        val volumePercent = (mGestureDownVolume * 100 / max + deltaY * 3f * 100f / mScreenHeight).toInt()
-                        showVolumeDialog(volumePercent)
-                    }
-
-                    if (mChangeBrightness) {
-                        deltaY = -deltaY
-                        val deltaV = (255f * deltaY * 3f / mScreenHeight).toInt()
-                        val params = window.attributes
-                        if ((mGestureDownBrightness + deltaV) / 255 >= 1) {//这和声音有区别，必须自己过滤一下负值
-                            params.screenBrightness = 1f
-                        } else if ((mGestureDownBrightness + deltaV) / 255 <= 0) {
-                            params.screenBrightness = 0.01f
-                        } else {
-                            params.screenBrightness = (mGestureDownBrightness + deltaV) / 255
+                        if (mChangePosition) {
+                            val totalTimeDuration = aPlayer!!.duration
+                            mSeekTimePosition = (mGestureDownPosition + deltaX * 0.3 * totalTimeDuration / mScreenWidth).toInt()
+                            if (mSeekTimePosition > totalTimeDuration)
+                                mSeekTimePosition = totalTimeDuration
+                            val seekTime = stringForTime(mSeekTimePosition)
+                            val totalTime = stringForTime(totalTimeDuration)
+                            showProgressDialog(deltaX, seekTime, mSeekTimePosition, totalTime, totalTimeDuration)
                         }
-                        window.setAttributes(params)
-                        //dialog中显示百分比
-                        val brightnessPercent = (mGestureDownBrightness * 100 / 255 + deltaY * 3f * 100f / mScreenHeight).toInt()
-                        showBrightnessDialog(brightnessPercent)
-                    }
+                        if (mChangeVolume) {
+                            deltaY = -deltaY
+                            val max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+                            val deltaV = (max.toFloat() * deltaY * 3f / mScreenHeight).toInt()
+                            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mGestureDownVolume + deltaV, 0)
+                            val volumePercent = (mGestureDownVolume * 100 / max + deltaY * 3f * 100f / mScreenHeight).toInt()
+                            showVolumeDialog(volumePercent)
+                        }
 
+                        if (mChangeBrightness) {
+                            deltaY = -deltaY
+                            val deltaV = (255f * deltaY * 3f / mScreenHeight).toInt()
+                            val params = window.attributes
+                            if ((mGestureDownBrightness + deltaV) / 255 >= 1) {//这和声音有区别，必须自己过滤一下负值
+                                params.screenBrightness = 1f
+                            } else if ((mGestureDownBrightness + deltaV) / 255 <= 0) {
+                                params.screenBrightness = 0.01f
+                            } else {
+                                params.screenBrightness = (mGestureDownBrightness + deltaV) / 255
+                            }
+                            window.setAttributes(params)
+                            //dialog中显示百分比
+                            val brightnessPercent = (mGestureDownBrightness * 100 / 255 + deltaY * 3f * 100f / mScreenHeight).toInt()
+                            showBrightnessDialog(brightnessPercent)
+                        }
+                    }
                 }
                 MotionEvent.ACTION_UP -> {
                     mIsTouchingSeekbar = false
-                    volume_layout.visibility = View.GONE
-                    brightness_layout.visibility = View.GONE
-                    dialog_progress.visibility = View.GONE
-                    if (mChangePosition) {
-                        userSeekPlayProgress(mSeekTimePosition)
+                    if (!lock) {
+                        volume_layout.visibility = View.GONE
+                        brightness_layout.visibility = View.GONE
+                        dialog_progress.visibility = View.GONE
+                        if (mChangePosition) {
+                            userSeekPlayProgress(mSeekTimePosition)
+                        }
+                        startUIUpdateThread()
                     }
-                    startUIUpdateThread()
                 }
             }
             true
         }
-        play_view_root!!.setOnTouchListener(playViewClick)
-        top_panel!!.setOnTouchListener(playViewClick)
-        bottom_panel!!.setOnTouchListener(playViewClick)
+        play_view_root.setOnTouchListener(playViewClick)
+        top_panel.setOnTouchListener(playViewClick)
+        bottom_panel.setOnTouchListener(playViewClick)
     }
 
     fun showProgressDialog(deltaX: Float, seekTime: String, seekTimePosition: Int, totalTime: String, totalTimeDuration: Int) {
@@ -316,18 +323,19 @@ class PlayerActivity : BaseActivity(), PlayerView {
     override fun controlViewShow() {
         if (null == aPlayer) return
         mVisible = true
-        top_panel!!.visibility = View.VISIBLE
-        bottom_panel!!.visibility = View.VISIBLE
+        top_panel.visibility = View.VISIBLE
+        bottom_panel.visibility = View.VISIBLE
+        player_lock.visibility = View.VISIBLE
         hidePlayControl!!.resetHideTimer()
     }
 
     override fun controlViewHide() {
         if (null == aPlayer) return
-        if (!mIsTouchingSeekbar) {
-            mVisible = false
-            top_panel!!.visibility = View.GONE
-            bottom_panel!!.visibility = View.GONE
-        }
+        mVisible = false
+        top_panel.visibility = View.GONE
+        bottom_panel.visibility = View.GONE
+        player_lock.visibility = View.GONE
+
     }
 
     override fun setVideoTile(name: String) {
@@ -430,6 +438,17 @@ class PlayerActivity : BaseActivity(), PlayerView {
             mPopupWindow = PlayerPopupWindow(this, play_view_root!!, aPlayer!!)
         }
         mPopupWindow!!.showAtLocation(play_view_root, Gravity.END, 0, 0)
+    }
+
+    private var lock: Boolean = false
+
+    fun toggleLockClick(view: View) {
+        lock = !lock;
+        if (lock) {
+            player_lock.setImageResource(R.drawable.ic_locked)
+        } else {
+            player_lock.setImageResource(R.drawable.ic_unlock)
+        }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {

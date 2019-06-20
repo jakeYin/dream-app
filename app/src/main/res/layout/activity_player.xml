@@ -229,7 +229,7 @@
                 android:id="@+id/tv_current"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#fff85959"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp" />
 
             <TextView
@@ -253,4 +253,15 @@
             android:max="100"
             android:progressDrawable="@drawable/jz_dialog_progress" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/player_lock"
+        android:layout_centerVertical="true"
+        android:onClick="toggleLockClick"
+        android:layout_marginStart="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_unlock"
+        android:visibility="gone"
+        />
 </RelativeLayout>

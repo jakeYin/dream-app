@@ -1,1 +1,1 @@
-include ':app',':thunder',':filepicker',':jiaozivideoplayer'
+include ':app',':thunder',':filepicker'
