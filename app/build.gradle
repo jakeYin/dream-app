@@ -58,6 +58,8 @@ dependencies {
     implementation rootProject.ext.deps.multidex
     implementation rootProject.ext.deps.xutils
     implementation rootProject.ext.deps.kotlin
+    implementation rootProject.ext.deps.rxandroid
+    implementation rootProject.ext.deps.rxjava
 
     testImplementation rootProject.ext.deps.junit
     androidTestImplementation rootProject.ext.deps.runner

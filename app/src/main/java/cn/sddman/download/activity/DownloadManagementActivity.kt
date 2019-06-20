@@ -1,10 +1,12 @@
 package cn.sddman.download.activity
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AlertDialog
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
@@ -18,7 +20,9 @@ import cn.sddman.download.mvp.p.DownloadManagementPresenter
 import cn.sddman.download.mvp.p.DownloadManagementPresenterImp
 import cn.sddman.download.mvp.v.DownloadManagementView
 import cn.sddman.download.service.DownService
+import cn.sddman.download.update.XdUpdateAgent
 import cn.sddman.download.util.AppConfigUtil
+import cn.sddman.download.util.SharedPreferencesUtils
 import cn.sddman.download.util.Util
 import com.cocosw.bottomsheet.BottomSheet
 import com.ess.filepicker.FilePicker
@@ -50,7 +54,33 @@ class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
         appConfigPresenter = AppConfigPresenterImp()
         initViewPage()
         initBottomMenu()
+        showNoteDialog()
+        initUpdate()
     }
+
+    private fun showNoteDialog() {
+        val isAgreen = SharedPreferencesUtils.getParam(this, "agree_note", false) as Boolean
+        if (!isAgreen) {
+            AlertDialog.Builder(this).setTitle(R.string.nav_note).setMessage(R.string.note_detail).setPositiveButton(R.string.agreen, DialogInterface.OnClickListener { dialogInterface, i ->
+                SharedPreferencesUtils.setParam(this, "agree_note", true)
+            }).setNegativeButton(R.string.not_agreen, DialogInterface.OnClickListener { dialogInterface, i -> finish() }).show()
+        }
+    }
+
+    private fun initUpdate() {
+        val updateAgent = XdUpdateAgent.Builder()
+                .setDebugMode(false)    //是否显示调试信息(可选,默认:false)
+                .setJsonUrl(Const.APK_UPDATE_JSON_URL)    //设置通过其他途径得到的XdUpdateBean(2选1)
+                .setShowDialogIfWifi(true)    //设置在WiFi下直接弹出AlertDialog而不使用Notification(可选,默认:false)
+                .setDownloadText("立即下载")    //可选,默认为左侧所示的文本
+                .setInstallText("立即安装(已下载)")
+                .setLaterText("以后再说")
+                .setHintText("版本更新")
+                .setDownloadingText("正在下载")
+                .build()
+        updateAgent.update(this)
+    }
+
 
     private fun initViewPage() {
         val downLoadSuccessFrm = DownLoadSuccessFrm()

@@ -56,6 +56,7 @@
         <activity android:name=".activity.BrowseActivity"></activity>
 
         <service android:name="cn.sddman.download.service.DownService"/>
+        <service android:name=".update.XdUpdateService"/>
     </application>
 
 </manifest>
