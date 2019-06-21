@@ -446,8 +446,12 @@ class PlayerActivity : BaseActivity(), PlayerView {
         lock = !lock;
         if (lock) {
             player_lock.setImageResource(R.drawable.ic_locked)
+            top_panel.visibility = View.GONE
+            bottom_panel.visibility = View.GONE
         } else {
             player_lock.setImageResource(R.drawable.ic_unlock)
+            top_panel.visibility = View.VISIBLE
+            bottom_panel.visibility = View.VISIBLE
         }
     }
 
