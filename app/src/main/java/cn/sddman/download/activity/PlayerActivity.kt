@@ -452,6 +452,7 @@ class PlayerActivity : BaseActivity(), PlayerView {
             player_lock.setImageResource(R.drawable.ic_unlock)
             top_panel.visibility = View.VISIBLE
             bottom_panel.visibility = View.VISIBLE
+            hidePlayControl!!.resetHideTimer()
         }
     }
 
