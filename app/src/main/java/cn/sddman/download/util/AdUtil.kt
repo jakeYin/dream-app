@@ -3,7 +3,6 @@ package cn.sddman.download.util
 import android.content.Context
 import cn.sddman.download.App
 import cn.sddman.download.common.Const
-import cn.sddman.download.listener.AdUtilListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
