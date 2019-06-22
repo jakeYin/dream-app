@@ -87,9 +87,9 @@ class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
         val downLoadIngFrm = DownLoadIngFrm()
         mFragments.add(downLoadIngFrm)
         mFragments.add(downLoadSuccessFrm)
-        viewPager!!.offscreenPageLimit = 2
-        viewPager.adapter = CusAdapter(supportFragmentManager, mFragments)
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        view_pager!!.offscreenPageLimit = 2
+        view_pager.adapter = CusAdapter(supportFragmentManager, mFragments)
+        view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(i: Int, v: Float, i1: Int) {}
             override fun onPageSelected(i: Int) {
                 changeTab(i)
@@ -101,20 +101,20 @@ class DownloadManagementActivity : BaseActivity(), DownloadManagementView {
     private fun changeTab(index: Int) {
         if (index == 0) {
             downloading!!.setTextColor(resources.getColor(R.color.white))
-            downloadfinish!!.setTextColor(resources.getColor(R.color.trwhite))
+            download_finish!!.setTextColor(resources.getColor(R.color.trwhite))
         } else {
             downloading!!.setTextColor(resources.getColor(R.color.trwhite))
-            downloadfinish!!.setTextColor(resources.getColor(R.color.white))
+            download_finish!!.setTextColor(resources.getColor(R.color.white))
         }
         EventBus.getDefault().postSticky(MessageEvent(Msg(Const.MESSAGE_TYPE_REFRESH_DATA)))
     }
 
     fun downloadingClick(view: View) {
-        viewPager!!.currentItem = 0
+        view_pager!!.currentItem = 0
     }
 
     fun downloadfinishClick(view: View) {
-        viewPager!!.currentItem = 1
+        view_pager!!.currentItem = 1
     }
 
     fun addTaskClick(view: View) {
