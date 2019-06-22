@@ -14,6 +14,12 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:overScrollMode="never"/>
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-7773568607801592/4839008651" />
     <LinearLayout
         android:id="@+id/start_download"
         android:layout_width="match_parent"

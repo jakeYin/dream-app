@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,8 +35,17 @@ class DownLoadSuccessFrm : Fragment(), DownLoadSuccessView {
     private var downloadSuccessListAdapter: DownloadSuccessListAdapter? = null
     private var downloadSuccessPresenter: DownloadSuccessPresenter? = null
     private var list: MutableList<DownloadTaskEntity>? = arrayListOf()
+    private lateinit var delete_button:View
+    private lateinit var delete_cancel_button:View
+    private lateinit var delete_bottom_layout:View
+    private lateinit var recyclerview:RecyclerView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.frm_download_success, container, false)
+        val view = inflater.inflate(R.layout.frm_download_success, container, false)
+        delete_button = view.findViewById(R.id.delete_button)
+        delete_cancel_button = view.findViewById(R.id.delete_cancel_button)
+        delete_bottom_layout = view.findViewById(R.id.delete_bottom_layout)
+        recyclerview = view.findViewById(R.id.recyclerview)
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

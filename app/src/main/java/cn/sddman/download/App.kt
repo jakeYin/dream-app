@@ -3,8 +3,8 @@ package cn.sddman.download
 import android.app.Application
 import android.content.pm.PackageManager
 import android.util.Log
-import android.util.Log.isLoggable
 import cn.sddman.download.common.DelegateApplicationPackageManager
+import cn.sddman.download.util.AdUtil
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.xunlei.downloadlib.XLTaskHelper
@@ -21,6 +21,8 @@ class App : Application() {
         //x.Ext.setDebug(BuildConfig.DEBUG);
         XLTaskHelper.init(applicationContext)
         instance = this
+        AdUtil.init(this)
+        AdUtil.loadRewardAd()
         Logger.addLogAdapter(object : AndroidLogAdapter() {
             override fun isLoggable(priority: Int, tag: String?): Boolean {
                 return true

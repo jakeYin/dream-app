@@ -28,7 +28,6 @@ dependencies {
     implementation rootProject.ext.deps.appcompat
     implementation rootProject.ext.deps.recyclerview
     implementation rootProject.ext.deps.design
-    implementation rootProject.ext.deps.appcompat
     implementation rootProject.ext.deps.support_v4
     implementation rootProject.ext.deps.constraint
     implementation rootProject.ext.deps.eventbus

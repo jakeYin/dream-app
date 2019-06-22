@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,6 @@ import cn.sddman.download.util.Util
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout
-import kotlinx.android.synthetic.main.frm_source.*
 import java.util.*
 
 
@@ -91,8 +91,11 @@ class SourceFrm : Fragment(), SourceView, UrlDownLoadView {
         loadData()
     }
 
-
+    private lateinit var source_rv:RecyclerView
+    private lateinit var source_twinklingRefreshLayout:TwinklingRefreshLayout
     private fun initView() {
+        source_rv = view!!.findViewById(R.id.source_rv)
+        source_twinklingRefreshLayout = view!!.findViewById(R.id.source_twinklingRefreshLayout)
         source_rv!!.layoutManager = RecyclerViewNoBugLinearLayoutManager(context!!,
                 LinearLayoutManager.VERTICAL, false)
         searchListAdapter = SourceListAdapter(context!!, this, sourceList)

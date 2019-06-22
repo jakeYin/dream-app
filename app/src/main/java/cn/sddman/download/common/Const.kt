@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit
 
 object Const {
 
+    val DEBUG = true
     val URL_DOWNLOAD = 1
     val BT_DOWNLOAD = 2
     val APK_UPDATE_JSON_URL = "https://raw.githubusercontent.com/jakeYin/dream-app/master/release/update.json"

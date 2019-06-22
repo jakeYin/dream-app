@@ -37,10 +37,13 @@ import com.yarolegovich.lovelydialog.LovelyStandardDialog
 import kotlinx.android.synthetic.main.frm_download_ing.*
 
 class DownLoadIngFrm : Fragment(), DownLoadIngView {
-    private var recyclerView: RecyclerView? = null
     private var downloadIngPresenter: DownloadIngPresenter? = null
     private var downloadingListAdapter: DownloadingListAdapter? = null
     private val list = ArrayList<DownloadTaskEntity>()
+    private lateinit var delete_button:View
+    private lateinit var delete_cancel_button:View
+    private lateinit var delete_bottom_layout:View
+    private lateinit var recyclerView: RecyclerView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frm_download_ing, container, false)
     }
@@ -69,6 +72,9 @@ class DownLoadIngFrm : Fragment(), DownLoadIngView {
 
     private fun initView() {
         recyclerView = view!!.findViewById(R.id.recyclerview)
+        delete_button = view!!.findViewById(R.id.delete_button)
+        delete_cancel_button = view!!.findViewById(R.id.delete_cancel_button)
+        delete_bottom_layout = view!!.findViewById(R.id.delete_bottom_layout)
         val manager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false)
         recyclerView!!.layoutManager = manager
