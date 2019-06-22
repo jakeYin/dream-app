@@ -31,7 +31,7 @@ class PlayerPresenterImp(private val playerView: PlayerView, private val videoPa
         }
     }
 
-    override fun uaDataPlayerTime(currentPlayTimeMs: Int, durationTimeMs: Int) {
+    override fun updatePlayerTime(currentPlayTimeMs: Int, durationTimeMs: Int) {
         if (currentPlayTimeMs > 0 && durationTimeMs > 0) {
             video!!.currentPlayTimeMs = currentPlayTimeMs
             video!!.durationTimeMs = durationTimeMs

@@ -13,7 +13,7 @@ object Const {
 
     val URL_DOWNLOAD = 1
     val BT_DOWNLOAD = 2
-    val APK_UPDATE_JSON_URL = "http://192.168.31.20:8080/hsp-update/update.json"
+    val APK_UPDATE_JSON_URL = "https://raw.githubusercontent.com/jakeYin/dream-app/master/release/update.json"
 
     val DB_NAME = "sddmandownload.db"
     val DB_SDCARD_PATH = FileTools.sdCardPath + x.app().getString(R.string.app_db_path)

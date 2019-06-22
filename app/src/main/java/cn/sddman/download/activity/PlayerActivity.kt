@@ -39,8 +39,7 @@ class PlayerActivity : BaseActivity(), PlayerView {
     private var mVisible = false
     private var mDownX: Float = 0.toFloat()
     private var mDownY: Float = 0.toFloat()
-
-
+    private var mCreateTime = System.currentTimeMillis()
     private var videoName: String = ""
 
     companion object {
@@ -75,6 +74,8 @@ class PlayerActivity : BaseActivity(), PlayerView {
         SCREEN_HEIGHT = size.y
     }
 
+    private var openThenFinished: Boolean = false
+
     override fun initPlayer() {
         if (null != aPlayer) {
             return
@@ -92,11 +93,21 @@ class PlayerActivity : BaseActivity(), PlayerView {
         aPlayer!!.setOnPlayCompleteListener { playRet ->
             val isUseCallStop = APlayerSationUtil.isStopByUserCall(playRet)
             if (!isUseCallStop) {
-                finish()
+                if (System.currentTimeMillis() - mCreateTime > 5000){
+                    // normal play completed
+                    finish()
+                } else {
+                    // when open video then play completed within 5 seconds need reopen the video
+                    openThenFinished = true
+                    openVideo(videoPath)
+                }
             }
         }
         aPlayer!!.setOnOpenCompleteListener {
-            // String s="";
+            // when open video then play completed
+            if (openThenFinished){
+                aPlayer!!.position = 0
+            }
         }
         registerListener()
 
@@ -401,10 +412,9 @@ class PlayerActivity : BaseActivity(), PlayerView {
         var duraSecond = durationTimeMs / 1000
         duraSecond = if (duraSecond > 0) duraSecond else 0
         play_time!!.text = getString(R.string.play_time, TimeUtil.formatFromSecond(currSecond), TimeUtil.formatFromSecond(duraSecond))
-        val batteryicon = SystemConfig.instance.batteryIcon
-        battery_icon!!.setImageDrawable(resources.getDrawable(batteryicon))
+        battery_icon!!.setImageDrawable(resources.getDrawable(SystemConfig.instance.batteryIcon))
         system_time!!.text = TimeUtil.getNowTime("HH:mm")
-        playerPresenter!!.uaDataPlayerTime(currentPlayTimeMs, durationTimeMs)
+        playerPresenter!!.updatePlayerTime(currentPlayTimeMs, durationTimeMs)
     }
 
     override fun openVideo(path: String) {
