@@ -75,7 +75,7 @@ public class SharedPreferencesUtils {
     }
 
     public static int getReward(Context context) {
-        return (int) getParam(context, REWARD, 0);
+        return (int) getParam(context, REWARD, AdUtil.AD_REWARD_VALUE);
     }
 
 

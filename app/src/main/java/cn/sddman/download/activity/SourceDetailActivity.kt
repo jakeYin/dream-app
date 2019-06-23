@@ -46,6 +46,9 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
         val sourceDetailPresenterImp = SourceDetailPresenterImp(this)
         urlDownLoadPresenter = UrlDownLoadPresenterImp(this)
         sourceDetailPresenterImp.parser(magnetRule, detailUrl!!)
+        if (AdUtil.AD_TYPE == AdUtil.AD_TYPE_BANNER){
+            AdUtil.showBannerAd(ad_banner_view)
+        }
         initRV()
     }
 
@@ -65,7 +68,7 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
     }
 
     fun downloadSelectedClick(v: View) {
-        if (SharedPreferencesUtils.getReward(this) > 0 || !AdUtil.isLoaded()) {
+        if (AdUtil.AD_TYPE == AdUtil.AD_TYPE_BANNER){
             var count = SharedPreferencesUtils.getReward(this)
             for (x in linkList) {
                 if (x.check) {
@@ -73,10 +76,21 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
                     urlDownLoadPresenter.startTask(x.name, detailUrl, magnetRule.id)
                 }
             }
-            SharedPreferencesUtils.updateReward(this,count)
-        } else{
-            AdUtil.showRewardAd()
+        } else {
+            if (SharedPreferencesUtils.getReward(this) > 0 || !AdUtil.isLoaded()) {
+                var count = SharedPreferencesUtils.getReward(this)
+                for (x in linkList) {
+                    if (x.check) {
+                        count--
+                        urlDownLoadPresenter.startTask(x.name, detailUrl, magnetRule.id)
+                    }
+                }
+                SharedPreferencesUtils.updateReward(this,count)
+            } else{
+                AdUtil.showRewardAd()
+            }
         }
+
     }
 
     override fun addTaskSuccess() {
@@ -89,12 +103,12 @@ class SourceDetailActivity : BaseActivity(), SourceDetailView, UrlDownLoadView {
 
     public override fun onPause() {
         super.onPause()
-        AdUtil.pause(this)
+//        AdUtil.pause(this)
     }
 
     public override fun onResume() {
         super.onResume()
-        AdUtil.resume(this)
+//        AdUtil.resume(this)
     }
 
 }

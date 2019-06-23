@@ -63,6 +63,7 @@ public class XdUpdateService extends Service {
                 .subscribe(new Consumer<Response>() {
                     @Override
                     public void accept(Response response) {
+                        Logger.d("start download new version");
                         InputStream is = null;
                         FileOutputStream fos = null;
                         try {
@@ -78,7 +79,6 @@ public class XdUpdateService extends Service {
                             while ((hasRead = is.read(buffer)) >= 0) {
                                 fos.write(buffer, 0, hasRead);
                                 mLength = mLength + hasRead;
-                                Logger.d("downloading === mLength " + mLength + "  mFileLength " + mFileLength);
                             }
                             mLength = 0;
                             if (mFile.exists()) {
@@ -88,6 +88,7 @@ public class XdUpdateService extends Service {
                                     throw new Exception("MD5 mismatch. md5JustDownloaded: " + md5JustDownloaded + ". md5InUpdateBean: " + md5InUpdateBean + ".");
                                 }
                             }
+                            Logger.d("end download new version");
                         } catch (Exception e) {
                             e.printStackTrace();
                             mFile.delete();
