@@ -3,17 +3,17 @@
     <color name="colorPrimary">#1bbc9b</color>
     <color name="colorPrimaryDark">#1bbc9b</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorMain">#1bbc9b</color>
+    <color name="colorMain">#009688</color>
     <color name="colorMainLight">#f77d6d</color>
     <color name="colorMainTran">#4D1bbc9b</color>
     <color name="color444">#444</color>
 
 
-     <color name="primary">#00bcd4</color>
+    <color name="primary">#00bcd4</color>
     <color name="success">#009688</color>
-     <color name="info">#03a9f4</color>
+    <color name="info">#03a9f4</color>
     <color name="warning">#ffc107</color>
-     <color name="danger">#e51c23</color>
+    <color name="danger">#e51c23</color>
     <color name="trwhite">#4Dffffff</color>
     <color name="white_ff">#b0f1ffff</color>
     <color name="gray_ff">#ded2d2</color>
