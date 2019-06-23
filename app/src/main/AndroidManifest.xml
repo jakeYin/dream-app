@@ -59,6 +59,7 @@
         <activity android:name=".activity.SourceDetailActivity"
             android:windowSoftInputMode="adjustPan" ></activity>
         <activity android:name=".activity.BrowseActivity"></activity>
+        <activity android:name=".activity.NoteActivity"></activity>
 
         <service android:name="cn.sddman.download.service.DownService"/>
         <service android:name=".update.XdUpdateService"/>

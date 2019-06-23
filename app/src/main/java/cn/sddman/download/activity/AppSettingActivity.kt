@@ -26,6 +26,11 @@ class AppSettingActivity : BaseActivity(), AppSettingView {
         initView()
     }
 
+    fun pageNote(v: View){
+        val intent = Intent(this@AppSettingActivity, NoteActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun initView() {
         mobile_net!!.setOnCheckedChangeListener { compoundButton, b ->
             val net = if (b) Const.MOBILE_NET_OK else Const.MOBILE_NET_NOT
