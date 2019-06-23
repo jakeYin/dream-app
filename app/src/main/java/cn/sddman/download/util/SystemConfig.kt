@@ -8,16 +8,11 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.media.AudioManager
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.BatteryManager
 import android.provider.Settings
-import android.view.Window
-import android.view.WindowManager
-
-import org.xutils.x
-
 import cn.sddman.download.R
 import cn.sddman.download.common.Const
+import org.xutils.x
 
 class SystemConfig private constructor() {
     private val audioManager: AudioManager

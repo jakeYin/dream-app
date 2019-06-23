@@ -2,8 +2,6 @@ package cn.sddman.download.thread
 
 import android.os.Handler
 import android.os.Message
-import android.view.View
-
 import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.v.PlayerView
 

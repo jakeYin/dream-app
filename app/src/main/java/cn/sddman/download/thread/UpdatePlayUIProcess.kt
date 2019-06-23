@@ -1,12 +1,9 @@
 package cn.sddman.download.thread
 
 import android.os.Handler
-import android.os.Message
-
-import com.aplayer.aplayerandroid.APlayerAndroid
-
 import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.v.PlayerView
+import com.aplayer.aplayerandroid.APlayerAndroid
 
 class UpdatePlayUIProcess(private val playerView: PlayerView, private val handler: Handler, private val aPlayer: APlayerAndroid?) : Runnable {
     override fun run() {

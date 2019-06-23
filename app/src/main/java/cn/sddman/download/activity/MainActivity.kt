@@ -1,26 +1,18 @@
 package cn.sddman.download.activity
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
-
-import com.cocosw.bottomsheet.BottomSheet
-import com.ess.filepicker.FilePicker
-import com.ess.filepicker.model.EssFile
-
-import org.xutils.view.annotation.ContentView
-import org.xutils.view.annotation.Event
-import org.xutils.view.annotation.ViewInject
-
-import java.util.ArrayList
-
 import cn.sddman.download.R
 import cn.sddman.download.common.BaseActivity
 import cn.sddman.download.common.Const
 import cn.sddman.download.util.Util
+import com.cocosw.bottomsheet.BottomSheet
+import com.ess.filepicker.FilePicker
+import com.ess.filepicker.model.EssFile
+import org.xutils.view.annotation.ContentView
+import org.xutils.view.annotation.Event
 
 @ContentView(R.layout.activity_main)
 class MainActivity : BaseActivity() {

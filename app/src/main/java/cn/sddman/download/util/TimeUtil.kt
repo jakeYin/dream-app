@@ -1,7 +1,7 @@
 package cn.sddman.download.util
 
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 
 /**
  * Created by admin on 2016/7/6.

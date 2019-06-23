@@ -1,10 +1,8 @@
 package cn.sddman.download.util
 
 import android.content.pm.PackageManager
-
-import org.xutils.x
-
 import cn.sddman.download.mvp.e.MagnetRule
+import org.xutils.x
 
 class AppConfigUtil {
     var rules: List<MagnetRule>? = null

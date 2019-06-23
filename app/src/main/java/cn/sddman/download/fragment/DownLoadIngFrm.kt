@@ -8,16 +8,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.yarolegovich.lovelydialog.LovelyChoiceDialog
-
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
-
-import java.io.File
-import java.util.ArrayList
-
 import cn.sddman.download.R
 import cn.sddman.download.activity.PlayerActivity
 import cn.sddman.download.activity.SourceDetailActivity
@@ -34,7 +24,11 @@ import cn.sddman.download.rule.Rule
 import cn.sddman.download.util.FileTools
 import cn.sddman.download.util.Util
 import com.yarolegovich.lovelydialog.LovelyStandardDialog
-import kotlinx.android.synthetic.main.frm_download_ing.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import java.io.File
+import java.util.*
 
 class DownLoadIngFrm : Fragment(), DownLoadIngView {
     private var downloadIngPresenter: DownloadIngPresenter? = null

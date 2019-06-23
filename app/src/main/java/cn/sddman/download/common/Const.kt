@@ -1,9 +1,8 @@
 package cn.sddman.download.common
 
-import org.xutils.x
-
 import cn.sddman.download.R
 import cn.sddman.download.util.FileTools
+import org.xutils.x
 import java.util.concurrent.Executor
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor

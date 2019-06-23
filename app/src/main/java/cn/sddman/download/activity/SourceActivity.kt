@@ -8,9 +8,9 @@ import android.view.inputmethod.EditorInfo
 import cn.sddman.download.R
 import cn.sddman.download.adapter.SourceFrmAdapter
 import cn.sddman.download.common.BaseActivity
+import cn.sddman.download.fragment.SourceFrm
 import cn.sddman.download.mvp.e.MagnetRule
 import cn.sddman.download.rule.Rule
-import cn.sddman.download.fragment.SourceFrm
 import kotlinx.android.synthetic.main.activity_source.*
 import kotlinx.android.synthetic.main.view_sear_bar.*
 import java.util.*

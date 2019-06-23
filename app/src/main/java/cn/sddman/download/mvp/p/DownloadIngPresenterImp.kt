@@ -1,6 +1,7 @@
 package cn.sddman.download.mvp.p
 
 import cn.sddman.download.common.Const
+import cn.sddman.download.fragment.DownProgressNotify
 import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.m.DownLoadModel
 import cn.sddman.download.mvp.m.DownLoadModelImp
@@ -9,7 +10,6 @@ import cn.sddman.download.mvp.m.TaskModelImp
 import cn.sddman.download.mvp.v.DownLoadIngView
 import cn.sddman.download.util.AppSettingUtil
 import cn.sddman.download.util.SystemConfig
-import cn.sddman.download.fragment.DownProgressNotify
 
 class DownloadIngPresenterImp(private val downLoadIngView: DownLoadIngView) : DownloadIngPresenter {
     private val taskModel: TaskModel

@@ -1,14 +1,7 @@
 package cn.sddman.download.mvp.p
 
-import com.xunlei.downloadlib.XLTaskHelper
-import com.xunlei.downloadlib.parameter.TorrentInfo
-
-import org.xutils.x
-import java.io.File
-
 import cn.sddman.download.R
 import cn.sddman.download.common.Const
-import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.e.TorrentInfoEntity
 import cn.sddman.download.mvp.m.DownLoadModel
 import cn.sddman.download.mvp.m.DownLoadModelImp
@@ -16,6 +9,9 @@ import cn.sddman.download.mvp.m.TaskModel
 import cn.sddman.download.mvp.m.TaskModelImp
 import cn.sddman.download.mvp.v.TorrentInfoView
 import cn.sddman.download.util.FileTools
+import com.xunlei.downloadlib.XLTaskHelper
+import org.xutils.x
+import java.io.File
 
 class TorrentInfoPresenterImp(private val torrentInfoView: TorrentInfoView, private val torrentPath: String) : TorrentInfoPresenter {
     private val taskModel: TaskModel

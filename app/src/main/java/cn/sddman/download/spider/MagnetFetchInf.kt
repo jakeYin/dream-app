@@ -3,7 +3,6 @@ package cn.sddman.download.spider
 import cn.sddman.download.mvp.e.MagnetDetail
 import cn.sddman.download.mvp.e.MagnetInfo
 import cn.sddman.download.mvp.e.MagnetRule
-import cn.sddman.download.mvp.e.MagnetSearchBean
 
 abstract class MagnetFetchInf {
     open fun transformPage(page: Int?): Int {

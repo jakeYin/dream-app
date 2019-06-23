@@ -1,14 +1,11 @@
 package cn.sddman.download.util
 
+import cn.sddman.download.common.Const
+import cn.sddman.download.mvp.e.DownloadTaskEntity
 import org.xutils.DbManager
 import org.xutils.ex.DbException
 import org.xutils.x
-
 import java.io.File
-
-import cn.sddman.download.R
-import cn.sddman.download.common.Const
-import cn.sddman.download.mvp.e.DownloadTaskEntity
 
 class DBTools private constructor() {
     private val daoConfig: DbManager.DaoConfig

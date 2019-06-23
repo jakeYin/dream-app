@@ -1,15 +1,12 @@
 package cn.sddman.download.common
 
 import android.content.Context
-import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
-
+import cn.sddman.download.R
 import com.yanzhenjie.permission.Permission
 import com.yanzhenjie.permission.Rationale
 import com.yanzhenjie.permission.RequestExecutor
-
-import cn.sddman.download.R
 
 class RuntimeRationale : Rationale<List<String>> {
 

@@ -1,7 +1,6 @@
 package cn.sddman.download.mvp.p
 
 import android.os.AsyncTask
-import cn.sddman.download.spider.MagnetFetchInf
 import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.e.MagnetInfo
 import cn.sddman.download.mvp.e.MagnetRule
@@ -11,6 +10,7 @@ import cn.sddman.download.mvp.m.DownLoadModelImp
 import cn.sddman.download.mvp.m.TaskModel
 import cn.sddman.download.mvp.m.TaskModelImp
 import cn.sddman.download.mvp.v.SourceView
+import cn.sddman.download.spider.MagnetFetchInf
 
 class SourcePresenterImp(val sourceView: SourceView) : SourcePresenter {
     private val taskModel: TaskModel

@@ -4,18 +4,12 @@ import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.support.v4.app.FragmentActivity
-
-import com.irozon.sneaker.Sneaker
-
-import org.xutils.x
-
-import java.text.DecimalFormat
-
 import cn.sddman.download.R
 import cn.sddman.download.common.Const
+import com.irozon.sneaker.Sneaker
+import org.xutils.x
 
 object Util {
 

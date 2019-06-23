@@ -6,18 +6,9 @@ import android.media.MediaMetadataRetriever
 import android.media.ThumbnailUtils
 import android.os.Environment
 import android.text.TextUtils
-
-import org.xutils.x
-
-import java.io.Closeable
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
-
 import cn.sddman.download.R
 import cn.sddman.download.common.Const
+import java.io.*
 
 object FileTools {
     private val TAG = "FileTools"

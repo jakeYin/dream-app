@@ -1,12 +1,12 @@
 package cn.sddman.download.mvp.p
 
 import android.os.AsyncTask
-import cn.sddman.download.spider.MagnetFetchInf
 import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.e.MagnetDetail
 import cn.sddman.download.mvp.e.MagnetRule
 import cn.sddman.download.mvp.e.MagnetSearchBean
 import cn.sddman.download.mvp.v.SourceDetailView
+import cn.sddman.download.spider.MagnetFetchInf
 
 class SourceDetailPresenterImp(val sourceView: SourceDetailView) : SourceDetailPresenter {
 

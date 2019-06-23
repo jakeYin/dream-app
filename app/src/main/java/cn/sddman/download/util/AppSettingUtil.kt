@@ -1,9 +1,6 @@
 package cn.sddman.download.util
 
-import org.xutils.ex.DbException
-
 import cn.sddman.download.common.Const
-import cn.sddman.download.mvp.e.AppSettingEntity
 import cn.sddman.download.mvp.m.AppSettingModel
 import cn.sddman.download.mvp.m.AppSettingModelImp
 

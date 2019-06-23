@@ -1,9 +1,7 @@
 package cn.sddman.download.thread
 
-import android.graphics.Bitmap
 import android.os.AsyncTask
 import android.provider.MediaStore
-
 import cn.sddman.download.listener.GetThumbnailsListener
 import cn.sddman.download.mvp.e.TorrentInfoEntity
 import cn.sddman.download.util.FileTools

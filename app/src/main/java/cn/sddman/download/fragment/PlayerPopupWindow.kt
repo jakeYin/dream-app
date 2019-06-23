@@ -3,19 +3,13 @@ package cn.sddman.download.fragment
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.PopupWindow
-import android.widget.SeekBar
-import android.widget.Switch
-import android.widget.TextView
-
-import com.aplayer.aplayerandroid.APlayerAndroid
-
+import android.widget.*
 import cn.sddman.download.R
 import cn.sddman.download.common.Const
 import cn.sddman.download.util.StringUtil
 import cn.sddman.download.util.SystemConfig
 import cn.sddman.download.util.Util
+import com.aplayer.aplayerandroid.APlayerAndroid
 
 class PlayerPopupWindow(private val parentActivity: Activity, parentView: View, aPlayer: APlayerAndroid) : PopupWindow(parentView.height, parentView.height), View.OnClickListener {
     private var mRootView: View? = null

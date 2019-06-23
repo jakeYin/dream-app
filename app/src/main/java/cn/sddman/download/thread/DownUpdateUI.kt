@@ -2,20 +2,12 @@ package cn.sddman.download.thread
 
 import android.content.Intent
 import android.provider.MediaStore
-
-import com.xunlei.downloadlib.XLTaskHelper
-
-import org.greenrobot.eventbus.EventBus
-import org.xutils.x
-
-import java.io.File
-import java.util.ArrayList
-
 import cn.sddman.download.activity.TorrentInfoActivity
 import cn.sddman.download.common.AppManager
 import cn.sddman.download.common.Const
 import cn.sddman.download.common.MessageEvent
 import cn.sddman.download.common.Msg
+import cn.sddman.download.fragment.DownProgressNotify
 import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.m.DownLoadModel
 import cn.sddman.download.mvp.m.DownLoadModelImp
@@ -24,7 +16,11 @@ import cn.sddman.download.mvp.m.TaskModelImp
 import cn.sddman.download.util.AppSettingUtil
 import cn.sddman.download.util.DownUtil
 import cn.sddman.download.util.FileTools
-import cn.sddman.download.fragment.DownProgressNotify
+import com.xunlei.downloadlib.XLTaskHelper
+import org.greenrobot.eventbus.EventBus
+import org.xutils.x
+import java.io.File
+import java.util.*
 
 class DownUpdateUI {
     private val taskModel: TaskModel

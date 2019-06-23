@@ -1,26 +1,16 @@
 package cn.sddman.download.mvp.m
 
-import com.xunlei.downloadlib.XLTaskHelper
-import com.xunlei.downloadlib.parameter.TorrentFileInfo
-import com.xunlei.downloadlib.parameter.TorrentInfo
-import com.xunlei.downloadlib.parameter.XLTaskInfo
-
-import org.xutils.ex.DbException
-import org.xutils.x
-
-import java.io.File
-import java.util.ArrayList
-import java.util.Date
-import java.util.HashMap
-
-import cn.sddman.download.R
 import cn.sddman.download.common.Const
 import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.e.TorrentInfoEntity
 import cn.sddman.download.util.AppSettingUtil
 import cn.sddman.download.util.DBTools
 import cn.sddman.download.util.FileTools
-import cn.sddman.download.util.Util
+import com.xunlei.downloadlib.XLTaskHelper
+import org.xutils.ex.DbException
+import org.xutils.x
+import java.io.File
+import java.util.*
 
 class DownLoadModelImp : DownLoadModel {
     override fun startTorrentTask(bt: DownloadTaskEntity): Boolean {

@@ -1,8 +1,8 @@
 package cn.sddman.download.mvp.m
 
-import org.xutils.ex.DbException
 import cn.sddman.download.mvp.e.PlayerVideoEntity
 import cn.sddman.download.util.DBTools
+import org.xutils.ex.DbException
 
 class PlayerVideoModelImp : PlayerVideoModel {
     override fun findAllVideo(): List<PlayerVideoEntity>? {

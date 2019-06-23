@@ -3,7 +3,6 @@ package cn.sddman.download.spider
 import cn.sddman.download.cache.CacheHttpUtils
 import cn.sddman.download.mvp.e.MagnetInfo
 import cn.sddman.download.mvp.e.MagnetRule
-import com.orhanobut.logger.Logger
 import org.htmlcleaner.CleanerProperties
 import org.htmlcleaner.DomSerializer
 import org.htmlcleaner.HtmlCleaner

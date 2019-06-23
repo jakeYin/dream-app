@@ -1,7 +1,5 @@
 package cn.sddman.download.mvp.p
 
-import cn.sddman.download.common.Const
-import cn.sddman.download.mvp.e.AppSettingEntity
 import cn.sddman.download.mvp.m.AppSettingModel
 import cn.sddman.download.mvp.m.AppSettingModelImp
 import cn.sddman.download.mvp.v.AppSettingView

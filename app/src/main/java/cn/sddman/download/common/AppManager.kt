@@ -2,9 +2,7 @@ package cn.sddman.download.common
 
 import android.app.Activity
 import android.content.Context
-import cn.sddman.download.common.AppManager.Companion.activityStack
-
-import java.util.Stack
+import java.util.*
 
 /**
  * Activity管理类：用于管理Activity和退出程序

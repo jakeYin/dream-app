@@ -1,21 +1,16 @@
 package cn.sddman.download.util
 
 import android.content.Context
-
+import cn.sddman.download.mvp.e.MagnetRule
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
-
-import org.json.JSONObject
-
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.io.UnsupportedEncodingException
-import java.util.LinkedHashMap
-
-import cn.sddman.download.mvp.e.MagnetRule
+import java.util.*
 
 /**
  * author  dengyuhan

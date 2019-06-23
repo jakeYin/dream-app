@@ -1,11 +1,9 @@
 package cn.sddman.download.util
 
-import net.steamcrafted.loadtoast.LoadToast
-
-import org.xutils.x
-
 import cn.sddman.download.R
 import cn.sddman.download.common.AppManager
+import net.steamcrafted.loadtoast.LoadToast
+import org.xutils.x
 
 object AlertUtil {
     private var lt: LoadToast? = null

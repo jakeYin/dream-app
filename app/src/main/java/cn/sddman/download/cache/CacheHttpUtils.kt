@@ -11,7 +11,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import org.xutils.common.util.MD5
-import java.io.*
+import java.io.File
 import java.nio.charset.Charset
 
 

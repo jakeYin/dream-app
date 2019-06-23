@@ -1,11 +1,9 @@
 package cn.sddman.download.mvp.e
 
 import android.graphics.Bitmap
-
 import org.xutils.db.annotation.Column
 import org.xutils.db.annotation.Table
-
-import java.util.Date
+import java.util.*
 
 @Table(name = "DownloadTask")
 class DownloadTaskEntity {

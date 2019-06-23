@@ -1,15 +1,13 @@
 package cn.sddman.download.mvp.p
 
-import org.xutils.x
-
 import cn.sddman.download.R
 import cn.sddman.download.common.Const
-import cn.sddman.download.mvp.e.DownloadTaskEntity
 import cn.sddman.download.mvp.m.DownLoadModel
 import cn.sddman.download.mvp.m.DownLoadModelImp
 import cn.sddman.download.mvp.m.TaskModel
 import cn.sddman.download.mvp.m.TaskModelImp
 import cn.sddman.download.mvp.v.DownloadManagementView
+import org.xutils.x
 
 class DownloadManagementPresenterImp(private val downloadManagementView: DownloadManagementView) : DownloadManagementPresenter {
     private val taskModel: TaskModel

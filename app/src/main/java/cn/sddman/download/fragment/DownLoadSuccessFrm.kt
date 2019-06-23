@@ -25,7 +25,6 @@ import cn.sddman.download.util.FileTools
 import cn.sddman.download.util.Util
 import com.yanzhenjie.permission.AndPermission
 import com.yarolegovich.lovelydialog.LovelyStandardDialog
-import kotlinx.android.synthetic.main.frm_download_success.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode

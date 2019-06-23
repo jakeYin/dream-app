@@ -7,7 +7,6 @@ import com.orhanobut.logger.Logger
 import org.htmlcleaner.CleanerProperties
 import org.htmlcleaner.DomSerializer
 import org.htmlcleaner.HtmlCleaner
-import org.jsoup.Jsoup
 import org.w3c.dom.Node
 import org.w3c.dom.NodeList
 import java.io.UnsupportedEncodingException
