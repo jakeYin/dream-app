@@ -1,4 +1,4 @@
-package cn.sddman.download;
+package com.dream.tlj;
 
 import com.google.gson.Gson;
 
@@ -6,10 +6,10 @@ import org.junit.Test;
 
 import java.net.URLEncoder;
 
-import cn.sddman.download.mvp.e.MagnetRule;
-import cn.sddman.download.spider.MagnetFetchDyttDetailParserImp;
-import cn.sddman.download.spider.MagnetFetchDyttImp;
-import cn.sddman.download.spider.MagnetFetchInf;
+import com.dream.tlj.mvp.e.MagnetRule;
+import com.dream.tlj.spider.MagnetFetchDyttDetailParserImp;
+import com.dream.tlj.spider.MagnetFetchDyttImp;
+import com.dream.tlj.spider.MagnetFetchInf;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -33,8 +33,8 @@ public class ExampleUnitTest {
         try {
             String ruleStr = "{\"site\": \"电影天堂-Movie\",\n" +
                     "    \"url\": \"http://www.ygdy8.net\",\n" +
-                    "    \"parserClass\": \"cn.sddman.download.spider.MagnetFetchDyttImp\",\n" +
-                    "    \"parserDetailClass\":\"cn.sddman.download.spider.MagnetFetchDyttDetailParserImp\",\n" +
+                    "    \"parserClass\": \"com.dream.tlj.spider.MagnetFetchDyttImp\",\n" +
+                    "    \"parserDetailClass\":\"com.dream.tlj.spider.MagnetFetchDyttDetailParserImp\",\n" +
                     "    \"list\": \"//*[@id='header']/div/div[3]/div[3]/div[2]/div[2]/div[2]/ul/table\",\n" +
                     "    \"href\": \".//tbody/tr[2]/td[2]/b/a//@href\",\n" +
                     "    \"name\": \".//tbody/tr[1]/td[2]/b/a\",\n" +
@@ -60,8 +60,8 @@ public class ExampleUnitTest {
         try {
             String ruleStr = "{\"site\": \"国内电影\",\n" +
                     "    \"url\": \"http://www.ygdy8.com\",\n" +
-                    "    \"parserClass\": \"cn.sddman.download.spider.MagnetFetchDyttImp\",\n" +
-                    "    \"parserDetailClass\":\"cn.sddman.download.spider.MagnetFetchDyttDetailParserImp\",\n" +
+                    "    \"parserClass\": \"com.dream.tlj.spider.MagnetFetchDyttImp\",\n" +
+                    "    \"parserDetailClass\":\"com.dream.tlj.spider.MagnetFetchDyttDetailParserImp\",\n" +
                     "    \"list\": \"//*[@id='header']/div/div[3]/div[3]/div[2]/div[2]/div[2]/ul/table\",\n" +
                     "    \"href\": \".//tbody/tr[2]/td[2]/b/a//@href\",\n" +
                     "    \"name\": \".//tbody/tr[2]/td[2]/b/a\",\n" +

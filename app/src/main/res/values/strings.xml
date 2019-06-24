@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">TLJ下载</string>
     <string name="app_version">v1.0.0</string>
-    <string name="app_db_path">sddman/dowload/db</string>
-    <string name="app_down_path">sddman/dowload/file</string>
-    <string name="app_cache_path">sddman/dowload/cache</string>
-    <string name="app_crash_path">sddman/dowload/crash</string>
-    <string name="app_video_thumbnail_path">sddman/dowload/.pic</string>
+    <string name="app_db_path">tljdir/dowload/db</string>
+    <string name="app_down_path">tljdir/dowload/file</string>
+    <string name="app_cache_path">tljdir/dowload/cache</string>
+    <string name="app_crash_path">tljdir/dowload/crash</string>
+    <string name="app_video_thumbnail_path">tljdir/dowload/.pic</string>
     <string name="xl_package_name">com.xunlei.downloadprovider</string>
 
     <string name="title_dialog">提示</string>

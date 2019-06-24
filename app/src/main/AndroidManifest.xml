@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="cn.sddman.download">
+    package="com.dream.tlj">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -30,13 +30,13 @@
         android:appComponentFactory="任意字符"
        android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme.NoActionBar"
-        android:name=".App">
+        android:name="com.dream.tlj.App">
         <meta-data android:name="BaiduMobAd_STAT_ID" android:value="88caa00c60" />
         <meta-data android:name="BaiduMobAd_EXCEPTION_LOG" android:value="true" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7773568607801592~6500516636"/>
-        <activity android:name=".activity.WelcomeActivity"
+        <activity android:name="com.dream.tlj.activity.WelcomeActivity"
             android:icon="@drawable/logo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,25 +44,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.UrlDownLoadActivity"></activity>
-        <activity android:name=".activity.DownloadManagementActivity"
+        <activity android:name="com.dream.tlj.activity.MainActivity"></activity>
+        <activity android:name="com.dream.tlj.activity.UrlDownLoadActivity"></activity>
+        <activity android:name="com.dream.tlj.activity.DownloadManagementActivity"
             android:screenOrientation="portrait"
             ></activity>
-        <activity android:name=".activity.TorrentInfoActivity"></activity>
-        <activity android:name=".activity.AppSettingActivity"></activity>
-        <activity android:name=".activity.PlayerActivity"
+        <activity android:name="com.dream.tlj.activity.TorrentInfoActivity"></activity>
+        <activity android:name="com.dream.tlj.activity.AppSettingActivity"></activity>
+        <activity android:name="com.dream.tlj.activity.PlayerActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppStartLoadTranslucent"></activity>
-        <activity android:name=".activity.SourceActivity"
+        <activity android:name="com.dream.tlj.activity.SourceActivity"
         android:windowSoftInputMode="adjustPan" ></activity>
-        <activity android:name=".activity.SourceDetailActivity"
+        <activity android:name="com.dream.tlj.activity.SourceDetailActivity"
             android:windowSoftInputMode="adjustPan" ></activity>
-        <activity android:name=".activity.BrowseActivity"></activity>
-        <activity android:name=".activity.NoteActivity"></activity>
+        <activity android:name="com.dream.tlj.activity.BrowseActivity"></activity>
+        <activity android:name="com.dream.tlj.activity.NoteActivity"></activity>
 
-        <service android:name="cn.sddman.download.service.DownService"/>
-        <service android:name=".update.XdUpdateService"/>
+        <service android:name="com.dream.tlj.service.DownService"/>
+        <service android:name="com.dream.tlj.update.XdUpdateService"/>
     </application>
 
 </manifest>

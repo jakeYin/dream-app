@@ -33,8 +33,8 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 ext {
-    userOrg = 'sddman'
-    groupId = 'cn.sddman'
+    userOrg = 'dream'
+    groupId = 'com.dream'
     uploadName = 'Dowload'
     publishVersion = 'v1.0'
     desc = '一个安卓下载工具'

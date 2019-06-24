@@ -8,7 +8,7 @@ androidExtensions {
 android {
     compileSdkVersion rootProject.ext.versions.compileSdkVersion
     defaultConfig {
-        applicationId "cn.sddman.download"
+        applicationId "com.dream.tlj"
         minSdkVersion rootProject.ext.versions.minSdkVersion
         targetSdkVersion rootProject.ext.versions.targetSdkVersion
         versionCode 1
