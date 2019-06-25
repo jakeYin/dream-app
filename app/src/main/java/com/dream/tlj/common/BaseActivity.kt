@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.coorchice.library.SuperTextView
 import kotlinx.android.synthetic.main.view_top_bar.*
+import com.umeng.analytics.MobclickAgent
+
+
 
 
 open class BaseActivity : AppCompatActivity() {
@@ -40,5 +43,15 @@ open class BaseActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         AppManager.appManager.finishActivity(this)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MobclickAgent.onResume(this)
+    }
+
+    public override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this)
     }
 }

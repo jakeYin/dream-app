@@ -40,7 +40,7 @@ android {
             shrinkResources true //是否清理无用资源,依赖于minifyEnabled
             zipAlignEnabled true //是否启用zipAlign压缩
             signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             debuggable true
@@ -102,6 +102,8 @@ dependencies {
     implementation project(':thunder')
     implementation project( ':filepicker')
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
+    implementation  'com.umeng.umsdk:analytics:8.0.0'
+    implementation  'com.umeng.umsdk:common:2.0.0'
 }
 repositories {
     flatDir {
