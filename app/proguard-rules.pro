@@ -17,6 +17,13 @@
 }
 
 
+-keep class com.dream.tlj.spider.** { *; }
+-keep class com.dream.tlj.mvp.e.** { *; }
+
+-keep class com.xunlei.downloadlib.** { *; }
+-keep class com.xunlei.downloadlib.parameter.** { *; }
+-keep class com.aplayer.aplayerandroid.** { *; }
+#-------------------------------------------------------------------------
 #-------------------------------------------------------------------------
 
 #---------------------------------3.与js互相调用的类------------------------
