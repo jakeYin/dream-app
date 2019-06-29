@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">TLJ下载</string>
-    <string name="app_version">v1.0.1</string>
     <string name="app_db_path">tljdir/dowload/db</string>
     <string name="app_down_path">tljdir/dowload/file</string>
     <string name="app_cache_path">tljdir/dowload/cache</string>

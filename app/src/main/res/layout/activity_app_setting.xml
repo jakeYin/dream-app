@@ -151,7 +151,6 @@
                 android:layout_toEndOf="@id/app_name"
                 android:layout_centerVertical="true"
                 android:paddingStart="@dimen/default_pad2"
-                android:text="@string/app_version"
                 android:textColor="@color/gray_8f"
                 android:textSize="@dimen/file_item_text_size" />
 

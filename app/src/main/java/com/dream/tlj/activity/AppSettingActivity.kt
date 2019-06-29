@@ -10,6 +10,7 @@ import com.dream.tlj.common.Const
 import com.dream.tlj.mvp.p.AppSettingPresenter
 import com.dream.tlj.mvp.p.AppSettingPresenterImp
 import com.dream.tlj.mvp.v.AppSettingView
+import com.dream.tlj.update.XdUpdateUtils
 import com.ess.filepicker.FilePicker
 import com.ess.filepicker.model.EssFile
 import kotlinx.android.synthetic.main.activity_app_setting.*
@@ -40,6 +41,7 @@ class AppSettingActivity : BaseActivity(), AppSettingView {
             val net = if (b) Const.MOBILE_NET_OK else Const.MOBILE_NET_NOT
             appSettingPresenter!!.setDownNotify(net.toString() + "")
         }
+        app_version.text = XdUpdateUtils.getVersionName(this@AppSettingActivity).toString()
     }
 
     override fun initSetting(key: String, value: String) {

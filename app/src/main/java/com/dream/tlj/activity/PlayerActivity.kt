@@ -187,7 +187,7 @@ class PlayerActivity : BaseActivity(), PlayerView {
                                     mChangePosition = true
                                     mGestureDownPosition = aPlayer!!.position
                                 } else {
-                                    if (mDownX < mScreenWidth * 0.5f) {//左侧改变亮度
+                                    if (mDownX < mScreenWidth * 0.5f ) {//左侧改变亮度
                                         mChangeBrightness = true
                                         val lp = window.attributes
                                         if (lp.screenBrightness < 0) {
@@ -195,7 +195,7 @@ class PlayerActivity : BaseActivity(), PlayerView {
                                         } else {
                                             mGestureDownBrightness = lp.screenBrightness * 255
                                         }
-                                    } else {//右侧改变声音
+                                    } else if (mDownY > mScreenHeight*0.25){//右侧改变声音
                                         mChangeVolume = true
                                         mGestureDownVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
                                     }
